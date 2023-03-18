@@ -1,32 +1,15 @@
-import supabase from "@/lib/supabaseClient";
+// import supabase from "@/lib/supabaseClient";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
 import {useRouter} from 'next/router';
 import useScroll from "@/lib/hooks/use-scroll";
+import AuthButtons from "./AuthButtons";
 interface IHeader {
 	links: any;
 }
 
 function Header({ links }: IHeader) {
 	const scrolled = useScroll(50);
-	const [session, setSession] = useState(null);
-
-	const router = useRouter()
-	const checkAuth = async () => {
-		const { data } = await supabase.auth.getSession();
-		setSession(data.session);
-	};
-
-	useEffect(() => {
-		checkAuth();
-	}, [router]);
-
-	const handleSignOut = async () => {
-		let { error } = await supabase.auth.signOut()
-		router.push('/')
-	}
-
 	return (
 		<header
 			className={`fixed w-full top-0 ${
@@ -63,29 +46,7 @@ function Header({ links }: IHeader) {
 						))}
 					</ul>
 				</nav>
-				{!session ? (
-					<div className="flex items-center gap-5">
-						<Link
-							href="/login"
-							className="signIn  text-base text-white font-serif"
-						>
-							Вход
-						</Link>
-						<Link
-							href="/registration"
-							className="signUp border border-solid font-serif border-white px-4 py-2 rounded-lg text-white text-sm"
-						>
-							Регистрация
-						</Link>
-					</div>
-				) : (
-					<button
-						onClick={handleSignOut}
-						className="signUp border border-solid font-serif border-white px-4 py-2 rounded-lg text-white text-sm"
-					>
-						Выйти
-					</button>
-				)}
+			<AuthButtons/>
 			</div>
 		</header>
 	);

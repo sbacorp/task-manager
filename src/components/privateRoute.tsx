@@ -1,6 +1,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import supabase from "../lib/supabaseClient";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 interface PrivateRouteProps {
 	children: ReactNode;
@@ -9,20 +10,16 @@ interface PrivateRouteProps {
 const PrivateRoute = ({ children }: PrivateRouteProps) => {
 	const [loading, setLoading] = useState(true);
 	const router = useRouter();
-
+	const user = useSelector((state: RootState) => state.user.user);
 	useEffect(() => {
-		const checkAuth = async () => {
-			const {data} = await supabase.auth.getSession();
-			if (!data.session) {
-				router.push("/login");
-			} else {
-				setLoading(false);
-			}
-		};
-
-		checkAuth();
-	}, [router]);
-
+	if (!user) {
+		
+		router.push("/");
+	}
+	else{
+		setLoading(false);
+	}
+	}, [])
 	return <>{!loading && children}</>;
 };
 

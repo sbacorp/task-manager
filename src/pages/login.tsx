@@ -3,25 +3,38 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState, FormEvent } from "react";
 import supabase from "../lib/supabaseClient";
-
+import { setUser, setLoading, setError } from "../store/slices/userSlice";
+import { useDispatch } from "react-redux";
 
 const SignIn = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [message, setMessage] = useState("");
 	const router = useRouter();
+	const dispatch = useDispatch();
+
 	const handleSignIn = async (e: FormEvent) => {
 		e.preventDefault();
-		const { error } = await supabase.auth.signInWithPassword({
-			email,
-			password,
-		});
+		dispatch(setLoading(true));
+		dispatch(setError(null));
+		try {
+			const { data, error } = await supabase.auth.signInWithPassword({
+				email,
+				password,
+			});
+			if (error) {
+				setMessage(error.message);
+			} else {
+				console.log(data);
+				dispatch(setUser(data.user));
+				setMessage("Вы успешно вошли в систему!");
 
-		if (error) {
-			setMessage(error.message);
-		} else {
-			setMessage("Вы успешно вошли в систему!");
-			router.push("/account");
+				router.push("/account");
+			}
+		} catch (error) {
+			dispatch(setError(error.message));
+		} finally {
+			dispatch(setLoading(false));
 		}
 	};
 
@@ -30,7 +43,6 @@ const SignIn = () => {
 			<div className="flex flex-col gap-7 font-serif">
 				<p className="text-white font-normal text-22">Вход</p>
 				<form onSubmit={handleSignIn} className="flex flex-col gap-7">
-					
 					<div>
 						<p className="text-dark">Электроннаяя почта</p>
 						<input
