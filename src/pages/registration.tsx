@@ -2,8 +2,10 @@ import { useState, FormEvent } from "react";
 import SignLayout from "@/components/signLayout";
 import supabase from "../lib/supabaseClient";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 function Registration() {
+	const router = useRouter()
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [userName, setUserName] = useState("");
@@ -19,6 +21,8 @@ function Registration() {
 			setMessage(error.message);
 		} else {
 			setMessage("Проверьте почту");
+			setTimeout(()=>router.push('/login'), 1000)
+
 		}
 	};
 	return (
@@ -71,7 +75,7 @@ function Registration() {
 						Создать аккаунт
 					</button>
 				</form>
-				{message && <p className="text-white absolute">{message}</p>}
+				{message && <p className="text-white absolute bottom-0 left-1/2">{message}</p>}
 			</div>
 		</SignLayout>
 	);

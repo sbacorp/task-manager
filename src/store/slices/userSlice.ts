@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User } from "@supabase/supabase-js";
+import { HYDRATE } from "next-redux-wrapper";
 
 interface UserState {
 	user: User | null;
@@ -26,6 +27,16 @@ export const userSlice = createSlice({
 		setError: (state, action: PayloadAction<string | null>) => {
 			state.error = action.payload;
 		},
+	},
+	extraReducers: (builder) => {
+		builder.addMatcher(
+			(action): action is PayloadAction<any> => action.type === HYDRATE,
+			(state, action) => {
+				if (action.payload.user) {
+					state.user = action.payload.user;
+				}
+			}
+		);
 	},
 });
 

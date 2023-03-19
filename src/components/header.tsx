@@ -4,11 +4,9 @@ import Link from "next/link";
 import {useRouter} from 'next/router';
 import useScroll from "@/lib/hooks/use-scroll";
 import AuthButtons from "./AuthButtons";
-interface IHeader {
-	links: any;
-}
+import NavLinks from "./NavLinks";
 
-function Header({ links }: IHeader) {
+function Header() {
 	const scrolled = useScroll(50);
 	return (
 		<header
@@ -32,20 +30,7 @@ function Header({ links }: IHeader) {
 						</p>
 					</div>
 				</Link>
-				<nav className="links">
-					<ul>
-						{links.map((el: any, i: number) => (
-							<li key={i}>
-								<Link
-									href={`/${el.href}`}
-									className="text-dark2 font-semibold font-serif text-base"
-								>
-									{el.title}
-								</Link>
-							</li>
-						))}
-					</ul>
-				</nav>
+				<NavLinks/>
 			<AuthButtons/>
 			</div>
 		</header>

@@ -1,8 +1,12 @@
-// import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ReactNode } from "react";
-
+import { Open_Sans } from "next/font/google";
 import Meta from "./meta";
 import Header from "../header";
+import Footer from  '../footer'
+import { FADE_IN_ANIMATION_SETTINGS } from "@/lib/constants";
+
+const inter = Open_Sans({ subsets: ["latin"] });
 
 export default function Layout({
 	meta,
@@ -17,17 +21,21 @@ export default function Layout({
 }) {
 
 	return (
-		<div className="min-h-screen flex flex-col">
+		<div
+			className={`${inter.className} text-white font-serif min-h-screen flex flex-col w-full overflow-x-hidden`}
+		>
 			<Meta {...meta} />
-			
-				<Header links={[{ href: "about", title: "О проекте" }]} />
-			
-			<main className="flex w-full flex-auto  flex-col items-center justify-center py-32">
-				{children}
-			</main>
-			<div className=" w-full border-t border-dark2 py-5 text-center">
-				<p className="text-white">Rollin</p>
-			</div>
+
+			<Header links={[{ href: "about" }]} />
+			<AnimatePresence>
+				<motion.main
+					{...FADE_IN_ANIMATION_SETTINGS}
+					className="flex w-full flex-grow flex-auto flex-col items-center justify-center py-16"
+				>
+					{children}
+				</motion.main>
+			</AnimatePresence>
+			<Footer />
 		</div>
 	);
 }
