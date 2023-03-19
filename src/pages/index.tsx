@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import HomeSection from "@/components/HomeSection";
 
 export default function Home() {
 	const cards = [
@@ -19,6 +20,11 @@ export default function Home() {
 			desc: "Каждой частью вашей задачи можно управлять, отслеживать и делиться ею с товарищами по команде.",
 		},
 	];
+	const sections = [
+		{tag: 'Универсальность', title: 'Создайте желаемый рабочий процесс', desc: 'Управляйте своими досками с помощью Drag-n-Drop, создавайтедополнительные доски и задачи.', imgPath: 'assets/projectsImg.svg', order: 'order-last'},
+		{tag: 'Оптимизация', title: 'Все, что вам нужно, в одном месте', desc: 'Вы можете указать дополнительную информацию в описании задачи иназначить пользователей.', imgPath: 'assets/optimazedImg.svg', order: 'order-first'},
+		{tag: 'Без ограничений', title: 'Без ограничений для всех пользователей.', desc: 'Неограниченное количество канбан-досок, колонок и задач.', imgPath: 'assets/unlimitedImg.svg', order: 'order-last'}
+	]
 	return (
 		<>
 			<section className="start flex flex-col gap-4 text-center items-center justify-center py-16 w-screen">
@@ -54,81 +60,7 @@ export default function Home() {
 					);
 				})}
 			</section>
-			<section className="flex flex-col md:flex-row justify-center gap-8 md:gap-20 items-center py-12 container px-2">
-				<div className="">
-					<div className="tag flex gap-2">
-						<Image
-							src="assets/okIcon.svg"
-							alt="ok"
-							width={20}
-							height={20}
-							className="order-first md:order-last"
-						/>
-						<p className="text-semibold text-base leading-tight">
-							Универсальность
-						</p>
-					</div>
-					<p className="title text-3xl md:text-42 font-serif font-bold">
-						Создайте желаемый рабочий процесс
-					</p>
-					<p className="desc text-lg font-normal text-dark1 hidden md:block">
-						Управляйте своими досками с помощью Drag-n-Drop, создавайте
-						дополнительные доски и задачи.
-					</p>
-				</div>
-				<Image
-					src="assets/projectsImg.svg"
-					alt="projectsPreviewImg"
-					width={640}
-					height={420}
-					className=" order-last"
-				/>
-			</section>
-			<section className="flex flex-col md:flex-row justify-center gap-8 md:gap-20 items-center py-12 container px-2">
-				<div className="">
-					<div className="tag flex gap-2">
-						<Image src="assets/okIcon.svg" alt="ok" width={20} height={20} />
-						<p className="text-semibold text-base leading-tight">Оптимизация</p>
-					</div>
-					<p className="title text-3xl md:text-42 font-serif font-bold">
-						Все, что вам нужно, в одном месте
-					</p>
-					<p className="desc text-lg font-normal text-dark1 hidden md:block">
-						Вы можете указать дополнительную информацию в описании задачи и
-						назначить пользователей.
-					</p>
-				</div>
-				<Image
-					src="assets/optimazedImg.svg"
-					alt="optimazedImg"
-					width={640}
-					height={420}
-					className=" order-last md:order-first"
-				/>
-			</section>
-			<section className="flex flex-col md:flex-row justify-center gap-8 md:gap-20 items-center py-12 container px-2">
-				<div className="">
-					<div className="tag flex gap-2">
-						<Image src="assets/okIcon.svg" alt="ok" width={20} height={20} />
-						<p className="text-semibold text-base leading-tight">
-							Без ограничений
-						</p>
-					</div>
-					<p className="title text-3xl md:text-42 font-serif font-bold">
-						Без ограничений для всех пользователей.
-					</p>
-					<p className="desc text-lg font-normal text-dark1 hidden ">
-						Неограниченное количество канбан-досок, колонок и задач.
-					</p>
-				</div>
-				<Image
-					src="assets/unlimitedImg.svg"
-					alt="unlimitedImg"
-					width={640}
-					height={420}
-					className="order-last"
-				/>
-			</section>
+			{sections.map(elem => <HomeSection {...elem}/>)}
 		</>
 	);
 }
