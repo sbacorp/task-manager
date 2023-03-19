@@ -13,7 +13,39 @@ export const FADE_UP_ANIMATION_VARIANTS = {
 	hidden: { opacity: 0, y: 10 },
 	show: { opacity: 1, y: 0, transition: { type: "spring" } },
 };
-
+export const ItemAnimation = {
+	hidden: {
+		y: 400,
+		opacity: 0,
+	},
+	visible: (custom:number) => ({
+		y: 0,
+		opacity: 1,
+		transition: { delay: custom * 0.3, type: "tween", duration: 0.7 },
+	}),
+};
+export const ItemAnimation2 = {
+	hidden: {
+		x: 200,
+		opacity: 0,
+	},
+	visible: (custom: number) => ({
+		x: 0,
+		opacity: 1,
+		transition: { delay: custom * 0.3, type: "tween", duration: 0.7 },
+	}),
+};
+export const ItemAnimation3 = {
+	hidden: {
+		x: -200,
+		opacity: 0,
+	},
+	visible: (custom: number) => ({
+		x: 0,
+		opacity: 1,
+		transition: { delay: custom * 0.3, type: "tween", duration: 0.7 },
+	}),
+};
 
 export const cards = [
 	{
