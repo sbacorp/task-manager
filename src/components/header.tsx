@@ -13,7 +13,7 @@ function Header() {
 			className={`fixed w-full top-0 ${
 				scrolled
 					? "border-b border-dark6 bg-black/50 backdrop-blur-xl"
-					: "bg-black"
+					: "bg-black border-b border-dark6"
 			} z-30 transition-all`}
 		>
 			<div className="container h-16 flex justify-between items-center gap-2 py-2">
@@ -30,8 +30,8 @@ function Header() {
 						</p>
 					</div>
 				</Link>
-				<NavLinks/>
-			<AuthButtons/>
+				<NavLinks />
+				<AuthButtons />
 			</div>
 		</header>
 	);

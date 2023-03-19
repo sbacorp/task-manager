@@ -23,6 +23,7 @@
     "react-dom": "18.2.0",
     "react-redux": "^8.0.5",
     "redux-toolkit": "^1.1.2",
+    "sass": "^1.59.3",
     "typescript": "5.0.2"
   },
   "devDependencies": {

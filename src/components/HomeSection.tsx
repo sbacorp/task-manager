@@ -22,7 +22,7 @@ function HomeSection({tag, title, desc, imgPath, order}: HomeProps) {
 					<p className="title text-3xl md:text-42 font-serif font-bold">
 						{title}
 					</p>
-					<p className="desc text-lg font-normal text-dark1 hidden md:block">
+					<p className="desc text-lg font-normal text-dark1 block">
 						{desc}
 					</p>
 				</div>
@@ -31,7 +31,7 @@ function HomeSection({tag, title, desc, imgPath, order}: HomeProps) {
 					alt="projectsPreviewImg"
 					width={640}
 					height={420}
-					className={`${order}`}
+					className={`${order} order-first md:w-96 md:h-auto xl:w-[640px] flex-shrink`}
 				/>
 			</section>
   )

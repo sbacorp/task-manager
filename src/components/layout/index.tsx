@@ -26,7 +26,7 @@ export default function Layout({
 		>
 			<Meta {...meta} />
 
-			<Header links={[{ href: "about" }]} />
+			<Header/>
 			<AnimatePresence>
 				<motion.main
 					{...FADE_IN_ANIMATION_SETTINGS}
