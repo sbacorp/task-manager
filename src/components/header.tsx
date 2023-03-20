@@ -5,8 +5,11 @@ import {useRouter} from 'next/router';
 import useScroll from "@/lib/hooks/use-scroll";
 import AuthButtons from "./AuthButtons";
 import NavLinks from "./NavLinks";
+import { useState } from "react";
 
 function Header() {
+	const [active, setActive] = useState(false);
+
 	const scrolled = useScroll(50);
 	return (
 		<header
@@ -16,7 +19,7 @@ function Header() {
 					: "bg-black border-b border-dark6"
 			} z-30 transition-all`}
 		>
-			<div className="container h-16 flex justify-between items-center gap-2 py-2">
+			<div className="container h-16 flex justify-between items-center gap-2 py-2 ">
 				<Link href="/">
 					<div className="logo flex items-center gap-2 ">
 						<Image

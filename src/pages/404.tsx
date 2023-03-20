@@ -2,7 +2,9 @@ import Link from "next/link"
 
 function NotFound() {
   return (
+    
     <div className="flex bg-black min-h-screen flex-col justify-center font-sans">
+
     <div className="mx-auto max-w-md">
         <div className="space-y-6 flex flex-col items-center text-center">
           <p className="text-4xl text-white font-semibold">Извините! Страница не найдена</p>

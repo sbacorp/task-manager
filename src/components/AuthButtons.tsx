@@ -35,8 +35,7 @@ const AuthButtons: React.FC = () => {
 	}
 
 	return (
-		<div>
-			<div className="flex items-center gap-5">
+			<div className="flex items-center flex-col md:flex-row gap-5">
 				<Link href="/login" className="signIn  text-base text-white font-serif">
 					Вход
 				</Link>
@@ -47,7 +46,6 @@ const AuthButtons: React.FC = () => {
 					Регистрация
 				</Link>
 			</div>
-		</div>
 	);
 };
 
