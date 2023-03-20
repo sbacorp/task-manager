@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store";
 
 function NavLinks() {
-    const user = useSelector((state: RootState) => state.user.user);
+    const user = useSelector((state: RootState) => state.user);
     const notAuthLinks = [{title: 'О проекте', href: 'about'}]
     const authLinks = [{title: 'Проекты', href: 'projects'}, {title: 'Профиль', href: 'profile'}, {title: 'Поиск', href: 'search'}, {title: 'О проекте', href: 'about'},]
 	

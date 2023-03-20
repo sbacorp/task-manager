@@ -5,7 +5,7 @@ import { cards, ItemAnimation, sections } from "@/lib/constants";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect } from "react";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
-export default function Home({user}) {
+export default function Home() {
 	// useEffect(() => {
 	
 	
