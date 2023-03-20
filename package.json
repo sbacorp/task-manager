@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@badrap/bar-of-progress": "^0.2.2",
     "@radix-ui/react-icons": "^1.2.0",
     "@radix-ui/react-navigation-menu": "^1.1.2",
     "@reduxjs/toolkit": "^1.9.3",
