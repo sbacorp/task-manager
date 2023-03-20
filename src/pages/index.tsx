@@ -3,7 +3,17 @@ import Link from "next/link";
 import HomeSection from "@/components/HomeSection";
 import { cards, ItemAnimation, sections } from "@/lib/constants";
 import { AnimatePresence, motion } from "framer-motion";
-export default function Home() {
+import { useEffect } from "react";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+export default function Home({user}) {
+	// useEffect(() => {
+	
+	
+	//   return () => {
+		
+	//   }
+	// }, [])
+	
 	return (
 		<>
 			<motion.div
@@ -58,3 +68,27 @@ export default function Home() {
 		</>
 	);
 }
+
+// export const getServerSideProps = async (ctx) => {
+// 	// Create authenticated Supabase Client
+// 	const supabase = createServerSupabaseClient(ctx);
+// 	// Check if we have a session
+// 	const {
+// 		data: { session },
+// 	} = await supabase.auth.getSession();
+
+// 	if (!session)
+// 		return {
+// 			redirect: {
+// 				destination: "/",
+// 				permanent: false,
+// 			},
+// 		};
+
+// 	return {
+// 		props: {
+// 			initialSession: session,
+// 			user: session.user,
+// 		},
+// 	};
+// };
