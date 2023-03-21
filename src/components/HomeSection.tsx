@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 function HomeSection({ tag, title, desc, imgPath, order }: HomeProps) {
 	return (
 		<motion.section
+		
 			initial="hidden"
 			whileInView="visible"
 			viewport={{ once: true }}

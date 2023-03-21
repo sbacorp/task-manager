@@ -1,9 +1,9 @@
 import { configureStore, Middleware } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
-// import userSlice from "./slices/userSlice";
+import userSlice from "./slices/userSlice";
 
 const rootReducer = {
-	// user: userSlice.reducer,
+	user: userSlice.reducer,
 };
 
 const makeStore = () => {

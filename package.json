@@ -29,6 +29,7 @@
     "react-redux": "^8.0.5",
     "redux-toolkit": "^1.1.2",
     "sass": "^1.59.3",
+    "swr": "^2.1.0",
     "typescript": "5.0.2"
   },
   "devDependencies": {

@@ -28,7 +28,6 @@ const SignIn = () => {
 				console.log(data);
 				dispatch(setUser(data.user));
 				setMessage("Вы успешно вошли в систему!");
-
 				router.push("/account");
 			}
 		} catch (error) {

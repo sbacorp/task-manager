@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "@/store/slices/userSlice";
 
 const AuthButtons: React.FC = () => {
-	const user = useSelector((state: RootState) => state.user);
+	const user = useSelector((state: RootState) => state.user.user);
 	const router = useRouter();
 	const dispatch = useDispatch();
 	const handleSignOut = async () => {
@@ -21,6 +21,7 @@ const AuthButtons: React.FC = () => {
 			router.push("/");
 		}
 	};
+	
 	if (user) {
 		return (
 			<>

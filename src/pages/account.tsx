@@ -1,12 +1,9 @@
-import PrivateRoute from '@/components/privateRoute'
-import React from 'react'
+import PrivateRoute from "@/components/privateRoute";
 
-function Account() {
-  return (
-	<PrivateRoute>
-		<p className='text-white'>Account</p>
-	</PrivateRoute>
-  )
+export default function Acount() {
+	return (
+		<PrivateRoute>
+			<p className="text-3xl text-white text-serif">hello</p>
+		</PrivateRoute>
+	);
 }
-
-export default Account;

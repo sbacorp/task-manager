@@ -2,18 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import HomeSection from "@/components/HomeSection";
 import { cards, ItemAnimation, sections } from "@/lib/constants";
-import { AnimatePresence, motion } from "framer-motion";
-import { useEffect } from "react";
-import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
-export default function Home() {
-	// useEffect(() => {
-	
-	
-	//   return () => {
-		
-	//   }
-	// }, [])
-	
+import { motion } from "framer-motion";
+import { useState, useEffect, use } from "react";
+import supabase from "@/lib/supabaseClient";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
+
+export default function Index() {
 	return (
 		<>
 			<motion.div
@@ -48,6 +43,7 @@ export default function Home() {
 					{cards.map((el: any, i: number) => {
 						return (
 							<motion.div
+							key={i}
 								custom={i}
 								variants={ItemAnimation}
 								className=" card w-full md:w-60 lg:w-80 h-60 md:h-80 flex-shrink-0 md flex flex-col md:gap-7 gap-2 md:py-12 py-6 px-5 bg-gray-600 items-center text-center text-white bg-dark"
@@ -61,34 +57,10 @@ export default function Home() {
 						);
 					})}
 				</section>
-				{sections.map((elem) => (
-					<HomeSection {...elem} />
+				{sections.map((elem,i) => (
+					<HomeSection {...elem} key={i} />
 				))}
 			</motion.div>
 		</>
 	);
 }
-
-// export const getServerSideProps = async (ctx) => {
-// 	// Create authenticated Supabase Client
-// 	const supabase = createServerSupabaseClient(ctx);
-// 	// Check if we have a session
-// 	const {
-// 		data: { session },
-// 	} = await supabase.auth.getSession();
-
-// 	if (!session)
-// 		return {
-// 			redirect: {
-// 				destination: "/",
-// 				permanent: false,
-// 			},
-// 		};
-
-// 	return {
-// 		props: {
-// 			initialSession: session,
-// 			user: session.user,
-// 		},
-// 	};
-// };
