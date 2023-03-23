@@ -3,11 +3,12 @@ import { ReactNode, useEffect } from "react";
 import { Open_Sans } from "next/font/google";
 import Meta from "./meta";
 import Header from "../header";
-import Footer from  '../footer'
+import Footer from "../footer";
 import { FADE_IN_ANIMATION_SETTINGS } from "@/lib/constants";
 import supabase from "@/lib/supabaseClient";
 import { setUser } from "@/store/slices/userSlice";
 import { useDispatch } from "react-redux";
+import { useUser } from "@supabase/auth-helpers-react";
 
 const inter = Open_Sans({ subsets: ["latin"] });
 
@@ -23,11 +24,18 @@ export default function Layout({
 	children: ReactNode;
 }) {
 	const dispatch = useDispatch();
+	// const user = useUser();
+	// if (user) {
+	// 	console.log(user);
+
+	// }
+	// console.log(user);
+
 	useEffect(() => {
 		const getUser = async () => {
-			const {data} = await supabase.auth.getUser();
+			const { data } = await supabase.auth.getUser();
 			if (data.user) {
-				dispatch(setUser(data.user))
+				dispatch(setUser(data.user));
 			}
 		};
 		getUser();
@@ -38,7 +46,7 @@ export default function Layout({
 		>
 			<Meta {...meta} />
 
-			<Header/>
+			<Header />
 			<AnimatePresence>
 				<motion.main
 					{...FADE_IN_ANIMATION_SETTINGS}

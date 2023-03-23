@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../store";
+
 import Link from "next/link";
 import { useRouter } from "next/router";
 import supabase from "@/lib/supabaseClient";
@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "@/store/slices/userSlice";
 
 const AuthButtons: React.FC = () => {
-	const user = useSelector((state: RootState) => state.user.user);
+	// const user = useSelector((state: RootState) => state.user.user);
 	const router = useRouter();
 	const dispatch = useDispatch();
 	const handleSignOut = async () => {
@@ -22,18 +22,18 @@ const AuthButtons: React.FC = () => {
 		}
 	};
 	
-	if (user) {
-		return (
-			<>
-				<button
-					onClick={handleSignOut}
-					className="signUp border border-solid font-serif border-white px-4 py-2 rounded-lg text-white text-sm"
-				>
-					Выйти
-				</button>
-			</>
-		);
-	}
+	// if (user) {
+	// 	return (
+	// 		<>
+	// 			<button
+	// 				onClick={handleSignOut}
+	// 				className="signUp border border-solid font-serif border-white px-4 py-2 rounded-lg text-white text-sm"
+	// 			>
+	// 				Выйти
+	// 			</button>
+	// 		</>
+	// 	);
+	// }
 
 	return (
 			<div className="flex items-center flex-col md:flex-row gap-5">
