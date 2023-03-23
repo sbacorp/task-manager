@@ -15,8 +15,6 @@ const SignIn = () => {
 
 	const handleSignIn = async (e: FormEvent) => {
 		e.preventDefault();
-		dispatch(setLoading(true));
-		dispatch(setError(null));
 		try {
 			const { data, error } = await supabase.auth.signInWithPassword({
 				email,
@@ -31,9 +29,8 @@ const SignIn = () => {
 				router.push("/account");
 			}
 		} catch (error) {
-			dispatch(setError(error.message));
-		} finally {
-			dispatch(setLoading(false));
+			console.log(error);
+			
 		}
 	};
 

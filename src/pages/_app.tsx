@@ -7,9 +7,7 @@ import { Provider } from "react-redux";
 import { useState } from "react";
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
-import { wrapper } from "@/store";
-import { PersistGate } from "redux-persist/integration/react";
-
+import wrapper from "@/store";
 
 const progress = new ProgressBar({
 	size: 4,
@@ -22,19 +20,17 @@ Router.events.on("routeChangeStart", progress.start);
 Router.events.on("routeChangeComplete", progress.finish);
 Router.events.on("routeChangeError", progress.finish);
 
- function App({ Component, pageProps, ...rest }: AppProps) {
+function App({ Component, pageProps, ...rest }: AppProps) {
 	const { store, props } = wrapper.useWrappedStore(rest);
 	const [supabaseClient] = useState(() => createBrowserSupabaseClient());
 	return (
-		<SessionContextProvider
-      supabaseClient={supabaseClient}
-    >
+		<SessionContextProvider supabaseClient={supabaseClient}>
 			<Provider store={store}>
 				<Layout>
 					<Component {...pageProps} />
 				</Layout>
 			</Provider>
-			</SessionContextProvider>
+		</SessionContextProvider>
 	);
 }
 

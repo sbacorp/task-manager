@@ -10,6 +10,7 @@ function Registration() {
 	const [password, setPassword] = useState("");
 	const [userName, setUserName] = useState("");
 	const [message, setMessage] = useState("");
+	
 	const handleSignUp = async (e: FormEvent) => {
 		e.preventDefault();
 		const { error } = await supabase.auth.signUp({
