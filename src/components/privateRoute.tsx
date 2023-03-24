@@ -1,17 +1,20 @@
 import { ReactNode } from "react";
-import { createServerSupabaseClient, User } from "@supabase/auth-helpers-nextjs";
+import {
+	createServerSupabaseClient,
+	User,
+} from "@supabase/auth-helpers-nextjs";
 interface PrivateRouteProps {
 	children: ReactNode;
-	user: User
+	user: User;
 }
 
-const PrivateRoute = ({ children, user }: PrivateRouteProps) => {
+const PrivateRoute = ({ children }: PrivateRouteProps) => {
 	return <>{children}</>;
 };
 
 export default PrivateRoute;
 
-export const getServerSideProps = async (ctx:any) => {
+export const getServerSideProps = async (ctx: any) => {
 	const supabase = createServerSupabaseClient(ctx);
 	const {
 		data: { session },
