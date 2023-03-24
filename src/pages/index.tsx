@@ -4,6 +4,7 @@ import HomeSection from "@/components/HomeSection";
 import { cards, ItemAnimation, sections } from "@/lib/constants";
 import { motion } from "framer-motion";
 import type { NextPage } from "next";
+import Gradient from "@/components/gradient";
 
  const Index:NextPage = () =>{
 	return (
@@ -13,7 +14,9 @@ import type { NextPage } from "next";
 				whileInView="visible"
 				viewport={{ once: true }}
 			>
-				<section className="start flex flex-col gap-4 text-center items-center justify-center py-16 w-screen">
+				<section className="relative flex flex-col gap-4 text-center items-center justify-center py-16 w-screen overflow-hidden">
+					<Gradient classes={`left-1/2 md:left-3/4`} />
+					<Gradient classes={`right-1/2 md:right-3/4`} />
 					<div className="container">
 						<p className="title1 text-white font-serif text-xl font-semibold">
 							Приложение для управления проектами
@@ -34,13 +37,11 @@ import type { NextPage } from "next";
 						</Link>
 					</div>
 				</section>
-				<section
-					className="flex flex-col md:flex-row justify-center gap-12 items-center py-14 container px-2"
-				>
+				<section className="flex flex-col md:flex-row justify-center gap-12 items-center py-14 container px-2">
 					{cards.map((el: any, i: number) => {
 						return (
 							<motion.div
-							key={i}
+								key={i}
 								custom={i}
 								variants={ItemAnimation}
 								className=" card w-full md:w-60 lg:w-80 h-60 md:h-80 flex-shrink-0 md flex flex-col md:gap-7 gap-2 md:py-12 py-6 px-5 bg-gray-600 items-center text-center text-white bg-dark"
@@ -54,7 +55,7 @@ import type { NextPage } from "next";
 						);
 					})}
 				</section>
-				{sections.map((elem,i) => (
+				{sections.map((elem, i) => (
 					<HomeSection {...elem} key={i} />
 				))}
 			</motion.div>

@@ -8,8 +8,6 @@ import { FADE_IN_ANIMATION_SETTINGS } from "@/lib/constants";
 import supabase from "@/lib/supabaseClient";
 import { setUser } from "@/store/slices/userSlice";
 import { useDispatch } from "react-redux";
-import { useUser } from "@supabase/auth-helpers-react";
-
 const inter = Open_Sans({ subsets: ["latin"] });
 
 export default function Layout({
@@ -41,7 +39,7 @@ export default function Layout({
 	
 	return (
 		<div
-			className={`${inter.className} text-white font-serif min-h-screen flex flex-col w-full overflow-x-hidden`}
+			className={`${inter.className} text-white font-serif min-h-screen flex flex-col w-full overflow-hidden`}
 		>
 			<Meta {...meta} />
 
@@ -49,7 +47,7 @@ export default function Layout({
 			<AnimatePresence>
 				<motion.main
 					{...FADE_IN_ANIMATION_SETTINGS}
-					className="flex w-full flex-grow flex-auto flex-col items-center justify-center py-16"
+					className="flex w-full flex-grow flex-auto flex-col items-center justify-center pt-16"
 				>
 					{children}
 				</motion.main>
