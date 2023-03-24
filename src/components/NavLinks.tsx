@@ -1,10 +1,9 @@
 import { authLinks, notAuthLinks } from '@/lib/constants';
 import Link from 'next/link'
 import { useSelector } from "react-redux";
-import { RootState } from "../store";
 
 function NavLinks() {
-    const user = useSelector((state: RootState) => state.user);
+    const user = useSelector((state) => state.user.user);
     
 	
   return (

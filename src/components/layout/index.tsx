@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { Open_Sans } from "next/font/google";
 import Meta from "./meta";
 import Header from "../header";
@@ -30,16 +30,21 @@ export default function Layout({
 
 	// }
 	// console.log(user);
-
+	const [loading, setLoading] = useState(true);
 	useEffect(() => {
 		const getUser = async () => {
 			const { data } = await supabase.auth.getUser();
 			if (data.user) {
 				dispatch(setUser(data.user));
+				setLoading(false);
 			}
+			setLoading(false);
 		};
 		getUser();
 	}, []);
+	if(loading)
+	return <div className="text-white text-4xl">loading</div>
+	
 	return (
 		<div
 			className={`${inter.className} text-white font-serif min-h-screen flex flex-col w-full overflow-x-hidden`}

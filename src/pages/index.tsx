@@ -3,11 +3,7 @@ import Link from "next/link";
 import HomeSection from "@/components/HomeSection";
 import { cards, ItemAnimation, sections } from "@/lib/constants";
 import { motion } from "framer-motion";
-import { useState, useEffect, use } from "react";
-import { useSelector } from "react-redux";
 import type { NextPage } from "next";
-import { wrapper } from "@/store";
-import { setAuthState } from "@/store/slices/AuthSlice";
 
  const Index:NextPage = () =>{
 	return (
@@ -68,17 +64,3 @@ import { setAuthState } from "@/store/slices/AuthSlice";
 
 
 export default Index;
-
-export const getServerSideProps = wrapper.getServerSideProps(
-	(store) =>
-		async ({ params }) => {
-			
-			await store.dispatch(setAuthState(false));
-			console.log("State on server", store.getState());
-			return {
-				props: {
-					authState: false,
-				},
-			};
-		}
-);
