@@ -5,7 +5,6 @@ import {
 } from "@supabase/auth-helpers-nextjs";
 interface PrivateRouteProps {
 	children: ReactNode;
-	user?: User;
 }
 
 const PrivateRoute = ({ children }: PrivateRouteProps) => {
