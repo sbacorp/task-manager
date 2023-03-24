@@ -1,11 +1,5 @@
-'use client'
-import { ReactNode, use, useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
-
+import { ReactNode } from "react";
 import { createServerSupabaseClient, User } from "@supabase/auth-helpers-nextjs";
-import supabase from "@/lib/supabaseClient";
-import { useUser } from "@supabase/auth-helpers-react";
 interface PrivateRouteProps {
 	children: ReactNode;
 	user: User

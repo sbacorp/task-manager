@@ -24,12 +24,6 @@ export default function Layout({
 	children: ReactNode;
 }) {
 	const dispatch = useDispatch();
-	// const user = useUser();
-	// if (user) {
-	// 	console.log(user);
-
-	// }
-	// console.log(user);
 	const [loading, setLoading] = useState(true);
 	useEffect(() => {
 		const getUser = async () => {

@@ -1,4 +1,4 @@
-import { configureStore, Middleware } from "@reduxjs/toolkit";
+import { configureStore, Middleware, Store } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
 import userSlice from "./slices/userSlice";
 
@@ -15,8 +15,8 @@ const makeStore = () => {
 	});
 };
 
-export const store = makeStore();
-
+export const store: Store = makeStore();
+export type RootState = ReturnType<typeof store.getState>;
 const wrapper = createWrapper(makeStore, {
 	debug: process.env.NODE_ENV === "development",
 });
