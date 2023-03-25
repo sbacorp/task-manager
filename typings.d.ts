@@ -20,3 +20,12 @@ interface IWorking {
   router?: string;
   api?: string;
 }
+
+export interface ProfileProps {
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+export interface HeaderNavProps {
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+}

@@ -1,23 +1,21 @@
 // import supabase from "@/lib/supabaseClient";
 import Image from "next/image";
 import Link from "next/link";
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
 import useScroll from "@/lib/hooks/use-scroll";
 import AuthButtons from "./AuthButtons";
 import NavLinks from "./NavLinks";
-import { useState } from "react";
+import { HeaderNavProps } from "../../typings";
 
 function Header() {
-	const [active, setActive] = useState(false);
 
 	const scrolled = useScroll(50);
 	return (
 		<header
-			className={`fixed w-full top-0 ${
-				scrolled
-					? "border-b border-dark6 bg-black/50 backdrop-blur-xl"
-					: "bg-black border-b border-dark6"
-			} z-30 transition-all`}
+			className={`fixed w-full top-0 ${scrolled
+				? "border-b border-dark6 bg-black/50 backdrop-blur-xl"
+				: "bg-black border-b border-dark6"
+				} z-30 transition-all`}
 		>
 			<div className="container h-16 flex justify-between items-center gap-2 py-2 ">
 				<Link href="/">

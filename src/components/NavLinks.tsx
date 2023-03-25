@@ -1,14 +1,16 @@
 import { authLinks, notAuthLinks } from '@/lib/constants';
-import {  useAppSelector } from '@/store';
+import { useAppSelector } from '@/store';
 import Link from 'next/link'
+import { HeaderNavProps } from '../../typings';
 
 function NavLinks() {
-    const user = useAppSelector(state => state.userSlice.user)
-  return (
+	const user = useAppSelector(state => state.userSlice.user)
+	return (
 		<nav className="links flex">
 			<ul className="list-none flex gap-10">
 				{user ? (
 					<>
+						<li className="text-dark2 font-semibold font-serif text-base">Profile</li>
 						{authLinks.map((el: any, i: number) => (
 							<li key={i}>
 								<Link
