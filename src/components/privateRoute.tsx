@@ -8,9 +8,7 @@ interface PrivateRouteProps {
 }
 
 const PrivateRoute = ({ children }: PrivateRouteProps) => {
-	return (
-		<>{children}</>
-	)
+	return <>{children}</>;
 };
 
 export default PrivateRoute;

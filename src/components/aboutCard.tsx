@@ -6,7 +6,7 @@ function AboutCard({ name, desc, working, transform }: AboutProps) {
         <div className={`rounded-lg w-72 h-48 sm:w-[488px] flex-shrink-0 flex flex-col md:gap-5 gap-3 md:py-10 py-6 px-5 items-start text-white ${transform ? 'aboutCard' : 'reverseAboutCard'}`}
         >
             <div className="w-full flex flex-row justify-between items-center">
-                <h2 className="text-base md:text-lg font-semibold">
+                <h2 className="text-base md:text-lg font-semibold ">
                     {name}
                 </h2>
                 <Image src='/assets/vector.png' alt='vector' width={18} height={14} />
@@ -20,5 +20,3 @@ function AboutCard({ name, desc, working, transform }: AboutProps) {
         </div>
     )
 }
-
-export default AboutCard
