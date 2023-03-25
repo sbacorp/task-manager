@@ -19,7 +19,6 @@ export default function Layout({
 	};
 	children: ReactNode;
 }) {
-	//const [isOpen, setIsOpen] = useState<boolean>(false)
 	return (
 		<div
 			className={`${inter.className} text-white font-serif min-h-screen flex flex-col w-full overflow-hidden relative`}
@@ -28,7 +27,6 @@ export default function Layout({
 
 			<Header />
 
-			<Profile />
 			<motion.main
 				{...FADE_IN_ANIMATION_SETTINGS}
 				className="flex w-full flex-grow flex-auto flex-col items-center justify-center pt-16"

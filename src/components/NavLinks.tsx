@@ -3,14 +3,14 @@ import { useAppSelector } from '@/store';
 import Link from 'next/link'
 import { HeaderNavProps } from '../../typings';
 
-function NavLinks() {
+function NavLinks({ isOpen, setIsOpen }: HeaderNavProps) {
 	const user = useAppSelector(state => state.userSlice.user)
 	return (
 		<nav className="links flex">
 			<ul className="list-none flex gap-10">
 				{user ? (
 					<>
-						<li className="text-dark2 font-semibold font-serif text-base">Profile</li>
+						<li onClick={() => setIsOpen(!isOpen)} className="text-dark2 font-semibold font-serif text-base cursor-pointer">Профиль</li>
 						{authLinks.map((el: any, i: number) => (
 							<li key={i}>
 								<Link

@@ -22,10 +22,10 @@ interface IWorking {
 }
 
 export interface ProfileProps {
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  setIsOpen: any;
 }
 
 export interface HeaderNavProps {
   isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  setIsOpen: any;
 }

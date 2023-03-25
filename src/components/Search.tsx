@@ -2,10 +2,8 @@ import { useState, useRef } from "react";
 // import { debounce } from "lodash";
 
 
-function Search() {
+function Search({ value, setValue }: { value: string; setValue: (arg: string) => void }) {
 	const inputRef = useRef<HTMLInputElement>(null);
-	const [value, setValue] = useState("");
-
 
 	const onClickClear = () => {
 		setValue("");
