@@ -1,6 +1,7 @@
 import React from 'react'
 
 function Loader() {
+	
   return (
 		<div>
 			<svg
@@ -83,7 +84,6 @@ function Loader() {
 					stroke="black"
 				/>
 			</svg>
-			
 		</div>
 	);
 }

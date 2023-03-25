@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { useSelector } from "react-redux";
 
@@ -6,13 +8,13 @@ import { useRouter } from "next/router";
 import supabase from "@/lib/supabaseClient";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/store/slices/userSlice";
-import { RootState } from "@/store";
+import { RootState, store, useAppDispatch, useAppSelector } from "@/store";
 
 const AuthButtons: React.FC = () => {
-	
-	const user = useSelector((state: RootState) => state.user.user);
+
+	const user = useAppSelector(store=>store.userSlice.user)
+	const dispatch = useAppDispatch()
 	const router = useRouter();
-	const dispatch = useDispatch();
 	const handleSignOut = async () => {
 		try {
 			const { error } = await supabase.auth.signOut();

@@ -1,24 +1,42 @@
-import { configureStore, Middleware, Store } from "@reduxjs/toolkit";
-import { createWrapper } from "next-redux-wrapper";
-import userSlice from "./slices/userSlice";
+import { configureStore, Store } from "@reduxjs/toolkit";
+import { persistStore, persistReducer } from "redux-persist";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import UserReducer from "./slices/userSlice";
+import storage from "redux-persist/lib/storage";
+import {
+	FLUSH,
+	REHYDRATE,
+	PAUSE,
+	PERSIST,
+	PURGE,
+	REGISTER,
+} from "redux-persist";
 
-const rootReducer = {
-	user: userSlice.reducer,
+const persistConfig = {
+	key: "root",
+	version:1,
+	storage,
+	
 };
-
-const makeStore = () => {
-	return configureStore({
-		reducer: rootReducer,
-		middleware: (getDefaultMiddleware) =>
-			getDefaultMiddleware({ thunk: false }) as Middleware[],
-		devTools: process.env.NODE_ENV !== "production",
-	});
-};
-
-export const store: Store = makeStore();
-export type RootState = ReturnType<typeof store.getState>;
-const wrapper = createWrapper(makeStore, {
-	debug: process.env.NODE_ENV === "development",
+ 
+const persistedReducer = persistReducer(persistConfig, UserReducer);
+export const store = configureStore({
+	reducer: {
+		userSlice: persistedReducer,
+	},
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware({
+			serializableCheck: {
+				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+			},
+		}),
 });
 
-export default wrapper;
+export let persistor = persistStore(store)
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector

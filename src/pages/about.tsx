@@ -1,12 +1,12 @@
 import Image from "next/image"
 import AboutCard from "@/components/aboutCard"
-import { aboutCards } from "@/lib/constants"
+import { aboutCards, FADE_IN_ANIMATION_SETTINGS } from "@/lib/constants"
 import Gradient from "@/components/gradient";
-
+import {motion} from 'framer-motion'
 
 function About() {
     return (
-			<div className="flex w-full flex-col gap-5 items-center  py-6 sm:pt-12 overflow-hidden relative">
+			<motion.div {...FADE_IN_ANIMATION_SETTINGS} className="flex w-full flex-col gap-5 items-center  py-6 sm:pt-12 overflow-hidden relative">
 				<Gradient classes={`right-1/2 md:left-1/2 top-20`} />
 				<h2 className="mx-auto text-white text-4xl font-bold font-sans mb-5">
 					About Project
@@ -22,7 +22,7 @@ function About() {
 						<Image src="/assets/ts.png" width={20} height={20} alt="ts" />
 					</div>
 				</div>
-			</div>
+			</motion.div>
 		);
 }
 

@@ -20,3 +20,5 @@ function AboutCard({ name, desc, working, transform }: AboutProps) {
         </div>
     )
 }
+
+export default AboutCard

@@ -22,3 +22,5 @@ export interface IBoard {
 export interface IBoardsSliceState {
 	boards: IBoard[];
 }
+
+

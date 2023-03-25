@@ -1,7 +1,7 @@
 export const FADE_IN_ANIMATION_SETTINGS = {
 	initial: { opacity: 0 },
 	animate: { opacity: 1 },
-	transition: { duration: 0.5 },
+	transition: { duration: 1 },
 };
 
 export const FADE_DOWN_ANIMATION_VARIANTS = {

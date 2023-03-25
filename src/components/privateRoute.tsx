@@ -3,12 +3,13 @@ import {
 	createServerSupabaseClient,
 	User,
 } from "@supabase/auth-helpers-nextjs";
+import { store } from "@/store";
 interface PrivateRouteProps {
 	children: ReactNode;
 }
 
 const PrivateRoute = ({ children }: PrivateRouteProps) => {
-	return <>{children}</>;
+		return <>{children}</>;
 };
 
 export default PrivateRoute;
