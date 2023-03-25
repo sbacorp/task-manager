@@ -27,7 +27,7 @@ export default function Layout({
 			<Meta {...meta} />
 
 			<Header />
-<<<<<<< HEAD
+
 			<Profile />
 			<motion.main
 				{...FADE_IN_ANIMATION_SETTINGS}
@@ -35,14 +35,7 @@ export default function Layout({
 			>
 				{children}
 			</motion.main>
-=======
-				<motion.main
-					{...FADE_IN_ANIMATION_SETTINGS}
-					className="flex w-full flex-grow flex-auto flex-col items-center justify-start pt-16"
-				>
-					{children}
-				</motion.main>
->>>>>>> 2c04b1e10eca06cfb4fe77c8027d5d30f2b18f01
+
 			<Footer />
 		</div>
 	);
