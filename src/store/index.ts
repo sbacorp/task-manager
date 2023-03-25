@@ -2,6 +2,7 @@ import { configureStore, Store } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import UserReducer from "./slices/userSlice";
+import boardsReducer from "./slices/boardsSlice";
 import storage from "redux-persist/lib/storage";
 import {
 	FLUSH,
@@ -18,11 +19,15 @@ const persistConfig = {
 	storage,
 	
 };
+
+
  
 const persistedReducer = persistReducer(persistConfig, UserReducer);
+const persistedReducer2 = persistReducer(persistConfig, boardsReducer);
 export const store = configureStore({
 	reducer: {
 		userSlice: persistedReducer,
+		boardsSlice: persistedReducer2,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
