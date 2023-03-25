@@ -27,7 +27,7 @@ export default function Layout({
 			<Header />
 				<motion.main
 					{...FADE_IN_ANIMATION_SETTINGS}
-					className="flex w-full flex-grow flex-auto flex-col items-center justify-center pt-16"
+					className="flex w-full flex-grow flex-auto flex-col items-center justify-start pt-16"
 				>
 					{children}
 				</motion.main>

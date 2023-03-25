@@ -1,12 +1,12 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { IBoard, IBoardsSliceState, IColumn, ITask } from "./types";
+import { IBoard, IBoardsSliceState, IColumn } from "./types";
 
 const initialState: IBoardsSliceState = {
 	boards: [],
 };
 
 export const BoardsSlice = createSlice({
-	name: "boards",
+	name: "boardsSlice",
 	initialState,
 	reducers: {
 		addBoard(state, action: PayloadAction<IBoard>) {
@@ -30,14 +30,6 @@ export const BoardsSlice = createSlice({
 				find.title = action.payload.value;
 			}
 		},
-		updateGoal: (state, action) => {
-			const find = state.boards.find(
-				(boards) => boards.id === action.payload.id
-			);
-			if (find) {
-				find.goal = action.payload.value;
-			}
-		},
 		addColumn(state, action: PayloadAction<IColumn>) {
 			const board = state.boards.find(
 				(board) => board.id === action.payload.boardId
@@ -56,25 +48,25 @@ export const BoardsSlice = createSlice({
 			}
 		},
 
-		moveItem: (state, action) => {
-			const board = state.boards.find(
-				(board) => board.id === action.payload.id
-			);
-			if (board) {
-				const { taskId, fromColumnId, toColumnId } = action.payload;
-				const fromColumn = board.columns.find((col) => col.id === fromColumnId);
-				const toColumn = board.columns.find((col) => col.id === toColumnId);
-				if (fromColumn && toColumn) {
-					const taskIndex = fromColumn.tasks.findIndex(
-						(task) => task.id === taskId
-					);
-					if (taskIndex !== -1) {
-						const [task] = fromColumn.tasks.splice(taskIndex, 1);
-						toColumn.tasks.push(task);
-					}
-				}
-			}
-		},
+		// moveItem: (state, action) => {
+		// 	const board = state.boards.find(
+		// 		(board) => board.id === action.payload.id
+		// 	);
+		// 	if (board) {
+		// 		const { taskId, fromColumnId, toColumnId } = action.payload;
+		// 		const fromColumn = board.columns.find((col) => col.id === fromColumnId);
+		// 		const toColumn = board.columns.find((col) => col.id === toColumnId);
+		// 		if (fromColumn && toColumn) {
+		// 			const taskIndex = fromColumn.tasks.findIndex(
+		// 				(task) => task.id === taskId
+		// 			);
+		// 			if (taskIndex !== -1) {
+		// 				const [task] = fromColumn.tasks.splice(taskIndex, 1);
+		// 				toColumn.tasks.push(task);
+		// 			}
+		// 		}
+		// 	}
+		// },
 	},
 });
 
@@ -83,8 +75,6 @@ export const {
 	deleteBoard,
 	updateBoards,
 	updateTitle,
-	updateGoal,
-	moveItem,
 	addColumn,
 } = BoardsSlice.actions;
 

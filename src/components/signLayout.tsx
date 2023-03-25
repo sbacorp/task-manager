@@ -4,8 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FADE_IN_ANIMATION_SETTINGS } from "@/lib/constants";
 function SignLayout({ children }: { children: ReactNode }) {
 	return (
-		<AnimatePresence>
-			<motion.div {...FADE_IN_ANIMATION_SETTINGS} className="flex gap-10 flex-col lg:flex-row items-center justify-center">
+			<motion.div {...FADE_IN_ANIMATION_SETTINGS} className="mt-20 flex gap-10 h-full flex-col lg:flex-row items-center justify-center">
 				<div className="about flex flex-col gap-5 max-w-md text-white font-serif">
 					<div className="title flex gap-1">
 						<Image src="assets/okIcon.svg" alt="ok" width={20} height={20} />
@@ -25,7 +24,6 @@ function SignLayout({ children }: { children: ReactNode }) {
 					{children}
 				</div>
 			</motion.div>
-		</AnimatePresence>
 	);
 }
 
