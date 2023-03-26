@@ -15,6 +15,7 @@ export interface IColumn {
 export interface IBoard {
 	id: string;
 	title: string;
+	desc?:string
 	columns: IColumn[];
 }
 

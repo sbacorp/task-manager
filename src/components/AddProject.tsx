@@ -28,7 +28,7 @@ function AddProject(props: buttonProps) {
 		<>
 			<Dialog.Root>
 				<Dialog.Trigger asChild>
-					<div className="flex  items-center text-center relative justify-center w-72 h-72 bg-dark9 py-10 px-3 border rounded-xl border-solid border-black gap-3 cursor-pointer hover:bg-dark6 transition-all duration-300 hover:border-dark3">
+					<div className="flex  items-center text-center relative justify-center w-64 h-72 bg-dark9 py-10 px-3 border rounded-xl border-solid border-black gap-3 cursor-pointer hover:bg-dark6 transition-all duration-300 hover:border-dark3">
 						<p className="text-xl font-semibold capitalize">Создать проект</p>
 						<div>
 							<svg

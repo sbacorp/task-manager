@@ -36,10 +36,10 @@ const SignIn = () => {
 
 	return (
 		<SignLayout>
-			<div className="flex flex-col gap-7 font-serif">
+			<div className="flex flex-col gap-7 font-serif items-center">
 				<p className="text-white font-normal text-22">Вход</p>
 				<form onSubmit={handleSignIn} className="flex flex-col gap-7">
-					<div>
+					<div className="flex flex-col gap-3">
 						<p className="text-dark">Электроннаяя почта</p>
 						<input
 							className="block py-1.5 px-3 w-full bg-dark7 text-gray0 lg:w-96 rounded"
@@ -49,10 +49,10 @@ const SignIn = () => {
 							required
 						/>
 					</div>
-					<div>
+					<div className="flex flex-col gap-3">
 						<p className="text-dark">Пароль</p>
 						<input
-							className="block py-1.5 px-3 w-full bg-dark7 text-gray0  rounded"
+							className="block py-1.5 px-3 w-full bg-dark7 text-gray0 lg:w-96 rounded"
 							type="password"
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}

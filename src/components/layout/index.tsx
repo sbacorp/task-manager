@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { Open_Sans } from "next/font/google";
 import Meta from "./meta";
 import Header from "../header";
@@ -19,14 +19,23 @@ export default function Layout({
 	};
 	children: ReactNode;
 }) {
+	const [isOpen, setIsOpen] = useState<boolean>(false);
+	 useEffect(() => {
+			if (isOpen) {
+				document.body.style.overflow = "hidden";
+			} else {
+				document.body.style.overflow = "auto";
+			}
+		}, [isOpen]);
+	
 	return (
 		<div
-			className={`${inter.className} text-white font-serif min-h-screen flex flex-col w-full overflow-hidden relative`}
+			className={`${inter.className} text-white font-serif min-h-screen flex flex-col w-full overflow-hidden`}
 		>
 			<Meta {...meta} />
 
-			<Header />
-
+			<Header isOpen={isOpen} setIsOpen={setIsOpen}/>
+			{isOpen && <Profile setIsOpen={setIsOpen} />}
 			<motion.main
 				{...FADE_IN_ANIMATION_SETTINGS}
 				className="flex w-full flex-grow flex-auto flex-col items-center justify-center pt-16"

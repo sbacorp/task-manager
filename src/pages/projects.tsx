@@ -13,7 +13,7 @@ function Projects() {
 				<p className="font-bold text-4xl">Projects (7)</p>
 				<Search value={value} setValue={setValue} />
 			</div>
-			<div className="flex gap-5 w-full items-start justify-start">
+			<div className="flex gap-5 w-full items-start justify-start flex-wrap">
 				{boards && boards.map((el) => <ProjectsItem board={el} key={el.id} />)}
 				<AddProject />
 			</div>
