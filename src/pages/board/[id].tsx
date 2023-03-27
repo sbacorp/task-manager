@@ -1,18 +1,20 @@
-import { useAppSelector } from "@/store";
+import { rootReducer, useAppSelector } from "@/store";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { configureStore } from "@reduxjs/toolkit";
+import { fetchBoards } from "@/store/slices/boardsSlice";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 
 function Board() {
 	const router = useRouter();
 	const { id } = router.query;
-	const boards = useAppSelector((state) => state.boardsSlice.boards);
-	const board = boards.find((b) => b.id === id);
-  if (!board) {
-    return alert('Проект не найден')
-  }
+	useEffect(() => {}, []);
+
+	//   if (!board) {
+	//     return alert('Проект не найден')
+	//   }
 	return (
-		<div>
-			<p>{board.title}</p>
-		</div>
+			<div>{/* <p>{board.title}</p> */}</div>
 	);
 }
 

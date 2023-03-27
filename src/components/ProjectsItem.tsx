@@ -1,15 +1,20 @@
-import { useAppDispatch } from '@/store';
-import { deleteBoard } from '@/store/slices/boardsSlice';
-import { IBoard } from '@/store/slices/types';
-import Link from 'next/link';
-import React from 'react'
+import supabase from "@/lib/supabaseClient";
+import { useAppDispatch } from "@/store";
+import { deleteBoard } from "@/store/slices/boardsSlice";
+import { IBoard } from "@/store/slices/types";
+import Link from "next/link";
+import React from "react";
 
-function ProjectsItem({ board }:{board:IBoard}) {
-	const dispatch = useAppDispatch()
-	const deleteProject =()=>{
-		dispatch(deleteBoard(board));
-	}
-	
+function ProjectsItem({ board }: { board: IBoard }) {
+	const dispatch = useAppDispatch();
+	const deleteProject = async () => {
+		const { data, error } = await supabase
+			.from("boards")
+			.delete()
+			.eq("id", board.id);
+			dispatch(deleteBoard(board));
+	};
+
 	return (
 		<div
 			className={`flex flex-col gap items-center text-center relative justify-start w-64 h-72 py-10 px-3 border rounded-xl border-solid gap-4 ${board?.color}`}
@@ -35,7 +40,7 @@ function ProjectsItem({ board }:{board:IBoard}) {
 					Открыть
 				</Link>
 				<button className="edit text-base rounded px-4 py-2 bg-dark6 hover:bg-dark4 transition-all duration-300">
-					{" "}
+					
 					edit
 				</button>
 			</div>
@@ -43,4 +48,4 @@ function ProjectsItem({ board }:{board:IBoard}) {
 	);
 }
 
-export default ProjectsItem
+export default ProjectsItem;

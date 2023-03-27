@@ -1,8 +1,5 @@
-'use client'
-import { FADE_IN_ANIMATION_SETTINGS1 } from "@/lib/constants";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
-import { AnimatePresence, motion } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { useState } from "react";
 import { addBoard, fetchBoards } from "@/store/slices/boardsSlice";
@@ -31,7 +28,6 @@ function AddProject(props: buttonProps) {
 	const [desc, setDesc] = useState("");
 	const [color, setColor] = useState("");
 	const profile = useAppSelector((state) => state.profileSlice.profile?.id);
-	
 	const onClickAdd = async () => {
 		if (profile) {
 			const newBoard: IBoard = {
@@ -41,12 +37,9 @@ function AddProject(props: buttonProps) {
 				id: Math.trunc(Math.random() * 100000).toString(),
 				profile_id: profile,
 			};
-			const resultAction = await dispatch(addBoard(newBoard));
-			unwrapResult(resultAction);
-			await dispatch(fetchBoards({ profileId: profile, searchValue:'' }));
-		}
-		else{
-			
+			dispatch(addBoard(newBoard));
+			const { data, error } = await supabase.from("boards").insert([newBoard]);
+		} else {
 		}
 		setTitle("");
 		setDesc("");

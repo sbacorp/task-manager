@@ -3,12 +3,11 @@ import AddProject from "@/components/AddProject";
 import ProjectsItem from "@/components/ProjectsItem";
 import Search from "@/components/Search";
 import React, { useEffect, useState } from "react";
-import { store, useAppDispatch, useAppSelector } from "@/store";
+import { useAppDispatch, useAppSelector } from "@/store";
 import { fetchBoards } from "@/store/slices/boardsSlice";
 import PrivateRoute from "@/components/privateRoute";
 import supabase from "@/lib/supabaseClient";
-import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
-import { IBoard, Status } from "@/store/slices/types";
+
 
 function Projects() {
 	const [searchValue, setSearchValue] = useState("");

@@ -26,26 +26,29 @@ export const fetchBoards = createAsyncThunk<IBoard[], IParams>(
 	}
 );
 
-export const addBoard = createAsyncThunk<IBoard, IBoard>(
-	"boards/addBoard",
-	async (newBoard) => {
-		const { data, error } = await supabase.from("boards").insert([newBoard]);
-		if (error) {
-			console.log(error);
-		}
-		if (!data || !data[0]) {
-			console.warn("Данные не получены или имеют значение null");
-			throw new Error("Не удалось получить данные после добавления доски");
-		}
-		return data[0];
-	}
-);
+// export const addBoard = createAsyncThunk<IBoard, IBoard>(
+// 	"boards/addBoard",
+// 	async (newBoard) => {
+// 		const { data, error } = await supabase.from("boards").insert([newBoard]);
+// 		if (error) {
+// 			console.log(error);
+// 		}
+// 		if (!data || !data[0]) {
+// 			console.warn("Данные не получены или имеют значение null");
+// 			throw new Error("Не удалось получить данные после добавления доски");
+// 		}
+// 		return data[0];
+// 	}
+// );
 
 export const BoardsSlice = createSlice({
 	name: "boardsSlice",
 	initialState,
 	reducers: {
-		deleteBoard(state, action: PayloadAction<IBoard>) {
+		addBoard: (state, action: PayloadAction<IBoard>) => {
+			state.boards.push(action.payload);
+		},
+		deleteBoard : (state, action: PayloadAction<IBoard>)=> {
 			state.boards = state.boards.filter(
 				(state) => !(state.id === action.payload.id)
 			);
@@ -105,29 +108,28 @@ export const BoardsSlice = createSlice({
 		});
 		builder.addCase(fetchBoards.fulfilled, (state, action) => {
 			state.boards = action.payload;
-
 			state.status = Status.SUCCESS;
 		});
 		builder.addCase(fetchBoards.rejected, (state) => {
 			state.status = Status.ERROR;
 			state.boards = [];
 		});
-		builder.addCase(addBoard.pending, (state) => {
-			state.status = Status.LOADING;
-		});
-		builder.addCase(
-			addBoard.fulfilled,
-			(state, action: PayloadAction<IBoard>) => {
-				state.status = Status.SUCCESS;
-				state.boards.push(action.payload);
-			}
-		);
-		builder.addCase(addBoard.rejected, (state) => {
-			state.status = Status.ERROR;
-		});
+		// builder.addCase(addBoard.pending, (state) => {
+		// 	state.status = Status.LOADING;
+		// });
+		// builder.addCase(
+		// 	addBoard.fulfilled,
+		// 	(state, action: PayloadAction<IBoard>) => {
+		// 		state.status = Status.SUCCESS;
+		// 		state.boards.push(action.payload);
+		// 	}
+		// );
+		// builder.addCase(addBoard.rejected, (state) => {
+		// 	state.status = Status.ERROR;
+		// });
 	},
 });
 
-export const { deleteBoard, updateBoards, updateTitle } = BoardsSlice.actions;
+export const { addBoard,deleteBoard, updateBoards, updateTitle } = BoardsSlice.actions;
 
 export default BoardsSlice.reducer;

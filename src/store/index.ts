@@ -34,7 +34,7 @@ const persistConfigProfile = {
 	key: "profile",
 	storage,
 };
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
 	userSlice: persistReducer(persistConfigUser, UserReducer),
 	boardsSlice: persistReducer(persistConfigBoards, boardsReducer),
 	profileSlice: persistReducer(persistConfigProfile, profileReducer),
