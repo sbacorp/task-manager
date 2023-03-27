@@ -1,16 +1,26 @@
-'use client'
-
 import { authLinks, notAuthLinks } from '@/lib/constants';
 import { useAppSelector } from '@/store';
 import Link from 'next/link'
-import { Children, ReactNode } from 'react';
-import { HeaderNavProps } from '../../typings';
+import { ReactNode, useEffect, useState } from 'react';
+import { HamburgerMenuIcon } from '@radix-ui/react-icons';
+
 
 function NavLinks({ children }: { children:ReactNode }) {
 	const user = useAppSelector((state) => state.userSlice.user);
+	const [size, setSize] = useState<number>(1024)
+	useEffect(()=>{
+		if(window){
+			setSize(window.innerWidth)
+			console.log(window.innerWidth);
+			
+		}
+	},[])
+	if(size<=1024)
+		return	<div><HamburgerMenuIcon className='w-10 h-10'/></div>
+	
 	return (
 		<nav className="links flex">
-			<ul className="list-none flex gap-10">
+			<ul className="list-none sm:flex gap-10">
 				{user ? (
 					<>
 						{children}
@@ -40,6 +50,7 @@ function NavLinks({ children }: { children:ReactNode }) {
 				<li className="text-dark2 font-semibold text-base">English</li>
 			</ul>
 		</nav>
+
 	);
 }
 

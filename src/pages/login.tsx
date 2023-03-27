@@ -3,7 +3,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState, FormEvent } from "react";
 import supabase from "../lib/supabaseClient";
-import { setUser, setLoading, setError } from "../store/slices/userSlice";
+import { setUser } from "../store/slices/userSlice";
+import { setProfile, IProfile } from "../store/slices/profileSlice";
 import { useDispatch } from "react-redux";
 
 const SignIn = () => {
@@ -23,14 +24,26 @@ const SignIn = () => {
 			if (error) {
 				setMessage(error.message);
 			} else {
-				console.log(data);
 				dispatch(setUser(data.user));
+
+				const { data: profile, error } = await supabase
+					.from("profiles")
+					.select("*")
+					.eq("id", data.user?.id)
+					.single();
+				if (error) {
+					console.error("Error fetching profile:", error);
+				} else {
+					console.log(profile);
+					const userProfile: IProfile = profile;
+					dispatch(setProfile(userProfile));
+				}
+
 				setMessage("Вы успешно вошли в систему!");
-				router.push("/account");
+				router.push("/projects");
 			}
 		} catch (error) {
 			console.log(error);
-			
 		}
 	};
 

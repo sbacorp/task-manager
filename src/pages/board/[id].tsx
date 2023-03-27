@@ -1,7 +1,5 @@
 import { useAppSelector } from "@/store";
-import { IBoard, IBoardsSliceState } from "@/store/slices/types";
 import { useRouter } from "next/router";
-import React from "react";
 
 function Board() {
 	const router = useRouter();

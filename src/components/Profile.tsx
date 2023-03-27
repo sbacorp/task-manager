@@ -5,7 +5,7 @@ import { ProfileProps } from "../../typings"
 import Search from "./Search";
 
 function Profile({ setIsOpen }: ProfileProps) {
-    const user = store.getState().userSlice.user;
+    const profile = store.getState().profileSlice.profile;
 
     const [searchInput, setSearchInput] = useState<string>('')
     const haveTasks = false;
@@ -24,8 +24,8 @@ function Profile({ setIsOpen }: ProfileProps) {
 				<div className="relative w-full">
 					<div className="absolute -top-12 left-[40px] rounded-full w-[100px] h-[100px] bg-dark" />
 					<div className="absolute top-0.5 left-[164px] flex flex-col gap-3 w-fit">
-						<h2 className="whitespace-nowrap">{user?.email}</h2>
-						<p className="whitespace-nowrap">ID: {user?.id}</p>
+						<h2 className="whitespace-nowrap">{profile?.userName}</h2>
+						<p className="whitespace-nowrap">ID: {profile?.id}</p>
 					</div>
 				</div>
 				<div className="flex flex-col justify-center items-center mt-14">

@@ -13,12 +13,21 @@ function Registration() {
 
 	const handleSignUp = async (e: FormEvent) => {
 		e.preventDefault();
-		const { error } = await supabase.auth.signUp({
+		const { data: user, error } = await supabase.auth.signUp({
 			email,
 			password,
-			options:{data:{name:userName}}
 		});
-
+		if (user.user) {
+			console.log(123);
+		
+			const { data, error } = await supabase.from("profiles").insert([
+				{
+					id: user.user.id,
+					userName: userName,
+					email: user.user.email
+				},
+			]);
+		}
 		if (error) {
 			setMessage(error.message);
 		} else {
@@ -32,7 +41,7 @@ function Registration() {
 				<p className="text-white font-normal text-22">Регистрация</p>
 				<form onSubmit={handleSignUp} className="flex flex-col gap-7">
 					<div className="flex flex-col gap-3">
-						<p className="text-dark">Имя</p>
+						<p className="text-dark">Никмейм</p>
 						<input
 							className="block py-1.5 px-3 w-full bg-dark7 text-gray0 lg:w-96 rounded"
 							type="text"
@@ -77,7 +86,7 @@ function Registration() {
 					</button>
 				</form>
 				{message && (
-					<p className="text-white absolute bottom-0 left-1/2">{message}</p>
+					<p className="text-white absolute bottom-10 left-1/2">{message}</p>
 				)}
 			</div>
 		</SignLayout>

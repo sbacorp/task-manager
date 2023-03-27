@@ -1,19 +1,50 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { IBoard, IBoardsSliceState, IColumn } from "./types";
+import supabase from "@/lib/supabaseClient";
+import { PayloadAction, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { IBoard, IBoardsSliceState, IParams, Status } from "./types";
 
 const initialState: IBoardsSliceState = {
 	boards: [],
+	status: Status.LOADING,
 };
+export const fetchBoards = createAsyncThunk<IBoard[], IParams>(
+	"boardsSlice/fetchBoardsStatus",
+	async (params) => {
+		const { profileId, searchValue } = params;
+		const { data, error } = await supabase
+			.from("boards")
+			.select("*")
+			.eq("profile_id", profileId)
+			.ilike("title", `%${searchValue}%`);
+		if (error) console.error("Error fetching boards:", error);
+		if (!data?.length) {
+			return [];
+		} else {
+			const boards: IBoard[] = data as IBoard[];
+			console.log("Boards for profile:", boards);
+			return boards;
+		}
+	}
+);
+
+export const addBoard = createAsyncThunk<IBoard, IBoard>(
+	"boards/addBoard",
+	async (newBoard) => {
+		const { data, error } = await supabase.from("boards").insert([newBoard]);
+		if (error) {
+			console.log(error);
+		}
+		if (!data || !data[0]) {
+			console.warn("Данные не получены или имеют значение null");
+			throw new Error("Не удалось получить данные после добавления доски");
+		}
+		return data[0];
+	}
+);
 
 export const BoardsSlice = createSlice({
 	name: "boardsSlice",
 	initialState,
 	reducers: {
-		addBoard(state, action: PayloadAction<IBoard>) {
-			state.boards.push({
-				...action.payload,
-			});
-		},
 		deleteBoard(state, action: PayloadAction<IBoard>) {
 			state.boards = state.boards.filter(
 				(state) => !(state.id === action.payload.id)
@@ -30,23 +61,23 @@ export const BoardsSlice = createSlice({
 				find.title = action.payload.value;
 			}
 		},
-		addColumn(state, action: PayloadAction<IColumn>) {
-			const board = state.boards.find(
-				(board) => board.id === action.payload.boardId
-			);
-			if (board) {
-				board.columns.push({
-					...action.payload,
-				});
-			}
-		},
-		addTask(state, action: PayloadAction<IColumn>) {
-			const board = state.boards.find(
-				(board) => board.id === action.payload.boardId
-			);
-			if (board) {
-			}
-		},
+		// addColumn(state, action: PayloadAction<IColumn>) {
+		// 	const board = state.boards.find(
+		// 		(board) => board.id === action.payload.boardId
+		// 	);
+		// 	if (board) {
+		// 		board.columns.push({
+		// 			...action.payload,
+		// 		});
+		// 	}
+		// },
+		// addTask(state, action: PayloadAction<IColumn>) {
+		// 	const board = state.boards.find(
+		// 		(board) => board.id === action.payload.boardId
+		// 	);
+		// 	if (board) {
+		// 	}
+		// },
 
 		// moveItem: (state, action) => {
 		// 	const board = state.boards.find(
@@ -68,14 +99,35 @@ export const BoardsSlice = createSlice({
 		// 	}
 		// },
 	},
+	extraReducers: (builder) => {
+		builder.addCase(fetchBoards.pending, (state) => {
+			state.status = Status.LOADING;
+		});
+		builder.addCase(fetchBoards.fulfilled, (state, action) => {
+			state.boards = action.payload;
+
+			state.status = Status.SUCCESS;
+		});
+		builder.addCase(fetchBoards.rejected, (state) => {
+			state.status = Status.ERROR;
+			state.boards = [];
+		});
+		builder.addCase(addBoard.pending, (state) => {
+			state.status = Status.LOADING;
+		});
+		builder.addCase(
+			addBoard.fulfilled,
+			(state, action: PayloadAction<IBoard>) => {
+				state.status = Status.SUCCESS;
+				state.boards.push(action.payload);
+			}
+		);
+		builder.addCase(addBoard.rejected, (state) => {
+			state.status = Status.ERROR;
+		});
+	},
 });
 
-export const {
-	addBoard,
-	deleteBoard,
-	updateBoards,
-	updateTitle,
-	addColumn,
-} = BoardsSlice.actions;
+export const { deleteBoard, updateBoards, updateTitle } = BoardsSlice.actions;
 
 export default BoardsSlice.reducer;

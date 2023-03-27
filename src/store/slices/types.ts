@@ -14,14 +14,21 @@ export interface IColumn {
 }
 export interface IBoard {
 	id: string;
+	profile_id: string;
 	title: string;
-	desc?:string;
-	color?:string;
-	columns: IColumn[];
+	desc?: string;
+	color?: string;
 }
 
 export interface IBoardsSliceState {
 	boards: IBoard[];
+	status:Status
 }
-
-
+export enum Status {
+	LOADING = "loading",
+	SUCCESS = "completed",
+	ERROR = "error",
+}export interface IParams {
+	profileId: string;
+	searchValue: string;
+}

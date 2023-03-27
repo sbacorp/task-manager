@@ -1,8 +1,9 @@
-import { configureStore, Store } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import UserReducer from "./slices/userSlice";
 import boardsReducer from "./slices/boardsSlice";
+import profileReducer from "./slices/profileSlice";
 import storage from "redux-persist/lib/storage";
 import {
 	FLUSH,
@@ -13,22 +14,33 @@ import {
 	REGISTER,
 } from "redux-persist";
 
+
 const persistConfig = {
 	key: "root",
 	version:1,
 	storage,
 	
 };
+const persistConfigUser = {
+  key: "user",
+  storage,
+};
 
-
- 
-const persistedReducer = persistReducer(persistConfig, UserReducer);
-const persistedReducer2 = persistReducer(persistConfig, boardsReducer);
+const persistConfigBoards = {
+  key: "boards",
+  storage,
+};
+const persistConfigProfile = {
+	key: "profile",
+	storage,
+};
+const rootReducer = combineReducers({
+	userSlice: persistReducer(persistConfigUser, UserReducer),
+	boardsSlice: persistReducer(persistConfigBoards, boardsReducer),
+	profileSlice: persistReducer(persistConfigProfile, profileReducer),
+});
 export const store = configureStore({
-	reducer: {
-		userSlice: persistedReducer,
-		boardsSlice: persistedReducer2,
-	},
+	reducer: rootReducer,
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
 			serializableCheck: {

@@ -11,7 +11,9 @@ function ProjectsItem({ board }:{board:IBoard}) {
 	}
 	
 	return (
-		<div className={`flex flex-col gap items-center text-center relative justify-start w-64 h-72 py-10 px-3 border rounded-xl border-solid gap-4 ${board?.color}`}>
+		<div
+			className={`flex flex-col gap items-center text-center relative justify-start w-64 h-72 py-10 px-3 border rounded-xl border-solid gap-4 ${board?.color}`}
+		>
 			<svg
 				onClick={deleteProject}
 				fill="#868E96"
@@ -21,7 +23,7 @@ function ProjectsItem({ board }:{board:IBoard}) {
 				width="20"
 				xmlns="http://www.w3.org/2000/svg"
 			>
-				<path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 " />
+				<path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
 			</svg>
 			<p className="text-xl font-semibold capitalize">{board.title}</p>
 			<p className="text-base text-dark2">{board.desc}</p>
