@@ -11,7 +11,7 @@ function ProjectsItem({ board }:{board:IBoard}) {
 	}
 	
 	return (
-		<div className="flex flex-col gap items-center text-center relative justify-start w-64 h-72 bg-[#320606] py-10 px-3 border rounded-xl border-solid border-red6 gap-4">
+		<div className={`flex flex-col gap items-center text-center relative justify-start w-64 h-72 py-10 px-3 border rounded-xl border-solid gap-4 ${board?.color}`}>
 			<svg
 				onClick={deleteProject}
 				fill="#868E96"

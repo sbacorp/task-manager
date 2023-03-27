@@ -5,6 +5,16 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useAppDispatch } from "@/store";
 import { useState } from "react";
 import { addBoard } from "@/store/slices/boardsSlice";
+import * as RadioGroup from "@radix-ui/react-radio-group";
+
+const colors = [
+	{colorName:'BLUE', color: "bg-blue9"},
+	{colorName:'CYAN', color: "bg-cyan6"},
+	{colorName:'RED', color:"bg-red7"},
+	{colorName:'GRAP', color: "bg-grape7"},
+	{colorName:'PINK', color: "bg-pink6"},
+	{colorName:'VIOLET', color:"bg-violet7"}]
+
 type buttonProps = {
 	title?: string;
 	onClick?: (event: MouseEvent) => void;
@@ -13,10 +23,14 @@ type buttonProps = {
 function AddProject(props: buttonProps) {
 	const dispatch = useAppDispatch();
 	const [title, setTitle] = useState("");
+	const [desc, setDesc] = useState("");
+	const [color, setColor] = useState("");
 	const onClickAdd = () => {
 		dispatch(
 			addBoard({
 				title: title,
+				desc: desc,
+				color: color,
 				id: "id" + Math.random().toString(16).slice(2),
 				columns: [],
 			})
@@ -55,9 +69,13 @@ function AddProject(props: buttonProps) {
 							<Dialog.Content
 								onCloseAutoFocus={() => {
 									setTitle("");
+									setColor("");
+									setDesc("");
 								}}
 								onEscapeKeyDown={() => {
 									setTitle("");
+									setColor('');
+									setDesc('')
 								}}
 								className=" border-gray9 opacity-1 bg-white border-2 rounded-md fixed w-screen max-w-md top-1/3 p-6 focus:outline-none"
 							>
@@ -79,6 +97,52 @@ function AddProject(props: buttonProps) {
 										type="text"
 										placeholder="Введите название доски"
 									/>
+								</fieldset>
+								<fieldset className="flex gap-5 items-center mb-4">
+									<label
+										className="font-nurmal text-base text-purple text-right w-24"
+										htmlFor="desc"
+									>
+										Описание
+									</label>
+									<input
+										className="w-full flex-1 inline-flex items-center justify-center rounded-md px-3 text-base text-purple shadow-lg h-9 focus:shadow-p duration-300 transition-all"
+										id="desc"
+										value={desc}
+										onChange={(e) => setDesc(e.target.value)}
+										type="text"
+										placeholder="Введите описание доски"
+									/>
+								</fieldset>
+								<fieldset className="flex gap-5 items-center mb-4">
+									<label
+										className="font-nurmal text-base text-purple text-right w-24"
+										htmlFor="desc"
+									>
+										Цвет
+									</label>
+									<RadioGroup.Root
+										className="flex gap-2.5"
+										defaultValue="BLUE"
+										aria-label="View density"
+									>
+										
+										{colors.map((el, i) => {
+											return (
+												<RadioGroup.Item
+													key={i}
+													className={`${el.color}
+													 w-[25px] h-[25px] rounded-full shadow-[0_2px_10px] shadow-black focus:shadow-[0_0_0_2px] focus:shadow-black outline-none cursor-default`}
+													value={el.color}
+													onClick={() => setColor(el.color)}
+												>
+													<RadioGroup.Indicator
+														className={`flex items-center justify-center w-full h-full relative after:content-[''] after:block after:w-[11px] after:h-[11px] after:rounded-[50%] after:${el.color}`}
+													/>
+												</RadioGroup.Item>
+											);
+										})}
+									</RadioGroup.Root>
 								</fieldset>
 								<div
 									style={{

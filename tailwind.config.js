@@ -68,7 +68,7 @@ module.exports = {
       'violet1': '#E5DBFF',
       'violet2': '#D0BFFF',
       'violet3': '#B197FC',
-      'violet4': '##9775FA',
+      'violet4': '#9775FA',
       'violet5': '#845EF7',
       'violet6': '#7950F2',
       'violet7': '#7048E8',
