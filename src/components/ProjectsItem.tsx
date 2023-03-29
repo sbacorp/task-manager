@@ -8,8 +8,6 @@ import React from "react";
 function ProjectsItem({ project }: { project: IProject }) {
 	const dispatch = useAppDispatch();
 	const deleteProjectFn =async()=>{
-		console.log(project);
-		
 		await dispatch(deleteProject(project.id));
 		await dispatch(fetchProjects({ profileId: project.profile_id, searchValue:''}));
 	}
