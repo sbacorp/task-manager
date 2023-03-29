@@ -1,9 +1,5 @@
-import { rootReducer, useAppSelector } from "@/store";
+import { useAppSelector } from "@/store";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { configureStore } from "@reduxjs/toolkit";
-import { fetchBoards } from "@/store/slices/boardsSlice";
-import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 
 function Project() {
 	const router = useRouter();

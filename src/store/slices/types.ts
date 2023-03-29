@@ -10,9 +10,9 @@ export interface IColumn {
 	title: string;
 	description?: string;
 	tasks: ITask[];
-	boardId: string;
+	projectId: string;
 }
-export interface IBoard {
+export interface IProject {
 	id: string;
 	profile_id: string;
 	title: string;
@@ -20,15 +20,22 @@ export interface IBoard {
 	color?: string;
 }
 
-export interface IBoardsSliceState {
-	boards: IBoard[];
-	status:Status
+export interface IProjectsSliceState {
+	projects: IProject[];
+	status: Status;
+}
+export interface IProjectSliceState {
+	status: Status;
 }
 export enum Status {
 	LOADING = "loading",
 	SUCCESS = "completed",
 	ERROR = "error",
-}export interface IParams {
+}
+export interface IParams {
 	profileId: string;
-	searchValue: string;
+	searchValue?: string;
+}
+export interface IDeleteParams {
+	id: string;
 }

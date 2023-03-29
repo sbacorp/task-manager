@@ -3,29 +3,27 @@ import AddProject from "@/components/AddProject";
 import ProjectsItem from "@/components/ProjectsItem";
 import Search from "@/components/Search";
 import React, { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/store";
-import { fetchBoards } from "@/store/slices/boardsSlice";
+import { store, useAppDispatch, useAppSelector } from "@/store";
+import { fetchProjects } from "@/store/slices/projectsSlice";
 import PrivateRoute from "@/components/privateRoute";
 import supabase from "@/lib/supabaseClient";
-
-
 function Projects() {
 	const [searchValue, setSearchValue] = useState("");
 	const dispatch = useAppDispatch();
 
 	const [loading, setLoading] = useState(true);
-	const { boards, status } = useAppSelector((state) => state.boardsSlice);
-	const getBoards = async () => {
+	const { projects, status } = useAppSelector((state) => state.projectsSlice);
+	const getProjects = async () => {
 		try {
 			const { data } = await supabase.auth.getUser();
-			await dispatch(fetchBoards({ profileId: data!.user!.id, searchValue }));
+			await dispatch(fetchProjects({ profileId: data!.user!.id, searchValue }));
 			setLoading(false);
 		} catch (error) {
 			console.log(error);
 		}
 	};
 	useEffect(() => {
-		getBoards();
+		getProjects();
 	}, [searchValue, dispatch]);
 
 	if (loading) {
@@ -39,9 +37,8 @@ function Projects() {
 						<Search value={searchValue} setValue={setSearchValue} />
 					</div>
 					<div className="flex gap-5 w-full items-start justify-start flex-wrap">
-						{boards&&boards.map((el) => (
-							<ProjectsItem board={el} key={el.id} />
-						))}
+						{projects &&
+							projects.map((el) => <ProjectsItem project={el} key={el.id} />)}
 						<AddProject />
 					</div>
 				</div>

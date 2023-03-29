@@ -2,11 +2,9 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { useState } from "react";
-import { addBoard, fetchBoards } from "@/store/slices/boardsSlice";
+import { addProject, fetchProjects } from "@/store/slices/projectsSlice";
 import * as RadioGroup from "@radix-ui/react-radio-group";
-import supabase from "@/lib/supabaseClient";
-import { IBoard } from "@/store/slices/types";
-import { unwrapResult } from "@reduxjs/toolkit";
+import { IProject } from "@/store/slices/types";
 
 const colors = [
 	{ colorName: "BLUE", color: "bg-blue9" },
@@ -28,18 +26,18 @@ function AddProject(props: buttonProps) {
 	const [desc, setDesc] = useState("");
 	const [color, setColor] = useState("");
 	const profile = useAppSelector((state) => state.profileSlice.profile?.id);
-	const onClickAdd = async () => {
+
+	const onClickAdd = async () => {		
 		if (profile) {
-			const newBoard: IBoard = {
+			const newProject: IProject = {
 				title: title,
 				desc: desc,
 				color: color,
 				id: Math.trunc(Math.random() * 100000).toString(),
 				profile_id: profile,
 			};
-			dispatch(addBoard(newBoard));
-			const { data, error } = await supabase.from("boards").insert([newBoard]);
-		} else {
+			await dispatch(addProject(newProject));
+			await dispatch(fetchProjects({ profileId: profile, searchValue: "" }));
 		}
 		setTitle("");
 		setDesc("");

@@ -6,8 +6,8 @@ import {motion} from 'framer-motion'
 
 function About() {
     return (
-			<motion.div {...FADE_IN_ANIMATION_SETTINGS} className="flex w-full flex-col gap-5 items-center  py-6 sm:pt-12 overflow-hidden relative">
-				<Gradient classes={`right-1/2 md:left-1/2 top-20`} />
+			<motion.div {...FADE_IN_ANIMATION_SETTINGS} className="flex w-full flex-col gap-5 items-center  py-6 sm:pt-12 relative">
+				<Gradient classes={`right-1/2 md:-right-1/4 top-1/2`} />
 				<h2 className="mx-auto text-white text-4xl font-bold font-sans mb-5">
 					About Project
 				</h2>

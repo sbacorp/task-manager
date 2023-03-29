@@ -2,11 +2,12 @@ import {
   createSlice,
   PayloadAction,
 } from '@reduxjs/toolkit';
+import { IProject } from './types';
+
 export interface IProfile {
   id: string;
   userName: string;
   email: string;
-  avatar: string;
 }
 export interface ProfileState {
   profile: IProfile | null;

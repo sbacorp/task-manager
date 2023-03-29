@@ -1,26 +1,24 @@
-import supabase from "@/lib/supabaseClient";
-import { useAppDispatch } from "@/store";
-import { deleteBoard } from "@/store/slices/boardsSlice";
-import { IBoard } from "@/store/slices/types";
+import { useAppDispatch, useAppSelector } from "@/store";
+import { deleteProject } from "@/store/slices/projectSlice";
+import { fetchProjects } from "@/store/slices/projectsSlice";
+import { IProject } from "@/store/slices/types";
 import Link from "next/link";
 import React from "react";
 
-function ProjectsItem({ board }: { board: IBoard }) {
+function ProjectsItem({ project }: { project: IProject }) {
 	const dispatch = useAppDispatch();
-	const deleteProject = async () => {
-		const { data, error } = await supabase
-			.from("boards")
-			.delete()
-			.eq("id", board.id);
-			dispatch(deleteBoard(board));
-	};
-
+	const deleteProjectFn =async()=>{
+		console.log(project);
+		
+		await dispatch(deleteProject(project.id));
+		await dispatch(fetchProjects({ profileId: project.profile_id, searchValue:''}));
+	}
 	return (
 		<div
-			className={`flex flex-col gap items-center text-center relative justify-start w-64 h-72 py-10 px-3 border rounded-xl border-solid gap-4 ${board?.color}`}
+			className={`flex flex-col gap items-center text-center relative justify-start w-64 h-72 py-10 px-3 border rounded-xl border-solid gap-4 ${project?.color}`}
 		>
 			<svg
-				onClick={deleteProject}
+				onClick={deleteProjectFn}
 				fill="#868E96"
 				className="absolute right-4 top-4 cursor-pointer"
 				viewBox="0 0 24 24"
@@ -30,11 +28,11 @@ function ProjectsItem({ board }: { board: IBoard }) {
 			>
 				<path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
 			</svg>
-			<p className="text-xl font-semibold capitalize">{board.title}</p>
-			<p className="text-base text-dark2">{board.desc}</p>
+			<p className="text-xl font-semibold capitalize">{project.title}</p>
+			<p className="text-base text-dark2">{project.desc}</p>
 			<div className="buttons flex gap-2 pt-4">
 				<Link
-					href={`/board/${board.id}`}
+					href={`/projects/${project.id}`}
 					className="edit text-base rounded px-4 py-2 bg-dark6 hover:bg-dark4 transition-all duration-300"
 				>
 					Открыть
