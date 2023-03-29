@@ -23,17 +23,17 @@ export const deleteProject = createAsyncThunk<void, string>(
 		
 	}
 );
-export const updateBoard = createAsyncThunk<IProject, string>(
-	"project/delete",
-	async (projectId) => {
-		try {
-			await supabase.from("projects").delete().eq("id", projectId);
-			return;
-		} catch (error) {
-			console.log(error);
-		}
-	}
-);
+// export const updateBoard = createAsyncThunk<IProject, string>(
+// 	"project/delete",
+// 	async (projectId) => {
+// 		try {
+// 			await supabase.from("projects").delete().eq("id", projectId);
+// 			return;
+// 		} catch (error) {
+// 			console.log(error);
+// 		}
+// 	}
+// );
 
 export const ProjectSlice = createSlice({
 	name: "ProjectSlice",

@@ -38,7 +38,7 @@ function ProjectsItem({ project }: { project: IProject }) {
 					Открыть
 				</Link>
 				<button className="edit text-base rounded px-4 py-2 bg-dark6 hover:bg-dark4 transition-all duration-300">
-					{" "}
+					
 					edit
 				</button>
 			</div>

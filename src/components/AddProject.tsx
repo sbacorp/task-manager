@@ -1,5 +1,3 @@
-"use client";
-import { FADE_IN_ANIMATION_SETTINGS1 } from "@/lib/constants";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { useAppDispatch, useAppSelector } from "@/store";

@@ -17,9 +17,7 @@ function Registration() {
 			email,
 			password,
 		});
-		if (user.user) {
-			console.log(123);
-		
+		if (user.user) {		
 			const { data, error } = await supabase.from("profiles").insert([
 				{
 					id: user.user.id,
