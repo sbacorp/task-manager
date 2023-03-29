@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IBoard } from "./types";
+import { IProject } from "./types";
 
 export interface IProfile {
-	id:string,
-	userName:string,
-	email:string
+	id: string;
+	userName: string;
+	email: string;
 }
 export interface ProfileState {
 	profile: IProfile | null;

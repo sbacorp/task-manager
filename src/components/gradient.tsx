@@ -19,11 +19,10 @@ function Gradient({classes}:Props) {
 			}}
 		>
 			<Image
-				src="assets/noise.svg"
+				src="assets/gradient.svg"
 				alt="gr"
 				width={1000}
-				height={1500}
-				className="absolute top-1/2 left-0"
+				height={1000}
 			/>
 		</motion.div>
 	);

@@ -15,8 +15,8 @@ import Gradient from "@/components/gradient";
 				viewport={{ once: true }}
 			>
 				<section className="relative flex flex-col gap-4 text-center items-center justify-center py-16 w-screen overflow-hidden">
-					<Gradient classes={`left-1/2 md:left-3/4`} />
-					<Gradient classes={`right-1/2 md:right-3/4`} />
+					<Gradient classes='left-1/2 md:left-3/4' />
+					<Gradient classes='right-1/2 md:right-3/4' />
 					<div className="container">
 						<p className="title1 text-white font-serif text-xl font-semibold">
 							Приложение для управления проектами

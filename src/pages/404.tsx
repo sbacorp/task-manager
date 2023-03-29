@@ -4,7 +4,6 @@ import Link from "next/link"
 function NotFound() {
   return (
 		<div className=" min-h-full font-sans relative w-full">
-			<Gradient classes={`right-1/2 md:right-3/4 -top-40`} />
 			<div className="mx-auto max-w-md">
 				<div className="space-y-6 flex flex-col items-center text-center">
 					<p className="text-4xl text-white font-semibold">
