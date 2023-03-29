@@ -11,6 +11,9 @@ function Profile({ setIsOpen }: ProfileProps) {
 	const [searchInput, setSearchInput] = useState<string>('')
 	const haveTasks = false;
 	const tasks = ['Brochure products', 'Treatment', 'Windexing mirrors', 'Quarterly report tasklist']
+	if (!profile) {
+		return <>idi nahui</>
+	}
 	return (
 		<div className="absolute  right-0 w-[480px] h-full flex flex-col gap-2 rounded shadow-xl border border-[#343A40] bg-dark9 z-50">
 			<div className="w-full h-[120px] bg-cyan5 rounded-sm pr-2 pt-2">
@@ -23,8 +26,9 @@ function Profile({ setIsOpen }: ProfileProps) {
 				</button>
 			</div>
 			<div className="relative w-full">
-				<div className="absolute -top-12 left-[40px] rounded-full w-[100px] h-[100px">
-					<Image src={profile!.avatar} alt='avatar' />
+				<div className="absolute -top-12 left-[40px] rounded-full w-[100px] h-[100px] bg-dark flex items-center justify-center overflow-hidden">
+					{profile.avatar ? <img src={profile.avatar} alt='avatar' /> : <Image src='assets/userIcon.svg' alt='avatar' width={100} height={100} />}
+
 				</div>
 				<div className="absolute top-0.5 left-[164px] flex flex-col gap-3 w-fit">
 					<h2 className="whitespace-nowrap">{profile?.userName}</h2>
