@@ -25,7 +25,6 @@ const SignIn = () => {
 				setMessage(error.message);
 			} else {
 				dispatch(setUser(data.user));
-
 				const { data: profile, error } = await supabase
 					.from("profiles")
 					.select("*")
@@ -34,11 +33,9 @@ const SignIn = () => {
 				if (error) {
 					console.error("Error fetching profile:", error);
 				} else {
-					console.log(profile);
-					const userProfile: IProfile = profile;
+					const userProfile: IProfile = profile as IProfile;
 					dispatch(setProfile(userProfile));
 				}
-
 				setMessage("Вы успешно вошли в систему!");
 				router.push("/projects");
 			}

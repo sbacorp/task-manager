@@ -4,10 +4,11 @@ import Image from "next/image";
 import { store } from "@/store";
 import { ProfileProps } from "../../typings"
 import Search from "./Search";
+import EditProfile from "./EditProfile";
+import UploadAvatar from './UploadAvatar'
 
 function Profile({ setIsOpen }: ProfileProps) {
 	const profile = store.getState().profileSlice.profile;
-
 	const [searchInput, setSearchInput] = useState<string>('')
 	const haveTasks = false;
 	const tasks = ['Brochure products', 'Treatment', 'Windexing mirrors', 'Quarterly report tasklist']
@@ -27,8 +28,19 @@ function Profile({ setIsOpen }: ProfileProps) {
 			</div>
 			<div className="relative w-full">
 				<div className="absolute -top-12 left-[40px] rounded-full w-[100px] h-[100px] bg-dark flex items-center justify-center overflow-hidden">
-					{profile.avatar ? <img src={profile.avatar} alt='avatar' /> : <Image src='assets/userIcon.svg' alt='avatar' width={100} height={100} />}
-
+					{profile.avatar ? (
+						<img
+							src={`https://lifscnxzktzcffgkwvuw.supabase.co/storage/v1/object/public/user-avatars/${profile.avatar}`}
+							alt="avatar"
+						/>
+					) : (
+						<Image
+							src="assets/userIcon.svg"
+							alt="avatar"
+							width={100}
+							height={100}
+						/>
+					)}
 				</div>
 				<div className="absolute top-0.5 left-[164px] flex flex-col gap-3 w-fit">
 					<h2 className="whitespace-nowrap">{profile?.userName}</h2>
@@ -37,12 +49,8 @@ function Profile({ setIsOpen }: ProfileProps) {
 			</div>
 			<div className="flex flex-col justify-center items-center mt-14">
 				<div className="flex gap-6 mt-8 justify-evenly w-full">
-					<button className="bg-dark6 py-[10px] px-[22px] font-semibold text-base text-white rounded-lg">
-						Редактировать
-					</button>
-					<button className="bg-dark6 py-[10px] px-[22px] font-semibold text-base text-white rounded-lg">
-						Изменить аватар
-					</button>
+					<EditProfile />
+					<UploadAvatar />
 				</div>
 				<div className="flex flex-col gap-[16px] mt-10 justify-center items-center">
 					<h2 className="font-bold text-lg text-dark2">Ваши задачи</h2>

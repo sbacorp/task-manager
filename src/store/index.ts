@@ -6,6 +6,7 @@ import projectsReducer from "./slices/projectsSlice";
 import profileReducer from "./slices/profileSlice";
 import storage from "redux-persist/lib/storage";
 import projectReducer from './slices/projectSlice'
+import columnsReducer from "./slices/columnsSlice";
 import {
 	FLUSH,
 	REHYDRATE,
@@ -37,7 +38,8 @@ export const rootReducer = combineReducers({
 	userSlice: persistReducer(persistConfigUser, UserReducer),
 	projectsSlice: persistReducer(persistConfigProjects, projectsReducer),
 	profileSlice: persistReducer(persistConfigProfile, profileReducer),
-	projectReducer:projectReducer
+	projectReducer: projectReducer,
+	columnsReducer: columnsReducer,
 });
 export const store = configureStore({
 	reducer: rootReducer,
