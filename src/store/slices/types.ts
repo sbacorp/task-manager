@@ -1,8 +1,9 @@
 export interface ITask {
 	id: string;
-	title: string;
+	title?: string;
 	description?: string;
-	columnId?: string;
+	column_id: string;
+	position:number
 }
 
 export interface IColumn {

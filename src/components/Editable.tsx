@@ -53,11 +53,11 @@ const Editable: React.FC<IEditable> = ({
 			{isEditing ? (
 				<AnimatePresence>
 					<motion.div
-						className="flex flex-grow-0 w-full gap-1"
+						className="flex flex-grow-0 w-full min-w-[150px] gap-1 flex-shrink-0"
 						{...FADE_IN_ANIMATION_SETTINGS}
 					>
 						<input
-							className=" w-1/2 bg-transparent border rounded p-2 text-white text-md hover:bg-white/30 flex-grow-0 focus:bg-white/30"
+							className="flex-shrink-0 w-1/2 bg-transparent border rounded p-2 text-white text-md hover:bg-white/30 flex-grow-0 focus:bg-white/30"
 							value={newText}
 							onChange={(e) => setNewText(e.target.value)}
 						/>
@@ -77,7 +77,7 @@ const Editable: React.FC<IEditable> = ({
 				</AnimatePresence>
 			) : (
 				<p
-					className={`cursor-pointer text-lg text-center text-white w-fit hover:bg-white/30 focus:bg-white/30 p-2 rounded ${classes}`}
+					className={`cursor-pointer md:text-xl text-center text-white w-fit hover:bg-dark6 focus:bg-dark7 p-2 rounded ${classes} transition-all duration-300`}
 					onClick={() => setIsEditing(true)}
 				>
 					{text || defaultValue || "Enter Text"}
