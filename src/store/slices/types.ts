@@ -39,3 +39,9 @@ export interface IParams {
 export interface IDeleteParams {
 	id: string;
 }
+
+export interface TaskUpdatePayload {
+	id: string;
+	column_id: string;
+	position: number;
+}

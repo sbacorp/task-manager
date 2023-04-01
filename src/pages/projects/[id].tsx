@@ -1,9 +1,11 @@
 import Column from "@/components/Column";
 import CreateColumn from "@/components/createColumn";
+import PyramidLoader from "@/components/ui/PyramidLoader";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { addColumn, fetchcolumns } from "@/store/slices/columnsSlice";
-import { fetchTasks, updateTask } from "@/store/slices/tasksSlice";
-import { IColumn } from "@/store/slices/types";
+import { fetchTasks, setTasks, updateTask } from "@/store/slices/tasksSlice";
+import { IColumn, ITask, TaskUpdatePayload } from "@/store/slices/types";
+import { log } from "console";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
@@ -15,36 +17,48 @@ function Project() {
 	const project = projects.find((b) => b.id == id);
 	const [loading, setLoading] = useState(true);
 	let columns = useAppSelector((state) => state.columnsReducer.columns);
-	const handleDragEnd = async(result: any) => {
+	const tasks = useAppSelector((state) => state.tasksReducer.tasks);
+
+	const handleDragEnd = (result: any) => {
 		const { source, destination, draggableId, type } = result;
 		if (!destination) {
 			return;
 		}
+		if (
+			source.droppableId === destination.droppableId &&
+			source.index === destination.index
+		)
+			return;
 		if (type === "task") {
-			await dispatch(
+			dispatch(
 				updateTask({
 					id: draggableId,
 					column_id: destination.droppableId,
 					position: destination.index,
 				})
 			);
-
-			await dispatch(fetchcolumns(String(id))).then(() => {
+			
+			dispatch(fetchcolumns(String(id))).then(() => {
 				columns.forEach((column: IColumn) => {
 					dispatch(fetchTasks(column.id));
 				});
 			});
 		} else if (type === "column") {
-			// Обработка события завершения перетаскивания колонки
+			
 		}
 	};
+
+
+
 	useEffect(() => {
 		const getColumns = async () => {
 			await dispatch(fetchcolumns(project!.id));
 			setLoading(false);
 		};
+
 		if (project) {
 			getColumns();
+			console.log(tasks, "aadada");
 		}
 	}, [project]);
 	const createColumnFn = async (title: string) => {
@@ -53,7 +67,7 @@ function Project() {
 			await dispatch(fetchcolumns(project.id));
 		}
 	};
-	if (loading) return <>loading</>;
+	if (loading) return <PyramidLoader />;
 	if (!project) {
 		router.push("/projects");
 		return alert("Проект не найден");

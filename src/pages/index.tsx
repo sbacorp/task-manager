@@ -5,6 +5,7 @@ import { cards, ItemAnimation, sections } from "@/lib/constants";
 import { motion } from "framer-motion";
 import type { NextPage } from "next";
 import Gradient from "@/components/gradient";
+import PyramidLoader from "@/components/ui/PyramidLoader";
 
  const Index:NextPage = () =>{
 	return (

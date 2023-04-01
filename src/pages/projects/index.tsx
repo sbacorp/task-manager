@@ -7,6 +7,7 @@ import { store, useAppDispatch, useAppSelector } from "@/store";
 import { fetchProjects } from "@/store/slices/projectsSlice";
 import PrivateRoute from "@/components/privateRoute";
 import supabase from "@/lib/supabaseClient";
+import PyramidLoader from "@/components/ui/PyramidLoader";
 function Projects() {
 	const [searchValue, setSearchValue] = useState("");
 	const dispatch = useAppDispatch();
@@ -27,7 +28,7 @@ function Projects() {
 	}, [searchValue, dispatch]);
 
 	if (loading) {
-		return <>loading</>;
+		return <PyramidLoader/>
 	} else {
 		return (
 			<PrivateRoute>

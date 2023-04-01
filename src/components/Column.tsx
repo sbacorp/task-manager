@@ -8,6 +8,8 @@ import { Droppable } from "react-beautiful-dnd";
 import Task from "./Task";
 import { log } from "console";
 import { deleteColumn, fetchcolumns } from "@/store/slices/columnsSlice";
+import LoadingSpinner from "./ui/Loader";
+import PyramidLoader from "./ui/PyramidLoader";
 
 function Column({ column }: { column: IColumn }) {
 	const dispatch = useAppDispatch();
@@ -17,7 +19,6 @@ function Column({ column }: { column: IColumn }) {
 	);
 	
 	const status = useAppSelector(state=>state.columnsReducer.status);
-	const [loader, setLoader] = useState(status)
 	const deleteColumnFn =async()=>{
 		console.log(status);
 		await dispatch(deleteColumn(column.id));
@@ -29,19 +30,20 @@ function Column({ column }: { column: IColumn }) {
 	};
 	useEffect(() => {
 		dispatch(fetchTasks(column.id));
-		console.log(tasks);
 		setLoading(false)
 	}, [column.id, dispatch]);
-	const createTaskFn = async(title: string) => {
+	const createTaskFn =(title: string) => {
 		if (column) {
-			await dispatch(addTask({ column_id: column.id, title: title, position:1 }));
+			 dispatch(addTask({ column_id: column.id, title: title, position:1 }));
 			
 		}
 	};
-	if(loading) return <>loading...</>
+	if(loading) return <LoadingSpinner classes=""/>
 	return (
 		<div className="bg-dark8 flex-shrink-0 h-fit min-h-[100px] max-h-[500px] rounded-lg border relative border-solid border-dark6 p-5 w-72 overflow-hidden">
-			{/* {status == Status.LOADING && <>ADADADADADA</>} */}
+			{status == Status.LOADING &&
+			 <LoadingSpinner classes="absolute  right-1 bottom-1"/>
+			 }
 			<Cross2Icon
 				className=" absolute right-3 top-3 w-6 h-6 cursor-pointer"
 				onClick={() => deleteColumnFn()}

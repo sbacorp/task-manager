@@ -61,4 +61,5 @@ export const updateTask = (task: ITask): AppThunk => async (dispatch) => {
   }
 };
 
+
 export default tasksSlice.reducer;
