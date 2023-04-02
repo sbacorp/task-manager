@@ -1,6 +1,7 @@
 import Column from "@/components/projects/project/column";
 import CreateColumn from "@/components/projects/project/column/createColumn";
 import PyramidLoader from "@/components/ui/PyramidLoader";
+import { subscribeToColumnsChanges } from "@/lib/realtime/columns";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { addColumn, fetchcolumns } from "@/store/slices/columnsSlice";
 import { fetchTasks, setTasks, updateTask } from "@/store/slices/tasksSlice";
@@ -21,6 +22,7 @@ function Project() {
 	const currentTasksState = useAppSelector((state) => state.tasksReducer.tasks);
 
 	const handleDragEnd = (currentTasksState: any, result: any) => {
+		
 		const { source, destination, draggableId, type } = result;
 		if (!destination) {
 			return;
@@ -89,6 +91,7 @@ function Project() {
 		};
 		if (project) {
 			getColumns();
+			subscribeToColumnsChanges(project!.id);
 		}
 	}, [project]);
 	const createColumnFn = async (title: string) => {
