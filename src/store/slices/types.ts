@@ -18,6 +18,7 @@ export interface IProject {
 	title: string;
 	desc?: string;
 	color?: string;
+	users:string[]
 }
 
 export interface IProjectsSliceState {

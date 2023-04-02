@@ -13,7 +13,7 @@ function ProjectsItem({ project }: { project: IProject }) {
 	}
 	return (
 		<div
-			className={`flex flex-col gap items-center text-center relative justify-start w-64 h-72 py-10 px-3 border rounded-xl border-solid gap-4 ${project?.color}`}
+			className={`flex flex-col gap items-center text-center relative justify-start w-64 h-72 py-10 px-3 border-dark6 border border-double rounded-xl gap-4 bg-${project.color}`}
 		>
 			<svg
 				onClick={deleteProjectFn}
@@ -36,7 +36,6 @@ function ProjectsItem({ project }: { project: IProject }) {
 					Открыть
 				</Link>
 				<button className="edit text-base rounded px-4 py-2 bg-dark6 hover:bg-dark4 transition-all duration-300">
-					
 					edit
 				</button>
 			</div>

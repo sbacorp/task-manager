@@ -1,6 +1,6 @@
 import { Draggable } from "react-beautiful-dnd";
-import { useAppDispatch } from "../store";
-import { updateTask } from "../store/slices/tasksSlice";
+import { useAppDispatch } from "../../../../../store";
+import { updateTask } from "../../../../../store/slices/tasksSlice";
 import { ITask } from "@/store/slices/types";
 
 interface Props {
@@ -10,12 +10,12 @@ interface Props {
 
 const Task = ({ task, index }: Props) => {
 	const dispatch = useAppDispatch();
-	
+
 	// const handleCompleteChange = async () => {
 	// 	const updatedTask = { ...task, title: task.title };
 	// 	await dispatch(updateTask(updatedTask));
 	// };
-	
+
 	return (
 		<Draggable draggableId={String(task.id)} index={index}>
 			{(provided) => (

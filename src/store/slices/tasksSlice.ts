@@ -32,10 +32,11 @@ export const fetchTasks = (column_id: string): AppThunk => async (dispatch) => {
 		.select("*")
 		.eq("column_id", column_id)
 		.order("position");
+    dispatch(setTasks({ columnId: Number(column_id), tasks: data as ITask[] }));
   if (error) {
     throw error;
   }
-  dispatch(setTasks({ columnId:Number(column_id), tasks: data as ITask[] }));
+  
 };
 
 export const addTask = (task: Omit<ITask, 'id'>): AppThunk => async (dispatch) => {
@@ -46,8 +47,7 @@ export const addTask = (task: Omit<ITask, 'id'>): AppThunk => async (dispatch) =
    if (task.column_id) dispatch(fetchTasks(task.column_id));
 };
 
-export const updateTask = (task: ITask): AppThunk => async (dispatch) => {
-  dispatch(fetchTasks(task.column_id));
+export const updateTask = (task: ITask): AppThunk => async () => {
   const { data, error } = await supabase
 		.from("tasks")
 		.update({

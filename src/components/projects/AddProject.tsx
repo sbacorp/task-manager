@@ -7,9 +7,9 @@ import * as RadioGroup from "@radix-ui/react-radio-group";
 import { IProject } from "@/store/slices/types";
 
 const colors = [
-	{ colorName: "BLUE", color: "bg-blue9" },
-	{ colorName: "CYAN", color: "bg-cyan6" },
-	{ colorName: "RED", color: "bg-red7" },
+	{ colorName: "MIDNIGHT", color: "midnight" },
+	{ colorName: "SKY", color: "sky" },
+	{ colorName: "YODA", color: "yoda" },
 	{ colorName: "GRAP", color: "bg-grape7" },
 	{ colorName: "PINK", color: "bg-pink6" },
 	{ colorName: "VIOLET", color: "bg-violet7" },
@@ -35,6 +35,7 @@ function AddProject(props: buttonProps) {
 				color: color,
 				id: Math.trunc(Math.random() * 100000).toString(),
 				profile_id: profile,
+				users:[]
 			};
 			await dispatch(addProject(newProject));
 			await dispatch(fetchProjects({ profileId: profile, searchValue: "" }));
@@ -131,13 +132,13 @@ function AddProject(props: buttonProps) {
 										return (
 											<RadioGroup.Item
 												key={i}
-												className={`${el.color}
+												className={`bg-${el.color}
 													 w-[25px] h-[25px] rounded-full shadow-[0_2px_10px] shadow-black focus:shadow-[0_0_0_2px] focus:shadow-black outline-none cursor-default`}
 												value={el.color}
 												onClick={() => setColor(el.color)}
 											>
 												<RadioGroup.Indicator
-													className={`flex items-center justify-center w-full h-full relative after:content-[''] after:block after:w-[11px] after:h-[11px] after:rounded-[50%] after:${el.color}`}
+													className={`flex items-center justify-center w-full h-full relative after:content-[''] after:block after:w-[11px] after:h-[11px] after:rounded-[50%] `}
 												/>
 											</RadioGroup.Item>
 										);

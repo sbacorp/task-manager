@@ -1,6 +1,6 @@
 "use client";
-import AddProject from "@/components/AddProject";
-import ProjectsItem from "@/components/ProjectsItem";
+import AddProject from "@/components/projects/AddProject";
+import ProjectsItem from "@/components/projects/ProjectsItem";
 import Search from "@/components/Search";
 import React, { useEffect, useState } from "react";
 import { store, useAppDispatch, useAppSelector } from "@/store";

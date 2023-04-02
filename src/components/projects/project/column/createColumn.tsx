@@ -1,13 +1,12 @@
 import React from "react";
-import Editable from "./Editable";
-import {useState} from 'react'
+import Editable from "../../../Editable";
+import { useState } from "react";
 interface ICreateColumn {
 	createColumnF: any;
 }
 
 function CreateColumn({ createColumnF }: ICreateColumn) {
-
-	const handleAddColumn = (title:string) => {
+	const handleAddColumn = (title: string) => {
 		createColumnF(title);
 	};
 

@@ -20,7 +20,7 @@ const Editable: React.FC<IEditable> = ({
 	const [newText, setNewText] = useState(text);
 	useEffect(() => {
 		const handleKeyDown = (event: KeyboardEvent) => {
-			if (event.keyCode === 13 && isEditing) {
+			if (event.keyCode === 13 && isEditing && newText.length) {
 				// save on enter
 				onSave(newText);
 				setIsEditing(false);
@@ -41,8 +41,16 @@ const Editable: React.FC<IEditable> = ({
 		}
 	}, [isEditing]);
 	const handleSave = () => {
+		if (!newText.length) {
+			onSave('Добавьте название');
+			setIsEditing(false);
+		}
+		else{
 		onSave(newText);
 		setIsEditing(false);
+		}
+
+		
 	};
 
 	const handleCancel = () => {

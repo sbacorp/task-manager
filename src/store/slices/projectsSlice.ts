@@ -10,10 +10,11 @@ export const fetchProjects = createAsyncThunk<IProject[], IParams>(
 	"projectsSlice/fetchProjectsStatus",
 	async (params) => {
 		const { profileId, searchValue } = params;
+		
 		const { data, error } = await supabase
 			.from("projects")
 			.select("*")
-			.eq("profile_id", profileId)
+			.contains("users", [profileId])
 			.ilike("title", `%${searchValue}%`);
 		if (error) console.error("Error fetching projects:", error);
 		if (!data?.length) {

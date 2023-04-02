@@ -2,48 +2,59 @@ import { useAppDispatch, useAppSelector } from "@/store";
 import { IColumn, Status } from "@/store/slices/types";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import React, { useEffect, useState } from "react";
-import Editable from "./Editable";
+import Editable from "../../../Editable";
 import { addTask, fetchTasks } from "@/store/slices/tasksSlice";
 import { Droppable } from "react-beautiful-dnd";
-import Task from "./Task";
+import Task from "./task";
 import { log } from "console";
-import { deleteColumn, fetchcolumns } from "@/store/slices/columnsSlice";
-import LoadingSpinner from "./ui/Loader";
-import PyramidLoader from "./ui/PyramidLoader";
+import {
+	deleteColumn,
+	editColTitleLocal,
+	editTitle,
+	fetchcolumns,
+} from "@/store/slices/columnsSlice";
+import LoadingSpinner from "../../../ui/Loader";
+import PyramidLoader from "../../../ui/PyramidLoader";
 
 function Column({ column }: { column: IColumn }) {
 	const dispatch = useAppDispatch();
-	const [loading, setLoading] = useState(true)
+	const [loading, setLoading] = useState(true);
 	const tasks = useAppSelector(
 		(state) => state.tasksReducer.tasks[Number(column.id)]
 	);
-	
-	const status = useAppSelector(state=>state.columnsReducer.status);
-	const deleteColumnFn =async()=>{
+	const status = useAppSelector((state) => state.columnsReducer.status);
+	const deleteColumnFn = async () => {
 		console.log(status);
 		await dispatch(deleteColumn(column.id));
 		console.log(status);
 		await dispatch(fetchcolumns(column.project_id));
-	}
-	const editTitleFn = () => {
-		dispatch(fetchTasks(column.id));
 	};
+	const editTitleFn = (title: string) => {
+		dispatch(editColTitleLocal({ columnId: Number(column.id), title: title }));
+		dispatch(editTitle({ columnId: Number(column.id), title: title }));
+	};
+
 	useEffect(() => {
 		dispatch(fetchTasks(column.id));
-		setLoading(false)
+		setLoading(false);
 	}, [column.id, dispatch]);
-	const createTaskFn =(title: string) => {
+	const createTaskFn = (title: string) => {
 		if (column) {
-			 dispatch(addTask({ column_id: column.id, title: title, position:1 }));
-			
+			dispatch(
+				addTask({
+					column_id: column.id,
+					title: title,
+					position: tasks.length ? tasks.length + 1 : 0,
+				})
+			);
 		}
 	};
-	if(loading) return <LoadingSpinner classes=""/>
+	if (loading) return <LoadingSpinner classes="" />;
 	return (
 		<div className="bg-dark8 flex-shrink-0 h-fit min-h-[100px] max-h-[500px] rounded-lg border relative border-solid border-dark6 p-5 w-72 overflow-hidden">
-			{status == Status.LOADING &&
-			 <LoadingSpinner classes="absolute  right-1 bottom-1"/>
-			 }
+			{status == Status.LOADING && (
+				<LoadingSpinner classes="absolute  right-1 bottom-1" />
+			)}
 			<Cross2Icon
 				className=" absolute right-3 top-3 w-6 h-6 cursor-pointer"
 				onClick={() => deleteColumnFn()}
