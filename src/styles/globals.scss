@@ -3,81 +3,81 @@
 @tailwind utilities;
 
 * {
-	padding: 0;
-	margin: 0;
-	list-style: none;
-	outline: none;
-	box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  outline: none;
+  box-sizing: border-box;
 }
 
 html {
-	-ms-text-size-adjust: 100%;
-	-webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 * {
-	padding: 0;
-	margin: 0;
-	border: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
 }
 *,
 *:before,
 *:after {
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 :focus,
 :active {
-	outline: none;
+  outline: none;
 }
 a:focus,
 a:active {
-	outline: none;
+  outline: none;
 }
 nav,
 footer,
 header,
 aside {
-	display: block;
+  display: block;
 }
 html,
 body {
-	height: 100%;
-	width: 100%;
-	font-size: 100%;
-	line-height: 1;
-	font-size: 14px;
-	-ms-text-size-adjust: 100%;
-	-moz-text-size-adjust: 100%;
-	-webkit-text-size-adjust: 100%;
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 input,
 button,
 textarea {
-	font-family: inherit;
+  font-family: inherit;
 }
 input::-ms-clear {
-	display: none;
+  display: none;
 }
 button {
-	cursor: pointer;
+  cursor: pointer;
 }
 button::-moz-focus-inner {
-	padding: 0;
-	border: 0;
+  padding: 0;
+  border: 0;
 }
 a,
 a:visited {
-	text-decoration: none;
+  text-decoration: none;
 }
 a:hover {
-	text-decoration: none;
+  text-decoration: none;
 }
 ul li {
-	list-style: none;
+  list-style: none;
 }
 img {
-	vertical-align: top;
+  vertical-align: top;
 }
 h1,
 h2,
@@ -85,142 +85,202 @@ h3,
 h4,
 h5,
 h6 {
-	font-size: inherit;
-	font-weight: inherit;
+  font-size: inherit;
+  font-weight: inherit;
 }
 @mixin noselect {
-	-webkit-touch-callout: none; /* iOS Safari */
-	-webkit-user-select: none; /* Safari */
-	-khtml-user-select: none; /* Konqueror HTML */
-	-moz-user-select: none; /* Old versions of Firefox */
-	-ms-user-select: none; /* Internet Explorer/Edge */
-	user-select: none; /* Non-prefixed version, currently
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Opera and Firefox */
 }
 
 body::-webkit-scrollbar {
-	width: 15px;
+  width: 15px;
 }
 body::-webkit-scrollbar-track {
-	background: #000;
+  background: #000;
 }
 body::-webkit-scrollbar-thumb {
-	background: linear-gradient(180deg, #85888e 0%, rgba(39, 41, 44, 0.5) 100%);
+  background: linear-gradient(
+    180deg,
+    #85888e 0%,
+    rgba(39, 41, 44, 0.5) 100%
+  );
 
-	border-radius: 4px;
-	border: 2px solid #000;
+  border-radius: 4px;
+  border: 2px solid #000;
 }
 div {
-	@include noselect;
+  @include noselect;
 }
 
 .scroll {
-	&::-webkit-scrollbar {
-		width: 10px;
-	}
-	&::-webkit-scrollbar-track {
-		background: #000;
-	}
-	&::-webkit-scrollbar-thumb {
-		background-color: #fff;
-		border-radius: 4px;
-		border: 2px solid #000;
-	}
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #000;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #fff;
+    border-radius: 4px;
+    border: 2px solid #000;
+  }
 }
 
 body {
-	background-color: black;
+  background-color: black;
 }
 html,
 body {
-	height: 100%;
+  height: 100%;
 }
 
 * {
-	font-family: "Open Sans" sans-serif;
+  font-family: 'Open Sans' sans-serif;
 }
 
 .card {
-	background: linear-gradient(180deg, #101113 0%, rgba(16, 17, 19, 0) 100%);
-	border-radius: 17px;
+  background: linear-gradient(
+    180deg,
+    #101113 0%,
+    rgba(16, 17, 19, 0) 100%
+  );
+  border-radius: 17px;
 }
 
 .aboutCard {
-	background: linear-gradient(270deg, #101113 0%, rgba(16, 17, 19, 0) 100%);
-	border-radius: 17px;
+  background: linear-gradient(
+    270deg,
+    #101113 0%,
+    rgba(16, 17, 19, 0) 100%
+  );
+  border-radius: 17px;
 }
 
 .reverseAboutCard {
-	background: linear-gradient(-270deg, #101113 0%, rgba(16, 17, 19, 0) 100%);
-	border-radius: 17px;
+  background: linear-gradient(
+    -270deg,
+    #101113 0%,
+    rgba(16, 17, 19, 0) 100%
+  );
+  border-radius: 17px;
 }
 
 .profileFade {
-	background: rgb(24, 107, 124);
-	background: linear-gradient(
-		90deg,
-		rgba(24, 107, 124, 1) 0%,
-		rgba(27, 128, 167, 1) 50%,
-		rgba(2, 9, 12, 1) 98%,
-		rgba(0, 0, 0, 1) 100%
-	);
+  background: rgb(24, 107, 124);
+  background: linear-gradient(
+    90deg,
+    rgba(24, 107, 124, 1) 0%,
+    rgba(27, 128, 167, 1) 50%,
+    rgba(2, 9, 12, 1) 98%,
+    rgba(0, 0, 0, 1) 100%
+  );
 }
 
 .bg-midnight {
-	background: #0f2027; /* fallback for old browsers */
-	background: #0f2027; /* fallback for old browsers */
-	background: -webkit-linear-gradient(
-		to bottom top,
-		#2c5364,
-		#203a43,
-		#0f2027
-	); /* Chrome 10-25, Safari 5.1-6 */
-	border: double 2px transparent;
-	background-image: linear-gradient(#2c5364, #203a43, #0f2027),
-		radial-gradient(circle at top, #2c5364, #203a43, #000);
-	background-origin: border-box;
-	background-clip: padding-box, border-box;
+  background: #0f2027; /* fallback for old browsers */
+  background: #0f2027; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom top,
+    #2c5364,
+    #203a43,
+    #0f2027
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  border: double 2px transparent;
+  background-image: linear-gradient(
+      #2c5364,
+      #203a43,
+      #0f2027
+    ),
+    radial-gradient(
+      circle at top,
+      #2c5364,
+      #203a43,
+      #000
+    );
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
 }
 
 .bg-sky {
-	background: #2980b9; /* fallback for old browsers */
+  background: #2980b9; /* fallback for old browsers */
 
-  	border: double 2px transparent;
-	background-image: linear-gradient(to top, #ffffff,
-		#6dd5fa,
-		#2980b9),
-		radial-gradient(circle at top, #ffffff,
-		#6dd5fa,
-		#000);
-	background-origin: border-box;
-	background-clip: padding-box, border-box;
+  border: double 2px transparent;
+  background-image: linear-gradient(
+      to top,
+      #ffffff,
+      #6dd5fa,
+      #2980b9
+    ),
+    radial-gradient(
+      circle at top,
+      #ffffff,
+      #6dd5fa,
+      #000
+    );
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
 }
 .bg-yoda {
-	background: #ff0099; /* fallback for old browsers */
-	background: -webkit-linear-gradient(
-		to bottom top,
-		#f953c6,
-		#000
-	); /* Chrome 10-25, Safari 5.1-6 */
-	border: double 2px transparent;
-	background-image: linear-gradient(#f953c6, #000),
-		radial-gradient(circle at top, #d953c6, #000);
-	background-origin: border-box;
-	background-clip: padding-box, border-box;
+  background: #ff0099; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom top,
+    #f953c6,
+    #000
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  border: double 2px transparent;
+  background-image: linear-gradient(#f953c6, #000),
+    radial-gradient(circle at top, #d953c6, #000);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
 }
 
-.bg-gad {
-	background: #0f2027; /* fallback for old browsers */
-	background: #0f2027; /* fallback for old browsers */
-	background: -webkit-linear-gradient(
-		to bottom top,
-		#2c5364,
-		#203a43,
-		#0f2027
-	); /* Chrome 10-25, Safari 5.1-6 */
-	border: double 2px transparent;
-	background-image: linear-gradient(#2c5364, #203a43, #0f2027),
-		radial-gradient(circle at top, #2c5364, #000);
-	background-origin: border-box;
-	background-clip: padding-box, border-box;
+.bg-blood {
+  background: #320606; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom top,
+    #ff0000,
+    #320606
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  border: double 2px transparent;
+  background-image: linear-gradient(
+      #900000,
+      #0d0000
+    ),
+    radial-gradient(circle at top, #320606, #000);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+.bg-sandstorm {
+  background: #ff7b00; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom top,
+    #fc891d,
+    #000
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  border: double 2px transparent;
+  background-image: linear-gradient(#fb8b22, #000),
+    radial-gradient(circle at top, #904600, #000);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+.bg-emerald {
+  background: #064d22; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom top,
+    #026133,
+    #000
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  border: double 2px transparent;
+  background-image: linear-gradient(#026133, #000),
+    radial-gradient(circle at top, #31a96f, #000);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
 }
