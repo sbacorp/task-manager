@@ -34,8 +34,6 @@ export const fetchTasks = (column_id: string): AppThunk => async (dispatch) => {
 		.eq("column_id", column_id)
 		.order("position");
     await  dispatch(setTasks({ columnId: Number(column_id), tasks: data as ITask[] }));
-    console.log(data,'ada');
-    
   if (error) {
     throw error;
   }

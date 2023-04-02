@@ -21,7 +21,6 @@ export const fetchProjects = createAsyncThunk<IProject[], IParams>(
 			return [];
 		} else {
 			const projects: IProject[] = data as IProject[];
-			console.log("Projects for profile:", projects);
 			return projects;
 		}
 	}

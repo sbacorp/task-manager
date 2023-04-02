@@ -24,7 +24,6 @@ export const fetchcolumns = createAsyncThunk<IColumn[], string>(
 			return [];
 		} else {
 			const columns: IColumn[] = data as IColumn[];
-			console.log("columns for project:", columns);
 			return columns;
 		}
 	}

@@ -78,7 +78,6 @@ function UploadAvatar() {
     if (!profile) return;
 
     const file = fileInputRef.current?.files?.[0];
-    console.log(file);
 
     if (!file) return;
 
