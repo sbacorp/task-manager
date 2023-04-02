@@ -27,9 +27,9 @@ function Search({
       <input
         ref={inputRef}
         type="text"
-        className={`w-[${
-          classes || '300px'
-        }] rounded bg-black border border-solid border-gray6 px-10 py-3 hover:border-gray4  focus:border-gray3 focus:border transition-all duration-300 font-serif text-lg`}
+        className={`sm:${
+          classes || 'w-[300px]'
+        } rounded bg-black w-[290px] border border-solid border-gray6 px-10 py-3 hover:border-gray4  focus:border-gray3 focus:border transition-all duration-300 font-serif text-lg`}
         value={value}
         onChange={(e) => onChangeInput(e)}
         placeholder="Поиск"

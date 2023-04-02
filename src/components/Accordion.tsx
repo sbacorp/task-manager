@@ -4,7 +4,7 @@ import React from 'react';
 
 const AccordionDemo = () => (
   <Accordion.Root
-    className="bg-dark mt-4 w-screen sm:w-[400px] flex flex-col justify-right"
+    className="bg-dark mt-4 w-[290px] sm:w-[400px] flex flex-col justify-right"
     type="single"
     defaultValue="item-1"
     collapsible
