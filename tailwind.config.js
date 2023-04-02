@@ -106,6 +106,8 @@ module.exports = {
       'cyan9': '#0B7285',
       'white':'#fff',
       'black': '#000',
+      'green9':'#0f0',
+      'yellow9': '#ff0'
     },
     container: {
       // you can configure the container to be centered

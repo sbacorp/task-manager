@@ -61,6 +61,18 @@ export const updateTask = (task: ITask): AppThunk => async () => {
     throw error;
   }
 };
+export const updateTaskInfo =
+	(task: ITask): AppThunk =>
+	async () => {
+		const { data, error } = await supabase
+			.from("tasks")
+			.update(task)
+			.eq("id", task.id)
+			.single();
+		if (error) {
+			throw error;
+		}
+	};
 
 
 export default tasksSlice.reducer;

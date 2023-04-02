@@ -3,7 +3,9 @@ export interface ITask {
 	title?: string;
 	description?: string;
 	column_id: string;
-	position:number
+	position: number;
+	label?: string;
+	assignedTo?:string
 }
 
 export interface IColumn {

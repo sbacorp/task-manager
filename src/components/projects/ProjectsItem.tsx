@@ -28,8 +28,8 @@ function ProjectsItem({ project }: { project: IProject }) {
 				<path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
 			</svg>
 			<p className="text-xl font-semibold capitalize">{project.title}</p>
-			<p className="text-base text-dark2">{project.desc}</p>
-			<div className="buttons flex gap-2 pt-4">
+			<p className="text-base text-dark2">{project.desc?project.desc:'нет описания'}</p>
+			<div className="buttons flex flex-col justify-self-end gap-2 pt-4">
 				<Link
 					href={`/projects/${project.id}`}
 					className="text-base rounded px-4 py-2 bg-dark6 hover:bg-dark4 transition-all duration-300"

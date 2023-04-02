@@ -67,7 +67,7 @@ function Column({ column }: { column: IColumn }) {
 	};
 	if (loading) return <LoadingSpinner classes="" />;
 	return (
-		<div className="bg-dark8 flex-shrink-0 h-fit min-h-[100px] max-h-[500px] rounded-lg border relative border-solid border-dark6 p-5 w-72 overflow-hidden">
+		<div className="bg-dark8 flex-shrink-0 h-fit min-h-[100px] max-h-[90%] rounded-lg border relative border-solid border-dark6 p-5 w-72 md:w-80 overflow-hidden">
 			{status == Status.LOADING && (
 				<LoadingSpinner classes="absolute  right-1 bottom-1" />
 			)}
@@ -84,7 +84,7 @@ function Column({ column }: { column: IColumn }) {
 			<Droppable droppableId={String(column.id)} type="task">
 				{(provided) => (
 					<div
-						className="flex-col p-2 rounded-lg"
+						className="flex-col rounded-lg min-h-10 max-h-96 overflow-hidden overflow-y-scroll scroll"
 						{...provided.droppableProps}
 						ref={provided.innerRef}
 					>

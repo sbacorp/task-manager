@@ -1,12 +1,11 @@
 import Image from "next/image";
-import { HomeProps } from "../../typings";
+import { HomeProps } from "../../../typings";
 import { ItemAnimation2, ItemAnimation3 } from "@/lib/constants";
 import { motion } from "framer-motion";
 
 function HomeSection({ tag, title, desc, imgPath, order }: HomeProps) {
 	return (
 		<motion.section
-		
 			initial="hidden"
 			whileInView="visible"
 			viewport={{ once: true }}

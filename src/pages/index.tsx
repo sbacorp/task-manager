@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import HomeSection from "@/components/HomeSection";
+import HomeSection from "@/components/main/HomeSection";
 import { cards, ItemAnimation, sections } from "@/lib/constants";
 import { motion } from "framer-motion";
 import type { NextPage } from "next";
 import Gradient from "@/components/gradient";
 import PyramidLoader from "@/components/ui/PyramidLoader";
 
- const Index:NextPage = () =>{
+const Index: NextPage = () => {
 	return (
 		<>
 			<motion.div
@@ -16,8 +16,8 @@ import PyramidLoader from "@/components/ui/PyramidLoader";
 				viewport={{ once: true }}
 			>
 				<section className="relative flex flex-col gap-4 text-center items-center justify-center py-16 w-screen overflow-hidden">
-					<Gradient classes='left-1/2 md:left-3/4' />
-					<Gradient classes='right-1/2 md:right-3/4' />
+					<Gradient classes="left-1/2 md:left-3/4" />
+					<Gradient classes="right-1/2 md:right-3/4" />
 					<div className="container">
 						<p className="title1 text-white font-serif text-xl font-semibold">
 							Приложение для управления проектами
@@ -62,7 +62,6 @@ import PyramidLoader from "@/components/ui/PyramidLoader";
 			</motion.div>
 		</>
 	);
-}
-
+};
 
 export default Index;

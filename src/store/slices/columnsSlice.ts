@@ -18,7 +18,8 @@ export const fetchcolumns = createAsyncThunk<IColumn[], string>(
 		const { data, error } = await supabase
 			.from("columns")
 			.select("*")
-			.eq("project_id", project_id);
+			.eq("project_id", project_id)
+			.order("id");
 		if (error) console.error("Error fetching projects:", error);
 		if (!data?.length) {
 			return [];

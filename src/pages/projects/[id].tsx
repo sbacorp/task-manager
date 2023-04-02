@@ -2,6 +2,7 @@ import Column from "@/components/projects/project/column";
 import CreateColumn from "@/components/projects/project/column/createColumn";
 import PyramidLoader from "@/components/ui/PyramidLoader";
 import { subscribeToColumnsChanges } from "@/lib/realtime/columns";
+import supabase from "@/lib/supabaseClient";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { addColumn, fetchcolumns } from "@/store/slices/columnsSlice";
 import { fetchTasks, setTasks, updateTask } from "@/store/slices/tasksSlice";
@@ -21,7 +22,6 @@ function Project() {
 	const currentTasksState = useAppSelector((state) => state.tasksReducer.tasks);
 
 	const handleDragEnd = (currentTasksState: any, result: any) => {
-		
 		const { source, destination, draggableId, type } = result;
 		if (!destination) {
 			return;
@@ -66,30 +66,15 @@ function Project() {
 		}
 	};
 
-	// 	destinationIndex: number,
-	// 	destinationColumnId: string,
-	// 	taskId: string
-	// ) => {
-	// 	const tasksFromColumn = tasks[Number(destinationColumnId)];
-	// 	const sortedTasks = tasksFromColumn.sort((a, b) => a.position - b.position);
-	// 	let position =
-	// 		destinationIndex === 0
-	// 			? 0
-	// 			: sortedTasks[destinationIndex - 1].position + 1;
-
-	// 	const patchTask = {
-	// 		_id: taskId,
-	// 		position,
-	// 		columnId: destinationColumnId,
-	// 	};
-	// };
 	useEffect(() => {
 		const getColumns = async () => {
 			await dispatch(fetchcolumns(project!.id));
 			if (tasks) setLoading(false);
 		};
+
 		if (project) {
 			getColumns();
+			getAvatars();
 			subscribeToColumnsChanges(project!.id);
 		}
 	}, [project]);
@@ -99,7 +84,22 @@ function Project() {
 			await dispatch(fetchcolumns(project.id));
 		}
 	};
-	
+	interface IAvatars {
+		avatarPath: string;
+	}
+	const [avatars, setAvatars] = useState<IAvatars[]>([]);
+	const getAvatars = async () => {
+		if (project && project.users) {
+			const { data, error } = await supabase
+				.from("profiles")
+				.select("avatarPath")
+				.in("id", project.users);
+			if (data) {
+				setAvatars(data);
+				console.log(avatars);
+			}
+		}
+	};
 	if (loading) return <PyramidLoader />;
 	if (!project) {
 		router.push("/projects");
@@ -107,10 +107,40 @@ function Project() {
 	}
 	return (
 		<div className="container h-[70vh] overflow-hidden flex flex-col items-start justify-start">
-			<div className=" text-lg md:text-4xl text-white font-semibold mb-10">{project.title}</div>
+			<div className="top flex justify-between w-full">
+				<div className=" text-lg md:text-4xl text-white font-semibold mb-10">
+					{project.title}
+				</div>
+
+				<div className="avatars flex ">
+					{avatars &&
+						avatars.map((el: any, i) => {
+							return (
+								<div
+									key={i}
+									className="relative w-10 h-10 rounded-[50%] overflow-hidden -ml-2"
+								>
+									<img
+										data-tooltip-target="tooltip-default"
+										className=" inset-0 w-full h-full object-cover object-center"
+										src={`https://lifscnxzktzcffgkwvuw.supabase.co/storage/v1/object/public/user-avatars/${el.avatarPath}`}
+										alt="avatar"
+									/>
+									<div
+										id="tooltip-default"
+										role="tooltip"
+										className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray7 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray7"
+									>
+										пользователь
+										<div className="tooltip-arrow" data-popper-arrow></div>
+									</div>
+								</div>
+							);
+						})}
+				</div>
+			</div>
 			<div className="columns scroll h-full w-full flex gap-9 overflow-x-scroll">
 				<DragDropContext
-					// onDragEnd={handleDragEnd}
 					onDragEnd={(result) => handleDragEnd(currentTasksState, result)}
 				>
 					{columns &&
