@@ -2,12 +2,10 @@ import Column from "@/components/projects/project/column";
 import CreateColumn from "@/components/projects/project/column/createColumn";
 import PyramidLoader from "@/components/ui/PyramidLoader";
 import { subscribeToColumnsChanges } from "@/lib/realtime/columns";
-import { subscribeToTasksChanges } from "@/lib/realtime/tasks";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { addColumn, fetchcolumns } from "@/store/slices/columnsSlice";
 import { fetchTasks, setTasks, updateTask } from "@/store/slices/tasksSlice";
-import { IColumn, ITask, TaskUpdatePayload } from "@/store/slices/types";
-import { log } from "console";
+import { IColumn } from "@/store/slices/types";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
@@ -93,9 +91,6 @@ function Project() {
 		if (project) {
 			getColumns();
 			subscribeToColumnsChanges(project!.id);
-		}
-		if(columns.length){
-			subscribeToTasksChanges(columns);
 		}
 	}, [project]);
 	const createColumnFn = async (title: string) => {

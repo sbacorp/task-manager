@@ -6,7 +6,7 @@ import { fetchcolumns } from "@/store/slices/columnsSlice";
 
 export const subscribeToColumnsChanges = (project_id:string) => {
 	const columns = supabase
-		.channel("custom-all-channel")
+		.channel("realime cols")
 		.on(
 			"postgres_changes",
 			{ event: "*", schema: "public", table: "columns" },

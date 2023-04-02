@@ -6,7 +6,6 @@ import Editable from "../../../Editable";
 import { addTask, fetchTasks } from "@/store/slices/tasksSlice";
 import { Droppable } from "react-beautiful-dnd";
 import Task from "./task";
-import { log } from "console";
 import {
 	deleteColumn,
 	editColTitleLocal,
@@ -14,8 +13,7 @@ import {
 	fetchcolumns,
 } from "@/store/slices/columnsSlice";
 import LoadingSpinner from "../../../ui/Loader";
-import PyramidLoader from "../../../ui/PyramidLoader";
-import { subscribeToTasksChanges } from "@/lib/realtime/tasks";
+import supabase from "@/lib/supabaseClient";
 
 function Column({ column }: { column: IColumn }) {
 	const dispatch = useAppDispatch();
@@ -23,6 +21,25 @@ function Column({ column }: { column: IColumn }) {
 	const tasks = useAppSelector(
 		(state) => state.tasksReducer.tasks[Number(column.id)]
 	);
+	useEffect(() => {
+		const channel = supabase
+			.channel(`reatime tasks ${column.id}`)
+			.on(
+				"postgres_changes",
+				{
+					event: "*",
+					schema: "public",
+					table: "tasks",
+				},
+				(payload) => {
+					dispatch(fetchTasks(column.id));
+				}
+			)
+			.subscribe();
+		return () => {
+			supabase.removeChannel(channel);
+		};
+	}, [supabase]);
 	const status = useAppSelector((state) => state.columnsReducer.status);
 	const deleteColumnFn = async () => {
 		await dispatch(deleteColumn(column.id));
@@ -32,6 +49,7 @@ function Column({ column }: { column: IColumn }) {
 		dispatch(editColTitleLocal({ columnId: Number(column.id), title: title }));
 		dispatch(editTitle({ columnId: Number(column.id), title: title }));
 	};
+
 	useEffect(() => {
 		dispatch(fetchTasks(column.id));
 		setLoading(false);
