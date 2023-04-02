@@ -4,6 +4,7 @@ import { fetchProjects } from "@/store/slices/projectsSlice";
 import { IProject } from "@/store/slices/types";
 import Link from "next/link";
 import React from "react";
+import EditProjectItem from "./project/EditProjectItem";
 
 function ProjectsItem({ project }: { project: IProject }) {
 	const dispatch = useAppDispatch();
@@ -31,13 +32,11 @@ function ProjectsItem({ project }: { project: IProject }) {
 			<div className="buttons flex gap-2 pt-4">
 				<Link
 					href={`/projects/${project.id}`}
-					className="edit text-base rounded px-4 py-2 bg-dark6 hover:bg-dark4 transition-all duration-300"
+					className="text-base rounded px-4 py-2 bg-dark6 hover:bg-dark4 transition-all duration-300"
 				>
 					Открыть
 				</Link>
-				<button className="edit text-base rounded px-4 py-2 bg-dark6 hover:bg-dark4 transition-all duration-300">
-					edit
-				</button>
+				<EditProjectItem project={project}/>
 			</div>
 		</div>
 	);

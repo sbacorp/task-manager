@@ -63,7 +63,7 @@ function AddProject() {
 				</Dialog.Trigger>
 				<Dialog.Portal>
 					<div className="flex justify-center items-center">
-						<Dialog.Overlay className="fixed inset-0 bg-black " />
+						<Dialog.Overlay className="fixed inset-0 bg-black/30 " />
 						<Dialog.Content
 							onCloseAutoFocus={() => {
 								setTitle("");
