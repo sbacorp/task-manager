@@ -2,8 +2,6 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { useState } from "react";
-import { addProject, fetchProjects } from "@/store/slices/projectsSlice";
-import * as RadioGroup from "@radix-ui/react-radio-group";
 import { IProject } from "@/store/slices/types";
 import { editProject } from "@/store/slices/projectSlice";
 import supabase from "@/lib/supabaseClient";
