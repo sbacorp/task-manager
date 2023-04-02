@@ -16,5 +16,4 @@ export const subscribeToTasksChanges = (columnId: string) => {
 		)
 
 		.subscribe();
-	return tasks;
 };
