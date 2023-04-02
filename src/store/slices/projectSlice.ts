@@ -17,6 +17,18 @@ export const deleteProject = createAsyncThunk<void, string>(
 		}
 	}
 );
+export const editProject = createAsyncThunk<void, IProject>(
+	"project/edit",
+	async (project) => {
+		try {
+			await supabase.from("projects").update(project).eq("id", project.id);
+			return;
+		} catch (error) {
+			console.log(error);
+		}
+	}
+);
+
 export const ProjectSlice = createSlice({
 	name: "ProjectSlice",
 	initialState,

@@ -32,12 +32,12 @@ function Projects() {
 	} else {
 		return (
 			<PrivateRoute>
-				<div className="flex flex-col gap-20 items-center justify-start w-full container pt-20">
-					<div className="head flex w-full justify-between">
-						<p className="font-bold text-4xl">Projects (7)</p>
+				<div className="flex flex-col gap-20 h-full items-start justify-start w-full container pt-20">
+					<div className="head flex flex-col sm:flex-row gap-10 w-full justify-between sm:items-start items-center">
+						<p className="font-bold text-4xl">Проектов : {projects.length}</p>
 						<Search value={searchValue} setValue={setSearchValue} />
 					</div>
-					<div className="flex gap-5 w-full items-start justify-start flex-wrap">
+					<div className="flex gap-5 w-full md:justify-start justify-center flex-wrap">
 						{projects &&
 							projects.map((el) => <ProjectsItem project={el} key={el.id} />)}
 						<AddProject />
