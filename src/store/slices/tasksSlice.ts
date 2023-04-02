@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ITask } from './types';
 import supabase from '@/lib/supabaseClient';
 import { AppThunk } from '..';
+import { log } from 'console';
 
 interface TasksState {
   tasks: { [key: number]: ITask[] };
@@ -32,7 +33,9 @@ export const fetchTasks = (column_id: string): AppThunk => async (dispatch) => {
 		.select("*")
 		.eq("column_id", column_id)
 		.order("position");
-    dispatch(setTasks({ columnId: Number(column_id), tasks: data as ITask[] }));
+    await  dispatch(setTasks({ columnId: Number(column_id), tasks: data as ITask[] }));
+    console.log(data,'ada');
+    
   if (error) {
     throw error;
   }
