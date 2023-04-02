@@ -10,32 +10,21 @@ const colors = [
 	{ colorName: "MIDNIGHT", color: "midnight" },
 	{ colorName: "SKY", color: "sky" },
 	{ colorName: "YODA", color: "yoda" },
-
-
+	{ colorName: "GRAP", color: "bg-grape7" },
+	{ colorName: "PINK", color: "bg-pink6" },
+	{ colorName: "VIOLET", color: "bg-violet7" },
 ];
 
 
-
-function AddProject() {
+function EditProjectItem({project}:{project:IProject}) {
 	const dispatch = useAppDispatch();
 	const [title, setTitle] = useState("");
 	const [desc, setDesc] = useState("");
 	const [color, setColor] = useState("");
 	const profile = useAppSelector((state) => state.profileSlice.profile?.id);
 
-	const onClickAdd = async () => {		
-		if (profile) {
-			const newProject: IProject = {
-				title: title,
-				desc: desc,
-				color: color,
-				id: Math.trunc(Math.random() * 100000).toString(),
-				profile_id: profile,
-				users:[]
-			};
-			await dispatch(addProject(newProject));
-			await dispatch(fetchProjects({ profileId: profile, searchValue: "" }));
-		}
+	const onClickAdd = async () => {
+		
 		setTitle("");
 		setDesc("");
 	};
@@ -67,12 +56,10 @@ function AddProject() {
 						<Dialog.Content
 							onCloseAutoFocus={() => {
 								setTitle("");
-								setColor("");
 								setDesc("");
 							}}
 							onEscapeKeyDown={() => {
 								setTitle("");
-								setColor("");
 								setDesc("");
 							}}
 							className=" border-gray9 opacity-1 bg-white border-2 rounded-md fixed w-screen max-w-md top-1/3 p-6 focus:outline-none"
@@ -177,4 +164,4 @@ function AddProject() {
 	);
 }
 
-export default AddProject;
+export default EditProjectItem;
