@@ -25,21 +25,20 @@ function Column({ column }: { column: IColumn }) {
 	);
 	const status = useAppSelector((state) => state.columnsReducer.status);
 	const deleteColumnFn = async () => {
-		console.log(status);
 		await dispatch(deleteColumn(column.id));
-		console.log(status);
 		await dispatch(fetchcolumns(column.project_id));
 	};
 	const editTitleFn = (title: string) => {
 		dispatch(editColTitleLocal({ columnId: Number(column.id), title: title }));
 		dispatch(editTitle({ columnId: Number(column.id), title: title }));
 	};
-	subscribeToTasksChanges(column.id);
 	useEffect(() => {
-
 		dispatch(fetchTasks(column.id));
 		setLoading(false);
 	}, [column.id, dispatch]);
+	useEffect(() => {
+		subscribeToTasksChanges(column.id);
+	}, []);
 	const createTaskFn = (title: string) => {
 		if (column) {
 			dispatch(
