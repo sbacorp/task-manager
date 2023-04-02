@@ -15,6 +15,7 @@ import {
 } from "@/store/slices/columnsSlice";
 import LoadingSpinner from "../../../ui/Loader";
 import PyramidLoader from "../../../ui/PyramidLoader";
+import { subscribeToTasksChanges } from "@/lib/realtime/tasks";
 
 function Column({ column }: { column: IColumn }) {
 	const dispatch = useAppDispatch();
@@ -33,8 +34,9 @@ function Column({ column }: { column: IColumn }) {
 		dispatch(editColTitleLocal({ columnId: Number(column.id), title: title }));
 		dispatch(editTitle({ columnId: Number(column.id), title: title }));
 	};
-
+	subscribeToTasksChanges(column.id);
 	useEffect(() => {
+
 		dispatch(fetchTasks(column.id));
 		setLoading(false);
 	}, [column.id, dispatch]);
