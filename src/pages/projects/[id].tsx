@@ -95,10 +95,7 @@ function Project() {
 			subscribeToColumnsChanges(project!.id);
 		}
 		if(columns.length){
-			columns.forEach(element => {
-				subscribeToTasksChanges(element!.id);
-			});
-			subscribeToColumnsChanges(project!.id);
+			subscribeToTasksChanges(columns);
 		}
 	}, [project]);
 	const createColumnFn = async (title: string) => {
