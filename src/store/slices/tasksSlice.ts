@@ -47,8 +47,12 @@ export const addTask = (task: Omit<ITask, 'id'>): AppThunk => async (dispatch) =
   }
    if (task.column_id) dispatch(fetchTasks(task.column_id));
 };
-
-export const updateTask = (task: ITask): AppThunk => async () => {
+interface IUpdateTask {
+	id: string;
+	column_id: string;
+	position: number;
+}
+export const updateTask = (task: IUpdateTask): AppThunk => async () => {
   const { data, error } = await supabase
 		.from("tasks")
 		.update({
