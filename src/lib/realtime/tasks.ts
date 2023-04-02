@@ -14,6 +14,5 @@ export const subscribeToTasksChanges = (columnId: string) => {
 				await dispatch(fetchTasks(columnId));
 			}
 		)
-
 		.subscribe();
 };

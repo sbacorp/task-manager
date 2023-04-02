@@ -2,6 +2,7 @@ import Column from "@/components/projects/project/column";
 import CreateColumn from "@/components/projects/project/column/createColumn";
 import PyramidLoader from "@/components/ui/PyramidLoader";
 import { subscribeToColumnsChanges } from "@/lib/realtime/columns";
+import { subscribeToTasksChanges } from "@/lib/realtime/tasks";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { addColumn, fetchcolumns } from "@/store/slices/columnsSlice";
 import { fetchTasks, setTasks, updateTask } from "@/store/slices/tasksSlice";
@@ -93,6 +94,12 @@ function Project() {
 			getColumns();
 			subscribeToColumnsChanges(project!.id);
 		}
+		if(columns.length){
+			columns.forEach(element => {
+				subscribeToTasksChanges(element!.id);
+			});
+			subscribeToColumnsChanges(project!.id);
+		}
 	}, [project]);
 	const createColumnFn = async (title: string) => {
 		if (project) {
@@ -100,6 +107,7 @@ function Project() {
 			await dispatch(fetchcolumns(project.id));
 		}
 	};
+	
 	if (loading) return <PyramidLoader />;
 	if (!project) {
 		router.push("/projects");

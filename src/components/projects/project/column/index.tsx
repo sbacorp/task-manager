@@ -36,9 +36,6 @@ function Column({ column }: { column: IColumn }) {
 		dispatch(fetchTasks(column.id));
 		setLoading(false);
 	}, [column.id, dispatch]);
-	useEffect(() => {
-		subscribeToTasksChanges(column.id);
-	}, []);
 	const createTaskFn = (title: string) => {
 		if (column) {
 			dispatch(
