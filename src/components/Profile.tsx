@@ -1,20 +1,21 @@
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { useState } from 'react';
 import Image from 'next/image';
-import { store } from '@/store';
+import { useAppSelector } from '@/store';
 import { ProfileProps } from '../../typings';
 import Search from './Search';
 import EditProfile from './EditProfile';
 import UploadAvatar from './UploadAvatar';
 import AccordionDemo from './Accordion';
-import Gradient from './gradient';
 
 function Profile({ setIsOpen }: ProfileProps) {
-  const profile =
-    store.getState().profileSlice.profile;
+  const profile = useAppSelector(
+    (state) => state.profileSlice.profile
+  );
   const [searchInput, setSearchInput] =
     useState<string>('');
   const haveTasks = true;
+  console.log(profile?.avatar);
   const tasks = [
     'Brochure products',
     'Treatment',
@@ -25,7 +26,7 @@ function Profile({ setIsOpen }: ProfileProps) {
     return <>idi nahui</>;
   }
   return (
-    <div className="absolute right-0 w-screen sm:w-[480px] h-full flex flex-col gap-2 rounded-2xl shadow-xl border border-[#343A40] bg-dark9 z-50 overflow-hidden">
+    <div className="absolute right-0 w-screen sm:w-[480px] h-full flex flex-col gap-2 rounded-2xl shadow-xl border border-[#343A40] bg-dark9 z-30 overflow-hidden">
       <div className="w-full h-[120px] rounded-sm pr-2 pt-2 profileFade">
         <button
           className=" rounded-full h-7 w-7 bg-dark7 text-cyan5 inline-flex items-center justify-center absolute top-3 right-3 border border-solid hover:bg-cyan5 hover:text-black duration-300 transition-all"

@@ -31,8 +31,11 @@ const HamburgerMenu = ({
             Профиль
           </DropdownMenu.Item>
           {authLinks.map((el) => (
-            <Link href={`/${el.href}`}>
-              <DropdownMenu.Item className="  group text-2xl text-white rounded py-2 flex items-center px-2 relative select-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-dark7 data-[highlighted]:text-white active:bg-dark7">
+            <Link
+              key={el.title}
+              href={`/${el.href}`}
+            >
+              <DropdownMenu.Item className="group text-2xl text-white rounded py-2 flex items-center px-2 relative select-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-dark7 data-[highlighted]:text-white active:bg-dark7">
                 {el.title}
               </DropdownMenu.Item>
             </Link>
