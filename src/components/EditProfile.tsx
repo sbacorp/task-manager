@@ -100,7 +100,7 @@ function EditProfile() {
             setNewPassword('');
             setMessage('');
           }}
-          className="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[305px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-dark9 shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none flex items-center justify-center z-40"
+          className="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[305px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-dark9 shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none flex items-center justify-center z-50"
         >
           <Tabs.Root
             className="flex flex-col w-[300px] "
