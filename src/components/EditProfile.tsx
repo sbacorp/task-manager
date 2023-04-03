@@ -40,7 +40,6 @@ function EditProfile() {
             email: profile.email,
             password,
         })
-
         await updateName(data.user?.id, userName)
         await dispatch(setProfile(newData))
         setuserName('')

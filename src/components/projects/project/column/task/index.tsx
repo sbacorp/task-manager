@@ -33,7 +33,7 @@ const Task = ({ task, index }: Props) => {
 					<div className="flex flex-col justify-between">
 						<EditTaskModal task={task} />
 						{task.label && (
-							<div className={`label w-4 h-1 bg-${cardLabels[0].bg}`} />
+							<div className={`label w-4 h-1 ${task.label}`} />
 						)}
 					</div>
 				</div>

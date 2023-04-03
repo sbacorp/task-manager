@@ -3,49 +3,49 @@ import { Cross2Icon, Pencil2Icon } from "@radix-ui/react-icons";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { useState } from "react";
 import { ITask } from "@/store/slices/types";
-
 import supabase from "@/lib/supabaseClient";
 import { updateTaskInfo } from "@/store/slices/tasksSlice";
+import * as RadioGroup from "@radix-ui/react-radio-group";
 
 export const cardLabels = [
 	{
 		type: "performance",
-		bg: "[#0079bf]",
+		bg: "bg-[#0079bf]",
 	},
 	{
 		type: "bug",
-		bg: "[#eb5a46]",
+		bg: "bg-[#eb5a46]",
 	},
 	{
 		type: "feature",
-		bg: "[#61bd4f]",
+		bg: "bg-[#61bd4f]",
 	},
 	{
 		type: "information",
-		bg: "[#ff9f1a]",
+		bg: "bg-[#ff9f1a]",
 	},
 	{
 		type: "warning",
-		bg: "[#f2d600]",
+		bg: "bg-[#f2d600]",
 	},
 ];
-
 function EditTaskModal({ task }: { task: ITask }) {
 	const dispatch = useAppDispatch();
 	const [title, setTitle] = useState(task!.title);
 	const [desc, setDesc] = useState(task.description);
 	const profile = useAppSelector((state) => state.profileSlice.profile?.id);
-	const [assignedTo, setAssignedTo] = useState<string>("");
+	const [assignedTo, setAssignedTo] = useState<string>(task.assignedTo?task.assignedTo:'');
+	const [label, setLabel] = useState('')
 	const onClickEdit = async () => {
 		if (profile) {
-			let profileId =''
+			let profileId = "";
 			const { data } = await supabase
 				.from("profiles")
 				.select("id")
 				.eq("userName", assignedTo);
-				if (data&&data[0]) {
-					profileId = data![0]?.id;
-				}
+			if (data && data[0]) {
+				profileId = data![0]?.id;
+			}
 			dispatch(
 				updateTaskInfo({
 					id: task.id,
@@ -53,14 +53,20 @@ function EditTaskModal({ task }: { task: ITask }) {
 					description: desc ? desc : task.description,
 					position: task.position,
 					column_id: task.column_id,
-					assignedTo: assignedTo&&assignedTo
+					assignedTo: assignedTo ? assignedTo : undefined,
+					label: label ? label : undefined,
 				})
 			);
 		}
 		setTitle("");
 		setDesc("");
 	};
-
+	const onClickDelete = async () => {
+		const { error } = await supabase.from("tasks").delete().eq("id", task.id);
+		if (error) {
+			console.log(error);
+		}
+	};
 	return (
 		<>
 			<Dialog.Root>
@@ -134,13 +140,44 @@ function EditTaskModal({ task }: { task: ITask }) {
 									placeholder="Введите имя пользователя"
 								/>
 							</fieldset>
-							<div
-								style={{
-									display: "flex",
-									marginTop: 25,
-									justifyContent: "flex-end",
-								}}
-							>
+							<fieldset className="flex gap-5 items-center mb-4">
+								<label
+									className="font-nurmal text-base text-purple text-right w-24"
+									htmlFor="label"
+								>
+									Добавить лейбл
+								</label>
+								<RadioGroup.Root
+									className="flex gap-2.5"
+									aria-label="View density"
+									id="label"
+								>
+									{cardLabels.map((el, i) => {
+										return (
+											<RadioGroup.Item
+												key={i}
+												className={`${el.bg}
+													 w-[25px] h-[25px] rounded-full shadow-[0_2px_10px] shadow-black focus:shadow-[0_0_0_2px] focus:shadow-black outline-none cursor-default`}
+												value={el.bg}
+												onClick={() => setLabel(el.bg)}
+											>
+												<RadioGroup.Indicator
+													className={`flex items-center justify-center w-full h-full relative after:content-[''] after:block after:w-[11px] after:h-[11px] after:rounded-[50%] `}
+												/>
+											</RadioGroup.Item>
+										);
+									})}
+								</RadioGroup.Root>
+							</fieldset>
+							<div className="flex justify-between w-full">
+								<Dialog.Close asChild>
+									<button
+										onClick={onClickDelete}
+										className="border-solid border-2 border-black p-3 rounded-md bg-white text-back hover:bg-transparent hover:text-purple duration-300 transition-all disabled:cursor-not-allowed disabled:bg-gray2 disabled:border-gray2  background hover:text-white hover:bg-black "
+									>
+										Удалить
+									</button>
+								</Dialog.Close>
 								<Dialog.Close asChild>
 									<button
 										disabled={!title.trim().length}
