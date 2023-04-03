@@ -81,23 +81,27 @@ function Column({ column }: { column: IColumn }) {
 				onSave={editTitleFn}
 				classes="bg-dark8 text-lg md:text-xl font-semibold "
 			/>
-			
-			<Droppable droppableId={String(column.id)} type="task">
-				{(provided) => (
-					<div
-						className="flex-col rounded-lg min-h-[20px] max-h-80 overflow-hidden overflow-y-scroll scroll"
-						{...provided.droppableProps}
-						ref={provided.innerRef}
-					>
-						{tasks &&
-							tasks.map((task, index) => (
-								<Task key={task.id} task={task} index={index} />
-							))}
-						{provided.placeholder}
-					</div>
-				)}
-			</Droppable>
-
+			<div className="flex-col rounded-lg min-h-[20px] max-h-80 overflow-hidden overflow-y-scroll scroll">
+				<Droppable
+					direction="vertical"
+					droppableId={String(column.id)}
+					type="task"
+				>
+					{(provided) => (
+						<div
+							className="min-h-[20px]"
+							{...provided.droppableProps}
+							ref={provided.innerRef}
+						>
+							{tasks &&
+								tasks.map((task, index) => (
+									<Task key={task.id} task={task} index={index} />
+								))}
+							{provided.placeholder}
+						</div>
+					)}
+				</Droppable>
+			</div>
 			<Editable
 				onSave={createTaskFn}
 				classes="bg-dark8 text-lg"
