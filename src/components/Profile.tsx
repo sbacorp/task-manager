@@ -1,7 +1,7 @@
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { useState } from 'react';
 import Image from 'next/image';
-import { store } from '@/store';
+import { useAppSelector } from '@/store';
 import { ProfileProps } from '../../typings';
 import Search from './Search';
 import EditProfile from './EditProfile';
@@ -10,11 +10,13 @@ import AccordionDemo from './Accordion';
 import {motion} from 'framer-motion'
 import { FADE_IN_ANIMATION_SETTINGS3 } from '@/lib/constants';
 function Profile({ setIsOpen }: ProfileProps) {
-  const profile =
-    store.getState().profileSlice.profile;
+  const profile = useAppSelector(
+    (state) => state.profileSlice.profile
+  );
   const [searchInput, setSearchInput] =
     useState<string>('');
   const haveTasks = true;
+  console.log(profile?.avatar);
   const tasks = [
     'Brochure products',
     'Treatment',

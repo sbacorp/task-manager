@@ -24,6 +24,7 @@ function UploadAvatar() {
     userId: string,
     avatarPath: string
   ): Promise<void> {
+    if (!profile) return;
     try {
       const { error } = await supabase
         .from('profiles')
@@ -31,9 +32,9 @@ function UploadAvatar() {
         .eq('id', userId);
       dispatch(
         setProfile({
-          id: profile!.id,
-          userName: profile!.userName,
-          email: profile!.email,
+          id: profile.id,
+          userName: profile.userName,
+          email: profile.email,
           avatar: avatarPath,
         })
       );
@@ -150,7 +151,8 @@ function UploadAvatar() {
           <div className="flex justify-end">
             <Dialog.Close asChild>
               <button
-                className="bg-dark6 text-white text-base font-semibold inline-flex h-[35px] items-center justify-center hover:bg-dark5 rounded-[4px] px-[15px] leading-none focus:shadow-[0_0_0_2px] focus:outline-none"
+                disabled={!message}
+                className="bg-dark6 disabled:bg-dark3 text-white text-base font-semibold inline-flex h-[35px] items-center justify-center hover:bg-dark5 rounded-[4px] px-[15px] leading-none focus:shadow-[0_0_0_2px] focus:outline-none"
                 onClick={handleFileSubmit}
               >
                 Обновить
