@@ -1,12 +1,18 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
-import { authLinks } from '@/lib/constants';
+import {
+  authLinks,
+  notAuthLinks,
+} from '@/lib/constants';
 import Link from 'next/link';
+import { User } from '@supabase/supabase-js';
 
 const HamburgerMenu = ({
   setIsOpen,
+  user,
 }: {
   setIsOpen: any;
+  user: User | null;
 }) => {
   return (
     <DropdownMenu.Root>
@@ -30,16 +36,27 @@ const HamburgerMenu = ({
           >
             Профиль
           </DropdownMenu.Item>
-          {authLinks.map((el) => (
-            <Link
-              key={el.title}
-              href={`/${el.href}`}
-            >
-              <DropdownMenu.Item className="group text-2xl text-white rounded py-2 flex items-center px-2 relative select-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-dark7 data-[highlighted]:text-white active:bg-dark7">
-                {el.title}
-              </DropdownMenu.Item>
-            </Link>
-          ))}
+          {user
+            ? authLinks.map((el, i) => (
+                <Link
+                  key={i}
+                  href={`/${el.href}`}
+                >
+                  <DropdownMenu.Item className="  group text-2xl text-white rounded py-2 flex items-center px-2 relative select-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-dark7 data-[highlighted]:text-white active:bg-dark7">
+                    {el.title}
+                  </DropdownMenu.Item>
+                </Link>
+              ))
+            : notAuthLinks.map((el, i) => (
+                <Link
+                  key={i}
+                  href={`/${el.href}`}
+                >
+                  <DropdownMenu.Item className="  group text-2xl text-white rounded py-2 flex items-center px-2 relative select-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-dark7 data-[highlighted]:text-white active:bg-dark7">
+                    {el.title}
+                  </DropdownMenu.Item>
+                </Link>
+              ))}
           <DropdownMenu.Arrow className="fill-dark9" />
         </DropdownMenu.Content>
       </DropdownMenu.Portal>

@@ -32,7 +32,7 @@ function NavLinks({
   if (size <= 1024)
     return (
       <div>
-        <HamburgerMenu setIsOpen={setIsOpen} />
+        <HamburgerMenu user={user} setIsOpen={setIsOpen} />
       </div>
     );
 
