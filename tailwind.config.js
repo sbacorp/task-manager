@@ -110,15 +110,15 @@ module.exports = {
       'yellow9': '#ff0'
     },
     container: {
-      // you can configure the container to be centered
       center: true,
-      padding: '2rem',
+      padding: '1rem',
 
       screens: {
         sm: '560px',
         md: '728px',
-        lg: '984px',
-        xl: '1240px',
+        lg: '1024px',
+        xl: '1440px',
+        '2xl':'1650px'
       },
     },
     extend: {
