@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import Link from "next/link";
@@ -15,6 +15,13 @@ const AuthButtons: React.FC = () => {
 	const user = useAppSelector(store=>store.userSlice.user)
 	const dispatch = useAppDispatch()
 	const router = useRouter();
+	const [size, setSize] = useState<number>(1024);
+	useEffect(() => {
+		if (window) {
+			setSize(window.innerWidth);
+			console.log(window.innerWidth);
+		}
+	}, []);
 	const handleSignOut = async () => {
 		try {
 			const { error } = await supabase.auth.signOut();
@@ -46,7 +53,7 @@ const AuthButtons: React.FC = () => {
 				</Link>
 				<Link
 					href="/registration"
-					className="signUp border border-solid font-serif border-white px-4 py-2 rounded-lg text-white text-sm"
+					className="signUp hidden md:block border border-solid font-serif border-white px-4 py-2 rounded-lg text-white text-sm"
 				>
 					Регистрация
 				</Link>

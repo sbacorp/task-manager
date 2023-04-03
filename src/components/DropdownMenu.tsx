@@ -14,12 +14,7 @@ const HamburgerMenu = ({
   return (
 		<DropdownMenu.Root>
 			<DropdownMenu.Trigger asChild>
-				<button
-					className="rounded-full w-12 h-12 inline-flex items-center justify-center bg-black hover:bg-dark8 focus:shadow-[0_0_0_2px] focus:shadow-black"
-					aria-label="Customise options"
-				>
 					<HamburgerMenuIcon className="w-10 h-10" />
-				</button>
 			</DropdownMenu.Trigger>
 
 			<DropdownMenu.Portal>

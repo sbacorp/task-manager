@@ -29,7 +29,7 @@ function Header({
               width={28}
               height={28}
             />
-            <p className=" font-sans font-semibold text-gray0 text-center text-xl leading-tight">
+            <p className="hidden md:block font-sans font-semibold text-gray0 text-center text-xl leading-tight">
               RollingProject
             </p>
           </div>

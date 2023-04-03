@@ -81,10 +81,11 @@ function Column({ column }: { column: IColumn }) {
 				onSave={editTitleFn}
 				classes="bg-dark8 text-lg md:text-xl font-semibold "
 			/>
+			
 			<Droppable droppableId={String(column.id)} type="task">
 				{(provided) => (
 					<div
-						className="flex-col rounded-lg min-h-10 max-h-96 overflow-hidden overflow-y-scroll scroll"
+						className="flex-col rounded-lg min-h-[20px] max-h-80 overflow-hidden overflow-y-scroll scroll"
 						{...provided.droppableProps}
 						ref={provided.innerRef}
 					>
@@ -96,6 +97,7 @@ function Column({ column }: { column: IColumn }) {
 					</div>
 				)}
 			</Droppable>
+
 			<Editable
 				onSave={createTaskFn}
 				classes="bg-dark8 text-lg"

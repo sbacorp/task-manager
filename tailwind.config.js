@@ -112,7 +112,8 @@ module.exports = {
     container: {
       // you can configure the container to be centered
       center: true,
-      
+      padding: '2rem',
+
       screens: {
         sm: '560px',
         md: '728px',

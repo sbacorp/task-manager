@@ -1,16 +1,21 @@
 export const FADE_IN_ANIMATION_SETTINGS = {
   initial: { opacity: 0 },
   animate: { opacity: 1 },
-  transition: { duration: 1 },
+  transition: { duration: 0.5 },
 };
 export const FADE_IN_ANIMATION_SETTINGS1 = {
 	initial: { opacity: 0 },
 	animate: { opacity: 0.95 },
 	transition: { duration: 0.5 },
 };
+export const FADE_IN_ANIMATION_SETTINGS3 = {
+	initial: { x:600, opacity: 0 },
+	animate: { x:0, opacity: 1 },
+	transition: { duration: 0.5, type:'spring' },
+};
 
 export const FADE_DOWN_ANIMATION_VARIANTS = {
-  hidden: { opacity: 0, y: -10 },
+  hidden: { opacity: 0, y: -600 },
   show: {
     opacity: 1,
     y: 0,

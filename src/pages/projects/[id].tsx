@@ -8,7 +8,7 @@ import { addColumn, fetchcolumns } from "@/store/slices/columnsSlice";
 import { fetchTasks, setTasks, updateTask } from "@/store/slices/tasksSlice";
 import { IColumn } from "@/store/slices/types";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 function Project() {
 	const router = useRouter();
@@ -65,6 +65,7 @@ function Project() {
 		} else if (type === "column") {
 		}
 	};
+
 
 	useEffect(() => {
 		const getColumns = async () => {
@@ -147,6 +148,7 @@ function Project() {
 						columns.map((el: IColumn) => <Column column={el} key={el.id} />)}
 				</DragDropContext>
 				<CreateColumn createColumnF={createColumnFn} />
+				
 			</div>
 		</div>
 	);

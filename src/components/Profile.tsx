@@ -7,8 +7,8 @@ import Search from './Search';
 import EditProfile from './EditProfile';
 import UploadAvatar from './UploadAvatar';
 import AccordionDemo from './Accordion';
-import Gradient from './gradient';
-
+import {motion} from 'framer-motion'
+import { FADE_IN_ANIMATION_SETTINGS3 } from '@/lib/constants';
 function Profile({ setIsOpen }: ProfileProps) {
   const profile =
     store.getState().profileSlice.profile;
@@ -22,10 +22,10 @@ function Profile({ setIsOpen }: ProfileProps) {
     'Quarterly report tasklist',
   ];
   if (!profile) {
-    return <>idi nahui</>;
+    return <>login</>;
   }
   return (
-    <div className="absolute right-0 w-screen sm:w-[480px] h-full flex flex-col gap-2 rounded-2xl shadow-xl border border-[#343A40] bg-dark9 z-50 overflow-hidden">
+    <motion.div {...FADE_IN_ANIMATION_SETTINGS3} className="absolute right-0 w-screen sm:w-[480px] h-full flex flex-col gap-2 rounded-2xl shadow-xl border border-[#343A40] bg-dark9 z-50 overflow-hidden">
       <div className="w-full h-[120px] rounded-sm pr-2 pt-2 profileFade">
         <button
           className=" rounded-full h-7 w-7 bg-dark7 text-cyan5 inline-flex items-center justify-center absolute top-3 right-3 border border-solid hover:bg-cyan5 hover:text-black duration-300 transition-all"
@@ -47,7 +47,7 @@ function Profile({ setIsOpen }: ProfileProps) {
             </div>
           ) : (
             <Image
-              src="assets/userIcon.svg"
+              src="/assets/userIcon.svg"
               alt="avatar"
               width={100}
               height={100}
@@ -88,7 +88,7 @@ function Profile({ setIsOpen }: ProfileProps) {
           )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
