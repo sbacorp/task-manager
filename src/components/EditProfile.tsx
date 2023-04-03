@@ -8,6 +8,7 @@ import {
   useAppSelector,
 } from '@/store';
 import { setProfile } from '@/store/slices/profileSlice';
+import ForgetPassword from './ForgetPassword';
 
 function EditProfile() {
   const dispatch = useAppDispatch();
@@ -57,7 +58,7 @@ function EditProfile() {
         'Ошибка при проверке текущего пароля:',
         checkError
       );
-      setMessage('Неправильный текущий пароль!');
+      setMessage('Неправильный текущий пароль');
       return;
     }
 
@@ -73,7 +74,9 @@ function EditProfile() {
       );
       return;
     }
-    setMessage('Ваш пароль успешно изменен!');
+    setMessage(
+      'Ваш пароль успешно изменен. Можете закрыть диалоговое окно'
+    );
     setCurrentPassword('');
     setNewPassword('');
   }
@@ -100,7 +103,7 @@ function EditProfile() {
             setNewPassword('');
             setMessage('');
           }}
-          className="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[305px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-dark9 shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none flex items-center justify-center z-40"
+          className="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[305px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-dark9 shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none flex items-center justify-center z-50"
         >
           <Tabs.Root
             className="flex flex-col w-[300px] "
@@ -203,15 +206,21 @@ function EditProfile() {
                   }
                 />
                 {message && (
-                  <p className="text-xs text-red6 font-semibold tracking-wide flex items-center gap-2 mt-1.5">
-                    <span className="italic font-titleFont text-base font-extrabold">
+                  <p
+                    className={`text-xs ${
+                      message.length === 27
+                        ? 'text-red6'
+                        : 'text-green9'
+                    } font-semibold tracking-wide flex items-center gap-2 mt-3`}
+                  >
+                    <span className="italic font-titleFont text-2xl font-extrabold">
                       !
                     </span>{' '}
                     {message}
                   </p>
                 )}
               </fieldset>
-              <div className="flex justify-center mt-5">
+              <div className="flex justify-center mt-5 flex-col items-center gap-3">
                 <button
                   onClick={handleUpdatePassword}
                   disabled={
@@ -222,6 +231,9 @@ function EditProfile() {
                 >
                   Изменить пароль
                 </button>
+                <Dialog.Close asChild>
+                  <ForgetPassword />
+                </Dialog.Close>
               </div>
             </Tabs.Content>
           </Tabs.Root>

@@ -29,3 +29,5 @@ export interface HeaderNavProps {
   isOpen: boolean;
   setIsOpen: any;
 }
+
+export type LoginType = 'signin' | 'reset'
