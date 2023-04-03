@@ -8,7 +8,6 @@ import {
   useAppSelector,
 } from '@/store';
 import { setProfile } from '@/store/slices/profileSlice';
-import ForgetPassword from './ForgetPassword';
 
 function EditProfile() {
   const dispatch = useAppDispatch();
@@ -231,9 +230,6 @@ function EditProfile() {
                 >
                   Изменить пароль
                 </button>
-                <Dialog.Close asChild>
-                  <ForgetPassword />
-                </Dialog.Close>
               </div>
             </Tabs.Content>
           </Tabs.Root>
