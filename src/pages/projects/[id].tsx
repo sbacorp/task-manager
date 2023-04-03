@@ -101,6 +101,7 @@ function Project() {
 			}
 		}
 	};
+	
 	if (loading) return <PyramidLoader />;
 	if (!project) {
 		router.push("/projects");
@@ -140,7 +141,10 @@ function Project() {
 						})}
 				</div>
 			</div>
-			<div className="columns scroll h-full w-full flex gap-9 overflow-x-scroll">
+			<div
+				data-react-beautiful-dnd-scroll-container
+				className="h-full w-full flex gap-9 overflow-x-auto scroll"
+			>
 				<DragDropContext
 					onDragEnd={(result) => handleDragEnd(currentTasksState, result)}
 				>
@@ -148,7 +152,6 @@ function Project() {
 						columns.map((el: IColumn) => <Column column={el} key={el.id} />)}
 				</DragDropContext>
 				<CreateColumn createColumnF={createColumnFn} />
-				
 			</div>
 		</div>
 	);
