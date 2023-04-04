@@ -8,6 +8,8 @@ import {
   useAppSelector,
 } from '@/store';
 import { setProfile } from '@/store/slices/profileSlice';
+import { EyeActive } from '../../typings';
+import EyeAction from './EyeActive';
 
 function EditProfile() {
   const dispatch = useAppDispatch();
@@ -21,6 +23,10 @@ function EditProfile() {
   const [currentPassword, setCurrentPassword] =
     useState('');
   const [message, setMessage] = useState('');
+  const [isOpen1, setIsOpen1] =
+    useState<EyeActive>([false, 'password']);
+  const [isOpen2, setIsOpen2] =
+    useState<EyeActive>([false, 'password']);
 
   async function handleUpdateName() {
     if (!profile) return;
@@ -142,7 +148,7 @@ function EditProfile() {
                   Имя профиля
                 </label>
                 <input
-                  className="grow shrink-0 rounded px-2.5 text-[15px] text-black h-[35px] outline-none"
+                  className="grow shrink-0 rounded px-2.5 text-[15px] bg-dark7 text-white h-[35px] outline-none"
                   id="username"
                   value={userName}
                   onChange={(e) =>
@@ -176,17 +182,23 @@ function EditProfile() {
                 >
                   Текущий пароль
                 </label>
-                <input
-                  className="grow shrink-0 rounded px-2.5 text-[15px] leading-none text-black h-[35px]  outline-none"
-                  id="currentPassword"
-                  type="password"
-                  value={currentPassword}
-                  onChange={(e) =>
-                    setCurrentPassword(
-                      e.target.value
-                    )
-                  }
-                />
+                <div className="relative">
+                  <input
+                    className="grow block w-full shrink-0 rounded px-2.5 text-[15px] bg-dark7 leading-none text-white h-[35px]  outline-none"
+                    id="currentPassword"
+                    type={isOpen1[1]}
+                    value={currentPassword}
+                    onChange={(e) =>
+                      setCurrentPassword(
+                        e.target.value
+                      )
+                    }
+                  />
+                  <EyeAction
+                    setIsOpen={setIsOpen1}
+                    isOpen={isOpen1}
+                  />
+                </div>
               </fieldset>
               <fieldset className="mb-[15px] w-full flex flex-col justify-start">
                 <label
@@ -195,15 +207,23 @@ function EditProfile() {
                 >
                   Новый пароль
                 </label>
-                <input
-                  className="grow shrink-0 rounded px-2.5 text-[15px] leading-none text-black h-[35px] outline-none"
-                  id="newPassword"
-                  type="password"
-                  value={newPassword}
-                  onChange={(e) =>
-                    setNewPassword(e.target.value)
-                  }
-                />
+                <div className="relative">
+                  <input
+                    className="grow shrink-0 block  w-full rounded px-2.5 text-[15px] bg-dark7 leading-none text-white h-[35px] outline-none"
+                    id="newPassword"
+                    type={isOpen2[1]}
+                    value={newPassword}
+                    onChange={(e) =>
+                      setNewPassword(
+                        e.target.value
+                      )
+                    }
+                  />
+                  <EyeAction
+                    setIsOpen={setIsOpen2}
+                    isOpen={isOpen2}
+                  />
+                </div>
                 {message && (
                   <p
                     className={`text-xs ${

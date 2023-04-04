@@ -31,3 +31,5 @@ export interface HeaderNavProps {
 }
 
 export type LoginType = 'signin' | 'reset'
+
+export type EyeActive = [true, 'text'] | [false, 'password']
