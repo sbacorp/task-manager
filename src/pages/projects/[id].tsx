@@ -108,7 +108,7 @@ function Project() {
 		return alert("Проект не найден");
 	}
 	return (
-		<div className="container h-[70vh] overflow-hidden flex flex-col items-start justify-start">
+		<div className="w-[95vw] h-[70vh] overflow-hidden flex flex-col items-start justify-start">
 			<div className="top flex justify-between w-full">
 				<div className=" text-lg md:text-4xl text-white font-semibold mb-10">
 					{project.title}
@@ -135,7 +135,7 @@ function Project() {
 				</div>
 			</div>
 			<div
-				className="h-full w-full flex gap-9 overflow-x-auto overflow-y-hidden scroll"
+				className="h-full w-full flex gap-9 overflow-x-auto overflow-y-auto scroll"
 			>
 				<DragDropContext
 					onDragEnd={(result) => handleDragEnd(currentTasksState, result)}

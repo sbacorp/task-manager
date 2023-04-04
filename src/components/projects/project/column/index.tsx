@@ -67,7 +67,7 @@ function Column({ column }: { column: IColumn }) {
 	};
 	if (loading) return <LoadingSpinner classes="" />;
 	return (
-		<div className="bg-dark8 flex-shrink-0 h-fit min-h-[100px] max-h-[90%] rounded-lg border relative border-solid border-dark6 p-5 w-72 md:w-80 overflow-hidden">
+		<div className="bg-dark8 flex-shrink-0 h-fit min-h-[100px] rounded-lg border relative border-solid border-dark6 p-5 w-72 md:w-80 overflow-hidden">
 			{status == Status.LOADING && (
 				<LoadingSpinner classes="absolute  right-1 bottom-1" />
 			)}
@@ -81,7 +81,7 @@ function Column({ column }: { column: IColumn }) {
 				onSave={editTitleFn}
 				classes="bg-dark8 text-lg md:text-xl font-semibold "
 			/>
-			<div className="flex-col rounded-lg min-h-[20px] max-h-80 overflow-x-hidden overflow-y-scroll scroll">
+			<div className="flex-col rounded-lg min-h-[20px] max-h-fit overflow-hidden scroll">
 				<Droppable
 					direction="vertical"
 					droppableId={String(column.id)}
