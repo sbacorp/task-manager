@@ -81,7 +81,7 @@ function Column({ column }: { column: IColumn }) {
 				onSave={editTitleFn}
 				classes="bg-dark8 text-lg md:text-xl font-semibold "
 			/>
-			<div className="flex-col rounded-lg min-h-[20px] max-h-80 overflow-hidden overflow-y-scroll scroll">
+			<div className="flex-col rounded-lg min-h-[20px] max-h-80 overflow-x-hidden overflow-y-scroll scroll">
 				<Droppable
 					direction="vertical"
 					droppableId={String(column.id)}

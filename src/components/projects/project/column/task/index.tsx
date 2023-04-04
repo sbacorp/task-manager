@@ -23,7 +23,7 @@ const Task = ({ task, index }: Props) => {
 				>
 					<div className="flex flex-col items-start justify-between gap-2">
 						<div className="font-semibold font-serif text-white">
-							{task.title}{" "}
+							{task.title}
 							<span className="text-gray6"> {task.assignedTo ? `для ${task.assignedTo}` : ""}</span>
 						</div>
 						<div className="text-gray5">

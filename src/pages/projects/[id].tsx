@@ -5,7 +5,7 @@ import { subscribeToColumnsChanges } from "@/lib/realtime/columns";
 import supabase from "@/lib/supabaseClient";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { addColumn, fetchcolumns } from "@/store/slices/columnsSlice";
-import { fetchTasks, setTasks, updateTask } from "@/store/slices/tasksSlice";
+import {  setTasks, updateTask } from "@/store/slices/tasksSlice";
 import { IColumn } from "@/store/slices/types";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
@@ -128,22 +128,14 @@ function Project() {
 										src={`https://lifscnxzktzcffgkwvuw.supabase.co/storage/v1/object/public/user-avatars/${el.avatarPath}`}
 										alt="avatar"
 									/>
-									<div
-										id="tooltip-default"
-										role="tooltip"
-										className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray7 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray7"
-									>
-										пользователь
-										<div className="tooltip-arrow" data-popper-arrow></div>
-									</div>
+									
 								</div>
 							);
 						})}
 				</div>
 			</div>
 			<div
-				data-react-beautiful-dnd-scroll-container
-				className="h-full w-full flex gap-9 overflow-x-auto scroll"
+				className="h-full w-full flex gap-9 overflow-x-auto overflow-y-hidden scroll"
 			>
 				<DragDropContext
 					onDragEnd={(result) => handleDragEnd(currentTasksState, result)}
