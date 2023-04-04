@@ -14,7 +14,7 @@ function Header({
   const scrolled = useScroll(50);
   return (
     <header
-      className={`fixed w-full top-0 ${
+      className={`fixed w-full top-0 overflow-hidden ${
         scrolled
           ? 'border-b border-dark6 bg-black/50 backdrop-blur-xl'
           : 'bg-black border-b border-dark6'

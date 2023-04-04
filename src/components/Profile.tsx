@@ -1,14 +1,16 @@
+import dynamic from 'next/dynamic'
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { useState } from 'react';
 import Image from 'next/image';
 import { useAppSelector } from '@/store';
 import { ProfileProps } from '../../typings';
 import Search from './Search';
-import EditProfile from './EditProfile';
+const EditProfile = dynamic(()=>import('./EditProfile'))
 import UploadAvatar from './UploadAvatar';
 import AccordionDemo from './Accordion';
 import {motion} from 'framer-motion'
-import { FADE_IN_ANIMATION_SETTINGS3 } from '@/lib/constants';
+import { FADE_IN_ANIMATION_SETTINGS } from '@/lib/constants';
+
 function Profile({ setIsOpen }: ProfileProps) {
   const profile = useAppSelector(
     (state) => state.profileSlice.profile
@@ -16,7 +18,7 @@ function Profile({ setIsOpen }: ProfileProps) {
   const [searchInput, setSearchInput] =
     useState<string>('');
   const haveTasks = true;
-  console.log(profile?.avatar);
+  console.log(profile, 'profile');
   const tasks = [
     'Brochure products',
     'Treatment',
@@ -27,7 +29,7 @@ function Profile({ setIsOpen }: ProfileProps) {
     return <>login</>;
   }
   return (
-    <motion.div {...FADE_IN_ANIMATION_SETTINGS3} className="absolute right-0 w-screen sm:w-[480px] h-full flex flex-col gap-2 rounded-2xl shadow-xl border border-[#343A40] bg-dark9 z-50 overflow-hidden">
+    <motion.div {...FADE_IN_ANIMATION_SETTINGS} className="absolute right-0 w-screen sm:w-[480px] h-full flex flex-col gap-2 rounded-2xl shadow-xl border border-[#343A40] bg-dark9 z-50 overflow-hidden">
       <div className="w-full h-[120px] rounded-sm pr-2 pt-2 profileFade">
         <button
           className=" rounded-full h-7 w-7 bg-dark7 text-cyan5 inline-flex items-center justify-center absolute top-3 right-3 border border-solid hover:bg-cyan5 hover:text-black duration-300 transition-all"
@@ -39,11 +41,11 @@ function Profile({ setIsOpen }: ProfileProps) {
       </div>
       <div className="relative w-full">
         <div className="absolute -top-12 left-[40px] rounded-full w-[100px] h-[100px] bg-dark flex items-center justify-center overflow-hidden">
-          {profile.avatar ? (
+          {profile.avatarPath ? (
             <div className="relative w-full h-full pb-[56.25%]">
               <img
                 className="absolute inset-0 w-full h-full object-cover object-center "
-                src={`https://lifscnxzktzcffgkwvuw.supabase.co/storage/v1/object/public/user-avatars/${profile.avatar}`}
+                src={`https://lifscnxzktzcffgkwvuw.supabase.co/storage/v1/object/public/user-avatars/${profile.avatarPath}`}
                 alt="avatar"
               />
             </div>

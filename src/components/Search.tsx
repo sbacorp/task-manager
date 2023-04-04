@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import React, { useState, useRef,ChangeEvent } from 'react';
 // import { debounce } from "lodash";
 
 function Search({
@@ -17,7 +17,7 @@ function Search({
     inputRef.current?.focus();
   };
   const onChangeInput = (
-    e: React.ChangeEvent<HTMLInputElement>
+    e: ChangeEvent<HTMLInputElement>
   ) => {
     setValue(e.target.value);
     // updateSearch(e.target.value);

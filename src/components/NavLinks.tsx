@@ -9,7 +9,6 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 import HamburgerMenu from './DropdownMenu';
 
 function NavLinks({
@@ -54,6 +53,7 @@ function NavLinks({
                 </li>
               )
             )}
+
           </>
         ) : (
           notAuthLinks.map(
@@ -69,9 +69,7 @@ function NavLinks({
             )
           )
         )}
-        <li className="text-dark2 font-semibold text-base">
-          English
-        </li>
+
       </ul>
     </nav>
   );

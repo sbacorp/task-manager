@@ -1,14 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 
 import Link from "next/link";
 import { useRouter } from "next/router";
 import supabase from "@/lib/supabaseClient";
-import { useDispatch } from "react-redux";
 import { setUser } from "@/store/slices/userSlice";
-import { RootState, store, useAppDispatch, useAppSelector } from "@/store";
+import { useAppDispatch, useAppSelector } from "@/store";
 
 const AuthButtons: React.FC = () => {
 
@@ -24,12 +22,13 @@ const AuthButtons: React.FC = () => {
 	}, []);
 	const handleSignOut = async () => {
 		try {
-			const { error } = await supabase.auth.signOut();
+			await supabase.auth.signOut();
 			dispatch(setUser(null));
+
 		} catch (error) {
 			console.log(error);
 		} finally {
-			router.push("/");
+			await router.push("/");
 		}
 	};
 	
@@ -51,12 +50,14 @@ const AuthButtons: React.FC = () => {
 				<Link href="/login" className="signIn  text-base text-white font-serif">
 					Вход
 				</Link>
-				<Link
+				{size>960&&<Link
 					href="/registration"
 					className="signUp hidden md:block border border-solid font-serif border-white px-4 py-2 rounded-lg text-white text-sm"
 				>
 					Регистрация
-				</Link>
+				</Link>}
+
+
 			</div>
 	);
 };

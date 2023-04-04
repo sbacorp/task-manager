@@ -10,6 +10,7 @@ import {
 } from '../store/slices/profileSlice';
 import { useDispatch } from 'react-redux';
 import { LoginType } from '../../typings';
+import useSWR from 'swr'
 
 const SignIn = () => {
   const [email, setEmail] = useState('');

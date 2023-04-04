@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
+import dynamic from 'next/dynamic'
+
 import * as Tabs from '@radix-ui/react-tabs';
 import { useRouter } from 'next/router';
 import supabase from '@/lib/supabaseClient';
@@ -9,7 +11,7 @@ import {
 } from '@/store';
 import { setProfile } from '@/store/slices/profileSlice';
 import { EyeActive } from '../../typings';
-import EyeAction from './EyeActive';
+const EyeAction = dynamic(()=>import('./EyeActive'))
 
 function EditProfile() {
   const dispatch = useAppDispatch();
