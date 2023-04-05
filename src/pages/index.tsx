@@ -10,6 +10,7 @@ import Gradient from "@/components/gradient";
 
 const Index: NextPage = () => {
 	return (
+
 		<>
 			<motion.div
 				initial="hidden"
