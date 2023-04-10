@@ -35,7 +35,7 @@ function UploadAvatar() {
           id: profile.id,
           userName: profile.userName,
           email: profile.email,
-          avatar: avatarPath,
+          avatarPath: avatarPath,
         })
       );
       if (error) {

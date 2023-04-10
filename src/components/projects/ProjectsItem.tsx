@@ -4,7 +4,7 @@ import { fetchProjects } from "@/store/slices/projectsSlice";
 import { IProject } from "@/store/slices/types";
 import Link from "next/link";
 import React from "react";
-import EditProjectItem from "./project/EditProjectItem";
+import EditProjectItem from "./EditProjectItem";
 
 function ProjectsItem({ project }: { project: IProject }) {
 	const dispatch = useAppDispatch();

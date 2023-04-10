@@ -110,6 +110,6 @@ const Column = React.memo(function Column({ column }: { column: IColumn }) {
 			/>
 		</div>
 	);
-})
+});
 
 export default Column;

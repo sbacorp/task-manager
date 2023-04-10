@@ -3,9 +3,7 @@ import Link from 'next/link';
 import useScroll from '@/lib/hooks/use-scroll';
 import AuthButtons from './AuthButtons';
 import NavLinks from './NavLinks';
-import Profile from './Profile';
-import { useState } from 'react';
-import { HeaderNavProps } from '../../typings';
+import { HeaderNavProps } from '../../../typings';
 
 function Header({
   isOpen,

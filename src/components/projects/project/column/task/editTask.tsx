@@ -8,7 +8,6 @@ import { updateTaskInfo } from "@/store/slices/tasksSlice";
 import * as RadioGroup from "@radix-ui/react-radio-group";
 
 export const cardLabels = [
-
 	{
 		type: "performance",
 		bg: "bg-[#0079bf]",
@@ -33,10 +32,10 @@ export const cardLabels = [
 function EditTaskModal({ task }: { task: ITask }) {
 	const dispatch = useAppDispatch();
 	const [title, setTitle] = useState(task!.title);
-	const [desc, setDesc] = useState(task.description||'');
+	const [desc, setDesc] = useState(task.description || "");
 	const profile = useAppSelector((state) => state.profileSlice.profile?.id);
-	const [assignedTo, setAssignedTo] = useState<string>(task.assignedTo||'');
-	const [label, setLabel] = useState<string>('')
+	const [assignedTo, setAssignedTo] = useState<string>(task.assignedTo || "");
+	const [label, setLabel] = useState<string>("");
 	const onClickEdit = async () => {
 		if (profile) {
 			let profileId = "";

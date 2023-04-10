@@ -1,6 +1,6 @@
 import { useState, FormEvent } from "react";
 import SignLayout from "@/components/signLayout";
-import supabase from "../lib/supabaseClient";
+import supabase from "../../lib/supabaseClient";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -30,7 +30,7 @@ function Registration() {
 			setMessage(error.message);
 		} else {
 			setMessage("Проверьте почту");
-			setTimeout(() => router.push("/login"), 1000);
+			setTimeout(() => router.push("/auth/login"), 1000);
 		}
 	};
 	return (
@@ -72,7 +72,7 @@ function Registration() {
 						<p className="text-dark2 font-normal text-base">
 							Уже есть аккаунт?
 						</p>
-						<Link className="text-dark font-normal text-base" href="/login">
+						<Link className="text-dark font-normal text-base" href="/auth/login">
 							Войти
 						</Link>
 					</div>

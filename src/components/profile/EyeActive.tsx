@@ -1,5 +1,5 @@
 import React from 'react';
-import { EyeActive } from '../../typings';
+import { EyeActive } from '../../../typings';
 
 function EyeAction({
   isOpen,

@@ -3,13 +3,13 @@ import { Cross2Icon } from '@radix-ui/react-icons';
 import { useState } from 'react';
 import Image from 'next/image';
 import { useAppSelector } from '@/store';
-import { ProfileProps } from '../../typings';
-import Search from './Search';
-const EditProfile = dynamic(()=>import('./EditProfile'))
+import { ProfileProps } from '../../../typings';
+import Search from '../Search';
 import UploadAvatar from './UploadAvatar';
 import AccordionDemo from './Accordion';
 import {motion} from 'framer-motion'
 import { FADE_IN_ANIMATION_SETTINGS } from '@/lib/constants';
+const EditProfile = dynamic(() => import("./EditProfile"));
 
 function Profile({ setIsOpen }: ProfileProps) {
   const profile = useAppSelector(
