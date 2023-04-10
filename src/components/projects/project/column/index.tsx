@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@/store";
 import { IColumn, Status } from "@/store/slices/types";
 import { Cross2Icon } from "@radix-ui/react-icons";
-import React, { useEffect, useState, memo } from "react";
+import React, { useEffect, useState } from "react";
 import Editable from "../../../Editable";
 import { addTask, fetchTasks } from "@/store/slices/tasksSlice";
 import { Droppable } from "react-beautiful-dnd";

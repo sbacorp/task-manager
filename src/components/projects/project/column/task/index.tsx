@@ -1,9 +1,6 @@
 import { Draggable } from "react-beautiful-dnd";
-import { useAppDispatch } from "@/store";
-import { updateTask } from "@/store/slices/tasksSlice";
 import { ITask } from "@/store/slices/types";
-import { Pencil2Icon } from "@radix-ui/react-icons";
-import EditTaskModal, { cardLabels } from "./editTask";
+import EditTaskModal from "./editTask";
 interface Props {
 	task: ITask;
 	index: number;
