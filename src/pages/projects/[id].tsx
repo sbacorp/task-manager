@@ -6,7 +6,7 @@ import supabase from "@/lib/supabaseClient";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { addColumn, fetchcolumns } from "@/store/slices/columnsSlice";
 import { setTasks, updateTask } from "@/store/slices/tasksSlice";
-import { IColumn } from "@/store/slices/types";
+import { IColumn, TasksState } from "@/store/slices/types";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
@@ -25,7 +25,7 @@ function Project() {
 	const tasks = useAppSelector((state) => state.tasksReducer.tasks);
 	const currentTasksState = useAppSelector((state) => state.tasksReducer.tasks);
 
-	const handleDragEnd = (currentTasksState: any, result: any) => {
+	const handleDragEnd = (currentTasksState: TasksState, result: any) => {
 		const { source, destination, draggableId, type } = result;
 		if (!destination) {
 			return;
@@ -37,6 +37,7 @@ function Project() {
 			return;
 		if (type === "task") {
 			const newTasksState = JSON.parse(JSON.stringify(currentTasksState));
+			console.log(newTasksState);
 			const removedTask = newTasksState[source.droppableId].splice(
 				source.index,
 				1
@@ -52,21 +53,55 @@ function Project() {
 					tasks: newTasksState[source.droppableId],
 				})
 			);
-			// Обновляем стейт задач
+			//  Обновляем стейт задач
 			dispatch(
 				setTasks({
 					columnId: destination.droppableId,
 					tasks: newTasksState[destination.droppableId],
 				})
 			);
-			dispatch(
-				updateTask({
-					id: draggableId,
-					column_id: destination.droppableId,
-					position: destination.index,
-				})
-			);
-		} else if (type === "column") {
+			if (destination.droppableId === source.droppableId) {
+				for (
+					let index = 0;
+					index < newTasksState[destination.droppableId].length;
+					index++
+				) {
+					dispatch(
+						updateTask({
+							id: newTasksState[destination.droppableId][index].id,
+							column_id: destination.droppableId,
+							position: index,
+						})
+					);
+				}
+			} else {
+				for (
+					let index = 0;
+					index < newTasksState[destination.droppableId].length;
+					index++
+				) {
+					dispatch(
+						updateTask({
+							id: newTasksState[destination.droppableId][index].id,
+							column_id: destination.droppableId,
+							position: index,
+						})
+					);
+				}
+				for (
+					let index = 0;
+					index < newTasksState[source.droppableId].length;
+					index++
+				) {
+					dispatch(
+						updateTask({
+							id: newTasksState[source.droppableId][index].id,
+							column_id: source.droppableId,
+							position: index,
+						})
+					);
+				}
+			}
 		}
 	};
 
@@ -141,7 +176,9 @@ function Project() {
 			</div>
 			<div className="h-full w-full flex gap-9 overflow-x-auto overflow-y-auto scroll">
 				<DragDropContext
-					onDragEnd={(result) => handleDragEnd(currentTasksState, result)}
+					onDragEnd={(result) => {
+						handleDragEnd(currentTasksState, result);
+					}}
 				>
 					{columns &&
 						columns.map((el: IColumn) => <Column column={el} key={el.id} />)}

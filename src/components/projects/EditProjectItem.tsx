@@ -6,15 +6,6 @@ import { IProject } from "@/store/slices/types";
 import { editProject } from "@/store/slices/projectSlice";
 import supabase from "@/lib/supabaseClient";
 
-const colors = [
-	{ colorName: "MIDNIGHT", color: "midnight" },
-	{ colorName: "SKY", color: "sky" },
-	{ colorName: "YODA", color: "yoda" },
-	{ colorName: "GRAP", color: "bg-grape7" },
-	{ colorName: "PINK", color: "bg-pink6" },
-	{ colorName: "VIOLET", color: "bg-violet7" },
-];
-
 function EditProjectItem({ project }: { project: IProject }) {
 	const dispatch = useAppDispatch();
 	const [title, setTitle] = useState(project.title);

@@ -1,13 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User } from "@supabase/supabase-js";
+import { IUserSliceState } from "./types";
 
-interface UserState {
-	user: User | null;
-	loading: boolean;
-	error: string | null;
-}
 
-const initialState: UserState = {
+
+const initialState: IUserSliceState = {
 	user: null,
 	loading: false,
 	error: null,

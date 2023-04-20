@@ -1,12 +1,12 @@
 import { Draggable } from "react-beautiful-dnd";
 import { ITask } from "@/store/slices/types";
 import EditTaskModal from "./editTask";
-interface Props {
+interface ITaskProps {
 	task: ITask;
 	index: number;
 }
 
-const Task = ({ task, index }: Props) => {
+const Task = ({ task, index }: ITaskProps) => {
 	return (
 		<Draggable draggableId={String(task.id)} index={index}>
 			{(provided) => (

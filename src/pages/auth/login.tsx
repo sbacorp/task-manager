@@ -7,7 +7,6 @@ import { setUser } from "../../store/slices/userSlice";
 import { setProfile, IProfile } from "../../store/slices/profileSlice";
 import { useDispatch } from "react-redux";
 import { LoginType } from "../../../typings";
-import useSWR from "swr";
 
 const SignIn = () => {
 	const [email, setEmail] = useState("");
