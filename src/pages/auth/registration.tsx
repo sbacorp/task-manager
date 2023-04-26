@@ -3,6 +3,7 @@ import SignLayout from "@/components/signLayout";
 import supabase from "../../lib/supabaseClient";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 function Registration() {
 	const router = useRouter();
@@ -10,7 +11,7 @@ function Registration() {
 	const [password, setPassword] = useState("");
 	const [userName, setUserName] = useState("");
 	const [message, setMessage] = useState("");
-
+	
 	const handleSignUp = async (e: FormEvent) => {
 		e.preventDefault();
 		const { data: user, error } = await supabase.auth.signUp({
@@ -25,11 +26,14 @@ function Registration() {
 					email: user.user.email
 				},
 			]);
+			if(error){
+				toast.error(error.message);
+			}
 		}
 		if (error) {
-			setMessage(error.message);
+			toast.error(error.message);
 		} else {
-			setMessage("Проверьте почту");
+			toast.warn("Проверьте почту");
 			setTimeout(() => router.push("/auth/login"), 1000);
 		}
 	};

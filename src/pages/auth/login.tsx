@@ -7,6 +7,8 @@ import { setUser } from "../../store/slices/userSlice";
 import { setProfile, IProfile } from "../../store/slices/profileSlice";
 import { useDispatch } from "react-redux";
 import { LoginType } from "../../../typings";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignIn = () => {
 	const [email, setEmail] = useState("");
@@ -24,7 +26,7 @@ const SignIn = () => {
 				password,
 			});
 			if (error) {
-				setMessage(error.message);
+				toast.error(error.message);
 			} else {
 				dispatch(setUser(data.user));
 				const { data: profile, error } = await supabase
@@ -37,12 +39,12 @@ const SignIn = () => {
 				} else {
 					const userProfile: IProfile = profile as IProfile;
 					dispatch(setProfile(userProfile));
+					toast.success('Вход выполнен успешно!')
 				}
-				setMessage("Вы успешно вошли в систему!");
 				router.push("/projects");
 			}
-		} catch (error) {
-			console.log(error);
+		} catch (e) {
+			toast.error(`${e}`);
 		}
 	};
 
@@ -52,15 +54,15 @@ const SignIn = () => {
 		let { data, error: resetError } = await supabase.auth.resetPasswordForEmail(
 			email,
 			{
-				redirectTo: "http://localhost:3000/auth/update-password",
+				redirectTo: `${process.env.PROJECT_URL_DEV}/auth/update-password`,
 			}
 		);
 		if (resetError) {
-			setMessage(resetError.message);
+			toast.error(resetError.message);
 			return;
 		}
-		setMessage("Ссылка для сброса пароля отправлен на вашу почту.");
-		router.push("/");
+		toast.warn("Ссылка для сброса пароля отправлен на вашу почту.");
+		
 	};
 
 	return (
@@ -95,7 +97,7 @@ const SignIn = () => {
 							</p>
 							<Link
 								className="text-dark font-normal text-base"
-								href="/auth/login"
+								href="/auth/registration"
 							>
 								Зарегистрироваться
 							</Link>

@@ -10,11 +10,11 @@ import { IColumn, TasksState } from "@/store/slices/types";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
+import { toast } from "react-toastify";
 
-function Project() {
-	const router = useRouter(),
-		{ id } = router.query,
-		dispatch = useAppDispatch(),
+
+function Project({id}:{id:string}) {
+	const router = useRouter(), dispatch = useAppDispatch(),
 		projects = useAppSelector((state) => {
 			return state.projectsSlice.projects;
 		}),
@@ -22,7 +22,6 @@ function Project() {
 		[loading, setLoading] = useState(true);
 
 	let columns = useAppSelector((state) => state.columnsReducer.columns);
-	const tasks = useAppSelector((state) => state.tasksReducer.tasks);
 	const currentTasksState = useAppSelector((state) => state.tasksReducer.tasks);
 
 	const handleDragEnd = (currentTasksState: TasksState, result: any) => {
@@ -37,7 +36,6 @@ function Project() {
 			return;
 		if (type === "task") {
 			const newTasksState = JSON.parse(JSON.stringify(currentTasksState));
-			console.log(newTasksState);
 			const removedTask = newTasksState[source.droppableId].splice(
 				source.index,
 				1
@@ -106,15 +104,17 @@ function Project() {
 	};
 
 	useEffect(() => {
-		const getColumns = async () => {
-			await dispatch(fetchcolumns(project!.id));
-			if (tasks) setLoading(false);
-		};
-		console.log("effect");
 		if (project) {
-			getColumns();
+			const getColumns = async () => {
+				await dispatch(fetchcolumns(project?.id));
+				setLoading(false);
+			};
 			getAvatars();
-			subscribeToColumnsChanges(project!.id);
+			subscribeToColumnsChanges(project?.id);
+			getColumns();
+		} else {
+			toast.error("Проект не найден!");
+			router.push("/projects");
 		}
 	}, [project]);
 	const createColumnFn = async (title: string) => {
@@ -137,22 +137,17 @@ function Project() {
 				.in("id", project.users);
 			if (data) {
 				setAvatars(data);
-				console.log(avatars);
 			}
 			if (error) console.log(error);
 		}
 	};
 
 	if (loading) return <PyramidLoader />;
-	if (!project) {
-		router.push("/projects");
-		return alert("Проект не найден");
-	}
 	return (
 		<div className="w-[95vw] h-[70vh] overflow-hidden flex flex-col items-start justify-start">
 			<div className="top flex justify-between w-full">
 				<div className=" text-lg md:text-4xl text-white font-semibold mb-10">
-					{project.title}
+					{project!.title}
 				</div>
 
 				<div className="avatars flex ">
@@ -190,3 +185,18 @@ function Project() {
 }
 
 export default Project;
+interface MyContext {
+	query: {
+		id: string;
+	};
+}
+export const getServerSideProps = async (
+	context: MyContext
+) => {
+	const { id } = context.query;
+	return {
+		props: {
+			id
+		},
+	};
+};
