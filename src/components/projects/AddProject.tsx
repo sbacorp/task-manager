@@ -11,6 +11,7 @@ import {
 } from '@/store/slices/projectsSlice';
 import * as RadioGroup from '@radix-ui/react-radio-group';
 import { IProject } from '@/store/slices/types';
+import { progress } from 'framer-motion';
 
 const colors = [
   { colorName: 'MIDNIGHT', color: 'midnight' },
@@ -42,6 +43,7 @@ function AddProject() {
         profile_id: profile,
         users: [],
       };
+      
       await dispatch(addProject(newProject));
       await dispatch(
         fetchProjects({

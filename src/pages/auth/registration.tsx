@@ -1,9 +1,10 @@
 import { useState, FormEvent } from "react";
 import SignLayout from "@/components/signLayout";
-import supabase from "../lib/supabaseClient";
+import supabase from "../../lib/supabaseClient";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm,SubmitHandler } from "react-hook-form";
+import { toast } from "react-toastify";
 
 function Registration() {
 	const {
@@ -16,12 +17,18 @@ function Registration() {
 	const [password, setPassword] = useState("");
 	const [userName, setUserName] = useState("");
 	const [message, setMessage] = useState("");
+<<<<<<< HEAD:src/pages/registration.tsx
 interface IFormInput {
 	userName: string;
 	password: string;
 	email:string
 }
 	const handleSignUp:SubmitHandler<IFormInput> = async (data) => {
+=======
+	
+	const handleSignUp = async (e: FormEvent) => {
+		e.preventDefault();
+>>>>>>> cc23435b62c3838b48e79cac45502ed3ebaac8bd:src/pages/auth/registration.tsx
 		const { data: user, error } = await supabase.auth.signUp({
 			email:data.email,
 			password:data.password,
@@ -34,12 +41,15 @@ interface IFormInput {
 					email: user.user.email,
 				},
 			]);
+			if(error){
+				toast.error(error.message);
+			}
 		}
 		if (error) {
-			toast.error(error)
+			toast.error(error.message);
 		} else {
-			setMessage("Проверьте почту");
-			setTimeout(() => router.push("/login"), 1000);
+			toast.warn("Проверьте почту");
+			setTimeout(() => router.push("/auth/login"), 1000);
 		}
 	};
 	console.log(errors)
@@ -98,7 +108,7 @@ interface IFormInput {
 						<p className="text-dark2 font-normal text-base">
 							Уже есть аккаунт?
 						</p>
-						<Link className="text-dark font-normal text-base" href="/login">
+						<Link className="text-dark font-normal text-base" href="/auth/login">
 							Войти
 						</Link>
 					</div>

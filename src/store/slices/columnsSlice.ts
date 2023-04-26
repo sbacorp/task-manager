@@ -1,13 +1,10 @@
 import supabase from "@/lib/supabaseClient";
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { IColumn, Status } from "./types";
+import { IColumn, IColumnsSliceState, Status } from "./types";
 import { AppDispatch } from "..";
 
-interface IColumnsSlice {
-	columns: IColumn[];
-	status: Status;
-}
-const initialState: IColumnsSlice = {
+
+const initialState: IColumnsSliceState = {
 	columns: [],
 	status: Status.LOADING,
 };

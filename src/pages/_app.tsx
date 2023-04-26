@@ -4,8 +4,10 @@ import type { AppProps } from "next/app";
 import Router from "next/router";
 import ProgressBar from "@badrap/bar-of-progress";
 import Providers from "@/components/Providers";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
-const progress = new ProgressBar({
+export const progress = new ProgressBar({
 	size: 4,
 	color: "#0B7285",
 	className: "z-50",
@@ -21,6 +23,7 @@ function App({ Component, pageProps }: AppProps) {
 		<Providers>
 			<Layout>
 				<Component {...pageProps} />
+				<ToastContainer />
 			</Layout>
 		</Providers>
 	);

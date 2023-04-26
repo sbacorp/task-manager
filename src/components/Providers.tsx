@@ -1,4 +1,3 @@
-"use client";
 import { Provider } from "react-redux";
 import { persistor, store } from "@/store";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";

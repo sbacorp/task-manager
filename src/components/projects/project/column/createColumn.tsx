@@ -1,6 +1,5 @@
 import React from "react";
-import Editable from "../../../Editable";
-import { useState } from "react";
+import Editable from "@/components/Editable";
 interface ICreateColumn {
 	createColumnF: any;
 }

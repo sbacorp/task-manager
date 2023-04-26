@@ -1,3 +1,17 @@
+import { User } from "@supabase/supabase-js";
+
+export interface IUserSliceState {
+	user: User | null;
+	loading: boolean;
+	error: string | null;
+}
+export interface IColumnsSliceState {
+	columns: IColumn[];
+	status: Status;
+}
+export interface TasksState {
+	tasks: { [key: number]: ITask[] };
+}
 export interface ITask {
 	id: string;
 	title: string;
@@ -5,7 +19,7 @@ export interface ITask {
 	column_id: string;
 	position: number;
 	label?: string;
-	assignedTo?:string
+	assignedTo?: string;
 }
 
 export interface IColumn {
@@ -20,7 +34,7 @@ export interface IProject {
 	title: string;
 	desc?: string;
 	color?: string;
-	users:string[]
+	users: string[];
 }
 
 export interface IProjectsSliceState {

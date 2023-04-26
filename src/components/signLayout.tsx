@@ -1,13 +1,13 @@
 import Image from "next/image";
 import { ReactNode } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { FADE_IN_ANIMATION_SETTINGS } from "@/lib/constants";
 function SignLayout({ children }: { children: ReactNode }) {
 	return (
 			<motion.div {...FADE_IN_ANIMATION_SETTINGS} className="mt-20 flex gap-10 h-full flex-col lg:flex-row items-center justify-center">
 				<div className="about flex flex-col gap-5 max-w-md text-white font-serif">
 					<div className="title flex gap-1">
-						<Image src="assets/okIcon.svg" alt="ok" width={20} height={20} />
+						<Image src="/assets/okIcon.svg" alt="ok" width={20} height={20} />
 						<p className="text-semibold text-base leading-tight">
 							Приложение для управления проектами
 						</p>

@@ -2,7 +2,6 @@ import {
   createSlice,
   PayloadAction,
 } from '@reduxjs/toolkit';
-import { IProject } from './types';
 
 export interface IProfile {
   id: string;

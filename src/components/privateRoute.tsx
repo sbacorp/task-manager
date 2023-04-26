@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import {
-	createServerSupabaseClient,
-	User,
+	createServerSupabaseClient
 } from "@supabase/auth-helpers-nextjs";
 import { store } from "@/store";
 interface PrivateRouteProps {
