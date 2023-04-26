@@ -17,18 +17,12 @@ function Registration() {
 	const [password, setPassword] = useState("");
 	const [userName, setUserName] = useState("");
 	const [message, setMessage] = useState("");
-<<<<<<< HEAD:src/pages/registration.tsx
 interface IFormInput {
 	userName: string;
 	password: string;
 	email:string
 }
 	const handleSignUp:SubmitHandler<IFormInput> = async (data) => {
-=======
-	
-	const handleSignUp = async (e: FormEvent) => {
-		e.preventDefault();
->>>>>>> cc23435b62c3838b48e79cac45502ed3ebaac8bd:src/pages/auth/registration.tsx
 		const { data: user, error } = await supabase.auth.signUp({
 			email:data.email,
 			password:data.password,
