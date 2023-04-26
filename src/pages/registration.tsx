@@ -3,54 +3,75 @@ import SignLayout from "@/components/signLayout";
 import supabase from "../lib/supabaseClient";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useForm,SubmitHandler } from "react-hook-form";
 
 function Registration() {
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm();
 	const router = useRouter();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [userName, setUserName] = useState("");
 	const [message, setMessage] = useState("");
-
-	const handleSignUp = async (e: FormEvent) => {
-		e.preventDefault();
+interface IFormInput {
+	userName: string;
+	password: string;
+	email:string
+}
+	const handleSignUp:SubmitHandler<IFormInput> = async (data) => {
 		const { data: user, error } = await supabase.auth.signUp({
-			email,
-			password,
+			email:data.email,
+			password:data.password,
 		});
-		if (user.user) {		
-			const { data, error } = await supabase.from("profiles").insert([
+		if (user.user) {
+			const {  error } = await supabase.from("profiles").insert([
 				{
 					id: user.user.id,
-					userName: userName,
-					email: user.user.email
+					userName: data.userName,
+					email: user.user.email,
 				},
 			]);
 		}
 		if (error) {
-			setMessage(error.message);
+			toast.error(error)
 		} else {
 			setMessage("Проверьте почту");
 			setTimeout(() => router.push("/login"), 1000);
 		}
 	};
+	console.log(errors)
 	return (
 		<SignLayout>
 			<div className="flex flex-col items-center gap-7 font-serif">
 				<p className="text-white font-normal text-22">Регистрация</p>
-				<form onSubmit={handleSignUp} className="flex flex-col gap-7">
+				<form
+					onSubmit={handleSubmit(handleSignUp)}
+					className="flex flex-col gap-7"
+				>
 					<div className="flex flex-col gap-3">
 						<p className="text-dark">Никмейм</p>
 						<input
+							{...(register("userName"),
+							{
+								required: true,
+								minLength: 4,
+							})}
 							className="block py-1.5 px-3 w-full bg-dark7 text-gray0 lg:w-96 rounded"
 							type="text"
 							value={userName}
 							onChange={(e) => setUserName(e.target.value)}
-							required
 						/>
 					</div>
 					<div className="flex flex-col gap-3">
 						<p className="text-dark">Электроннаяя почта</p>
 						<input
+							{...(register("email"),
+							{
+								required: true,
+							})}
 							className="block py-1.5 px-3 w-full bg-dark7 text-gray0 lg:w-96 rounded"
 							type="email"
 							value={email}
@@ -61,6 +82,11 @@ function Registration() {
 					<div className="flex flex-col gap-3">
 						<p className="text-dark">Пароль</p>
 						<input
+							{...(register("password"),
+							{
+								required: true,
+								minLength: 8,
+							})}
 							className="block py-1.5 px-3 w-full bg-dark7 text-gray0  rounded lg:w-96"
 							type="password"
 							value={password}

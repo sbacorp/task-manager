@@ -38,6 +38,7 @@
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.43.9",
     "react-redux": "^8.0.5",
     "react-scroll": "^1.8.9",
     "react-window": "^1.8.8",
