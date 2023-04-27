@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@badrap/bar-of-progress": "^0.2.2",
+    "@hookform/resolvers": "^3.1.0",
     "@radix-ui/react-accordion": "^1.1.1",
     "@radix-ui/react-dialog": "^1.0.3",
     "@radix-ui/react-dropdown-menu": "^2.0.4",
@@ -35,8 +36,6 @@
     "next-redux-wrapper": "^8.1.0",
     "react": "18.2.0",
     "react-beautiful-dnd": "^13.1.0",
-    "react-dnd": "^16.0.1",
-    "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.9",
     "react-redux": "^8.0.5",
@@ -46,8 +45,8 @@
     "redux-persist": "^6.0.0",
     "redux-toolkit": "^1.1.2",
     "sass": "^1.59.3",
-    "swr": "^2.1.2",
-    "typescript": "5.0.2"
+    "typescript": "5.0.2",
+    "yup": "^1.1.1"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.192",

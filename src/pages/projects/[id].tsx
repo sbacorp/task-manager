@@ -6,15 +6,15 @@ import supabase from "@/lib/supabaseClient";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { addColumn, fetchcolumns } from "@/store/slices/columnsSlice";
 import { setTasks, updateTask } from "@/store/slices/tasksSlice";
-import { IColumn, TasksState } from "@/store/slices/types";
+import { IColumn, IProject, TasksState } from "@/store/slices/types";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import { toast } from "react-toastify";
 
-
-function Project({id}:{id:string}) {
-	const router = useRouter(), dispatch = useAppDispatch(),
+function Project({ id }: { id: string }) {
+	const router = useRouter(),
+		dispatch = useAppDispatch(),
 		projects = useAppSelector((state) => {
 			return state.projectsSlice.projects;
 		}),
@@ -117,13 +117,10 @@ function Project({id}:{id:string}) {
 			router.push("/projects");
 		}
 	}, [project]);
-	const createColumnFn = async (title: string) => {
-		if (project) {
-			await dispatch(addColumn({ project_id: project.id, title: title }));
-			await dispatch(fetchcolumns(project.id));
-		}
+	const createColumnFn = async ({ title }: { title: string }) => {
+		await dispatch(addColumn({ project_id: project!.id, title: title }));
+		await dispatch(fetchcolumns(project!.id));
 	};
-
 	interface IAvatars {
 		avatarPath: string;
 	}
@@ -143,6 +140,7 @@ function Project({id}:{id:string}) {
 	};
 
 	if (loading) return <PyramidLoader />;
+	if (!project) return router.push("/projects");
 	return (
 		<div className="w-[95vw] h-[70vh] overflow-hidden flex flex-col items-start justify-start">
 			<div className="top flex justify-between w-full">
@@ -190,13 +188,11 @@ interface MyContext {
 		id: string;
 	};
 }
-export const getServerSideProps = async (
-	context: MyContext
-) => {
+export const getServerSideProps = async (context: MyContext) => {
 	const { id } = context.query;
 	return {
 		props: {
-			id
+			id,
 		},
 	};
 };
