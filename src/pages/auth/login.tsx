@@ -39,7 +39,7 @@ const SignIn = () => {
 				} else {
 					const userProfile: IProfile = profile as IProfile;
 					dispatch(setProfile(userProfile));
-					toast.success('Вход выполнен успешно!')
+					toast.success("Вход выполнен успешно!");
 				}
 				router.push("/projects");
 			}
@@ -54,7 +54,7 @@ const SignIn = () => {
 		let { data, error: resetError } = await supabase.auth.resetPasswordForEmail(
 			email,
 			{
-				redirectTo: `${process.env.PROJECT_URL_DEV}/auth/update-password`,
+				redirectTo: `${process.env.PROJECT_URL_DEPLOY}/auth/update-password`,
 			}
 		);
 		if (resetError) {
@@ -62,7 +62,6 @@ const SignIn = () => {
 			return;
 		}
 		toast.warn("Ссылка для сброса пароля отправлен на вашу почту.");
-		
 	};
 
 	return (
