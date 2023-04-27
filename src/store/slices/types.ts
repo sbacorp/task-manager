@@ -9,7 +9,7 @@ export interface IColumnsSliceState {
 	columns: IColumn[];
 	status: Status;
 }
-export interface TasksState {
+export type TasksState ={
 	tasks: { [key: number]: ITask[] };
 }
 export interface ITask {

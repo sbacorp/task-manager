@@ -6,7 +6,7 @@ import supabase from "@/lib/supabaseClient";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { addColumn, fetchcolumns } from "@/store/slices/columnsSlice";
 import { setTasks, updateTask } from "@/store/slices/tasksSlice";
-import { IColumn, IProject, TasksState } from "@/store/slices/types";
+import { IColumn, IProject, ITask, TasksState } from "@/store/slices/types";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
@@ -22,10 +22,25 @@ function Project({ id }: { id: string }) {
 		[loading, setLoading] = useState(true);
 
 	let columns = useAppSelector((state) => state.columnsReducer.columns);
-	const currentTasksState = useAppSelector((state) => state.tasksReducer.tasks);
-
+	const currentTasksState: TasksState = useAppSelector(
+		(state) => state.tasksReducer
+	);
+	const changeTasksStateHandler = ({
+		columnId,
+		tasks,
+	}: {
+		columnId: number;
+		tasks: ITask[];
+	}) => {
+		dispatch(
+			setTasks({
+				columnId: columnId,
+				tasks: tasks,
+			})
+		);
+	};
 	const handleDragEnd = (currentTasksState: TasksState, result: any) => {
-		const { source, destination, draggableId, type } = result;
+		const { source, destination, type } = result;
 		if (!destination) {
 			return;
 		}
@@ -35,7 +50,7 @@ function Project({ id }: { id: string }) {
 		)
 			return;
 		if (type === "task") {
-			const newTasksState = JSON.parse(JSON.stringify(currentTasksState));
+			const newTasksState = JSON.parse(JSON.stringify(currentTasksState.tasks));
 			const removedTask = newTasksState[source.droppableId].splice(
 				source.index,
 				1
@@ -45,42 +60,41 @@ function Project({ id }: { id: string }) {
 				0,
 				removedTask
 			);
-			dispatch(
-				setTasks({
-					columnId: source.droppableId,
-					tasks: newTasksState[source.droppableId],
-				})
-			);
-			//  Обновляем стейт задач
-			dispatch(
-				setTasks({
-					columnId: destination.droppableId,
-					tasks: newTasksState[destination.droppableId],
-				})
-			);
+
 			if (destination.droppableId === source.droppableId) {
-				for (
-					let index = 0;
-					index < newTasksState[destination.droppableId].length;
-					index++
-				) {
+				const sourceTasks: ITask[] = newTasksState[source.droppableId];
+				changeTasksStateHandler({
+					columnId: source.droppableId,
+					tasks: sourceTasks,
+				});
+				for (let index = 0; index < sourceTasks.length; index++) {
 					dispatch(
 						updateTask({
-							id: newTasksState[destination.droppableId][index].id,
+							id: sourceTasks[index].id,
 							column_id: destination.droppableId,
 							position: index,
 						})
 					);
 				}
 			} else {
+				const sourceTasks: ITask[] = newTasksState[source.droppableId];
+				const destTasks: ITask[] = newTasksState[destination.droppableId];
+				changeTasksStateHandler({
+					columnId: source.droppableId,
+					tasks: sourceTasks,
+				});
+				changeTasksStateHandler({
+					columnId: destination.droppableId,
+					tasks: destTasks,
+				});
 				for (
 					let index = 0;
-					index < newTasksState[destination.droppableId].length;
+					index < destTasks.length;
 					index++
 				) {
 					dispatch(
 						updateTask({
-							id: newTasksState[destination.droppableId][index].id,
+							id: destTasks[index].id,
 							column_id: destination.droppableId,
 							position: index,
 						})
@@ -88,12 +102,12 @@ function Project({ id }: { id: string }) {
 				}
 				for (
 					let index = 0;
-					index < newTasksState[source.droppableId].length;
+					index < sourceTasks.length;
 					index++
 				) {
 					dispatch(
 						updateTask({
-							id: newTasksState[source.droppableId][index].id,
+							id: sourceTasks[index].id,
 							column_id: source.droppableId,
 							position: index,
 						})
