@@ -29,7 +29,7 @@ function Profile({ setIsOpen }: ProfileProps) {
     return <>login</>;
   }
   return (
-    <motion.div {...FADE_IN_ANIMATION_SETTINGS} className="absolute right-0 w-screen sm:w-[480px] h-full flex flex-col gap-2 rounded-2xl shadow-xl border border-[#343A40] bg-dark9 z-50 overflow-hidden">
+    <motion.div {...FADE_IN_ANIMATION_SETTINGS} className="fixed right-0 w-screen sm:w-[480px] h-full flex flex-col gap-2 rounded-2xl shadow-xl border border-[#343A40] bg-dark9 z-50 overflow-hidden">
       <div className="w-full h-[120px] rounded-sm pr-2 pt-2 profileFade">
         <button
           className=" rounded-full h-7 w-7 bg-dark7 text-cyan5 inline-flex items-center justify-center absolute top-3 right-3 border border-solid hover:bg-cyan5 hover:text-black duration-300 transition-all"

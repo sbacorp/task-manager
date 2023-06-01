@@ -32,7 +32,7 @@ const Index: NextPage = () => {
 							для быстрой разработки.
 						</p>
 						<Link
-							href="/"
+							href="/projects"
 							className="text-white px-4 py-1.5 text-lg font-semibold  bg-cyan7 rounded-lg"
 						>
 							Создать канбан-доску
