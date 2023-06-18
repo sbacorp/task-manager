@@ -1,98 +1,76 @@
-import { useState } from 'react';
-import * as Dialog from '@radix-ui/react-dialog';
-import dynamic from 'next/dynamic'
+import { useState } from "react";
+import * as Dialog from "@radix-ui/react-dialog";
+import dynamic from "next/dynamic";
 
-import * as Tabs from '@radix-ui/react-tabs';
-import { useRouter } from 'next/router';
-import supabase from '@/lib/supabaseClient';
-import {
-  useAppDispatch,
-  useAppSelector,
-} from '@/store';
-import { setProfile } from '@/store/slices/profileSlice';
-import { EyeActive } from '../../../typings';
-const EyeAction = dynamic(()=>import('./EyeActive'))
+import * as Tabs from "@radix-ui/react-tabs";
+import { useRouter } from "next/router";
+import supabase from "@/lib/supabaseClient";
+import { useAppDispatch, useAppSelector } from "@/store";
+import { setProfile } from "@/store/slices/profileSlice";
+import { EyeActive } from "../../../typings";
+const EyeAction = dynamic(() => import("./EyeActive"));
 
 function EditProfile() {
-  const dispatch = useAppDispatch();
-  const router = useRouter();
-  const profile = useAppSelector(
-    (state) => state.profileSlice.profile
-  );
-  const [userName, setUserName] = useState('');
-  const [newPassword, setNewPassword] =
-    useState('');
-  const [currentPassword, setCurrentPassword] =
-    useState('');
-  const [message, setMessage] = useState('');
-  const [isOpen1, setIsOpen1] =
-    useState<EyeActive>([false, 'password']);
-  const [isOpen2, setIsOpen2] =
-    useState<EyeActive>([false, 'password']);
+	const dispatch = useAppDispatch();
+	const router = useRouter();
+	const profile = useAppSelector((state) => state.profileSlice.profile);
+	const [userName, setUserName] = useState("");
+	const [newPassword, setNewPassword] = useState("");
+	const [currentPassword, setCurrentPassword] = useState("");
+	const [message, setMessage] = useState("");
+	const [isOpen1, setIsOpen1] = useState<EyeActive>([false, "password"]);
+	const [isOpen2, setIsOpen2] = useState<EyeActive>([false, "password"]);
 
-  async function handleUpdateName() {
-    if (!profile) return;
-    try {
-      const { error } = await supabase
-        .from('profiles')
-        .update({ userName })
-        .eq('id', profile.id);
-      dispatch(
-        setProfile({ ...profile, userName })
-      );
-      setUserName('');
-      router.push('/');
-      if (error) {
-        throw error;
-      }
-    } catch (err) {
-      console.error(
-        'Ошибка при обновлении профиля:',
-        err
-      );
-    }
-  }
+	async function handleUpdateName() {
+		if (!profile) return;
+		try {
+			const { error } = await supabase
+				.from("profiles")
+				.update({ userName })
+				.eq("id", profile.id);
+			dispatch(setProfile({ ...profile, userName }));
+			setUserName("");
+			router.push("/");
+			if (error) {
+				throw error;
+			}
+		} catch (err) {
+			console.error("Ошибка при обновлении профиля:", err);
+		}
+	}
 
-  async function handleUpdatePassword() {
-    if (!profile) return;
-    const { error: checkError } =
-      await supabase.auth.signInWithPassword({
-        email: profile?.email,
-        password: currentPassword,
-      });
-    if (checkError) {
-      console.error(
-        'Ошибка при проверке текущего пароля:',
-        checkError
-      );
-      setMessage('Неправильный текущий пароль');
-      return;
-    }
+	async function handleUpdatePassword() {
+		if (!profile) return;
+		const { error: checkError } = await supabase.auth.signInWithPassword({
+			email: profile?.email,
+			password: currentPassword,
+		});
+		if (checkError) {
+			console.error("Error when checking the current password:", checkError);
+			setMessage("wrong current Password");
+			return;
+		}
 
-    const { data, error: updateError } =
-      await supabase.auth.updateUser({
-        email: profile.email,
-        password: newPassword,
-      });
-    if (updateError) {
-      console.log(
-        'Ошибка при обновлении пароля:',
-        updateError
-      );
-      return;
-    }
-    setMessage(
-      'Ваш пароль успешно изменен. Можете закрыть диалоговое окно'
-    );
-    setCurrentPassword('');
-    setNewPassword('');
-  }
+		const { data, error: updateError } = await supabase.auth.updateUser({
+			email: profile.email,
+			password: newPassword,
+		});
+		if (updateError) {
+			console.log("Failed to update password:", updateError);
+			return;
+		}
+		setMessage(
+			"Your Password has been successfully changed. You can close the dialog window"
+		);
+		setCurrentPassword("");
+		setNewPassword("");
+	}
 
-  return (
+	return (
 		<Dialog.Root>
 			<Dialog.Trigger asChild>
 				<button className="bg-dark6 py-[10px] px-[22px] font-semibold text-base text-white rounded-lg">
-					Редактировать
+					Edit
 				</button>
 			</Dialog.Trigger>
 			<Dialog.Portal>
@@ -121,13 +99,13 @@ function EditProfile() {
 								className="bg-dark9 h-[45px] flex-1 flex items-center justify-center text-lg text-white select-none first:rounded-tl-md last:rounded-tr-md border-solid data-[state=active]:border-b-2   outline-none cursor-pointer"
 								value="tab1"
 							>
-								Профиль
+								Profile
 							</Tabs.Trigger>
 							<Tabs.Trigger
 								className="bg-dark9 h-[45px] flex-1 flex items-center justify-center text-lg text-white select-none first:rounded-tl-md last:rounded-tr-md border-solid data-[state=active]:border-b-2   outline-none cursor-pointer"
 								value="tab2"
 							>
-								Пароль
+								Password
 							</Tabs.Trigger>
 						</Tabs.List>
 						<Tabs.Content
@@ -135,15 +113,15 @@ function EditProfile() {
 							value="tab1"
 						>
 							<p className="mb-5 text-white text-base">
-								Внесите изменения в свое имя профиля. Нажмите сохранить, когда
-								закончите.
+								Make changes to your Profile Name. Click save when you are
+								finished.
 							</p>
 							<fieldset className="mb-[15px] w-full flex flex-col justify-start">
 								<label
 									className=" text-sm mb-2.5 text-white block"
 									htmlFor="username"
 								>
-									Имя профиля
+									Profile Name
 								</label>
 								<input
 									className="grow shrink-0 rounded px-2.5 text-[15px] bg-dark7 text-white h-[35px] outline-none"
@@ -169,14 +147,14 @@ function EditProfile() {
 							value="tab2"
 						>
 							<p className="mb-5 text-white text-base leading-normal">
-								Измените свой пароль здесь.
+								Change your Password here.
 							</p>
 							<fieldset className="mb-[15px] w-full flex flex-col justify-start">
 								<label
 									className="text-sm leading-none mb-2.5 text-white block"
 									htmlFor="currentPassword"
 								>
-									Текущий пароль
+									Current Password
 								</label>
 								<div className="relative">
 									<input
@@ -194,7 +172,7 @@ function EditProfile() {
 									className="text-sm leading-none mb-2.5 text-white block"
 									htmlFor="newPassword"
 								>
-									Новый пароль
+									New Password
 								</label>
 								<div className="relative">
 									<input
@@ -225,7 +203,7 @@ function EditProfile() {
 									disabled={!newPassword || !currentPassword}
 									className="bg-cyan6 hover:bg-cyan9 disabled:bg-cyan4 inline-flex items-center justify-center rounded px-[15px] text-base leading-none font-medium h-[35px] border border-white border-solid text-white  outline-none"
 								>
-									Изменить пароль
+									Edit Password
 								</button>
 							</div>
 						</Tabs.Content>

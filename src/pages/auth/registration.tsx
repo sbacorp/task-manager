@@ -49,21 +49,21 @@ export default function Registration() {
 		if (error) {
 			toast.error(error.message);
 		} else {
-			toast.warn("Проверьте почту");
+			toast.warn("Check your email");
 			setTimeout(() => router.push("/auth/login"), 1000);
 		}
 	};
 	return (
 		<SignLayout>
 			<div className="flex flex-col items-center gap-7 font-serif">
-				<p className="text-white font-normal text-22">Регистрация</p>
+				<p className="text-white font-normal text-22">Sign up</p>
 				<form
 					autoComplete="false"
 					onSubmit={handleSubmit(handleSignUp)}
 					className="flex flex-col gap-7"
 				>
 					<div className="flex flex-col gap-3">
-						<p className="text-dark">Никмейм</p>
+						<p className="text-dark">Nickname</p>
 						<input
 							autoComplete="false"
 							{...register("userName")}
@@ -85,7 +85,7 @@ export default function Registration() {
 					</div>
 
 					<div className="flex flex-col gap-3">
-						<p className="text-dark">Электроннаяя почта</p>
+						<p className="text-dark">Email address</p>
 						<input
 							{...register("email")}
 							className="block py-1.5 px-3 w-full bg-dark7 text-gray0 lg:w-96 rounded"
@@ -102,7 +102,7 @@ export default function Registration() {
 						)}
 					</div>
 					<div className="flex flex-col gap-3">
-						<p className="text-dark">Пароль</p>
+						<p className="text-dark">Password</p>
 						<input
 							{...register("password", {
 								minLength: 8,
@@ -125,18 +125,18 @@ export default function Registration() {
 					</div>
 					<div className="flex gap-1 items-center">
 						<p className="text-dark2 font-normal text-base">
-							Уже есть аккаунт?
+							Already have an account?
 						</p>
 						<Link
 							className="text-dark font-normal text-base"
 							href="/auth/login"
 						>
-							Войти
+							Sign in
 						</Link>
 					</div>
 					<input
 						type="submit"
-						value="Создать аккаунт"
+						value="Create account"
 						className="cursor-pointer self-center flex items-center rounded w-fit justify-center bg-dark6 text-white font-semibold text-base px-4 py-2"
 					/>
 				</form>

@@ -42,15 +42,12 @@ const Editable: React.FC<IEditable> = ({
 	}, [isEditing]);
 	const handleSave = () => {
 		if (!newText.length) {
-			onSave('Добавьте название');
+			onSave("Добавьте title");
+			setIsEditing(false);
+		} else {
+			onSave(newText);
 			setIsEditing(false);
 		}
-		else{
-		onSave(newText);
-		setIsEditing(false);
-		}
-
-		
 	};
 
 	const handleCancel = () => {

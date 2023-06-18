@@ -15,7 +15,7 @@ function CreateColumn({ createColumnF }: ICreateColumn) {
 				onSave={handleAddColumn}
 				text=""
 				classes="bg-dark4 whitespace-nowrap min-w-80 "
-				defaultValue="Добавить колонку"
+				defaultValue="Add column"
 			/>
 		</div>
 	);

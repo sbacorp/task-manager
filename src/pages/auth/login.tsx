@@ -39,7 +39,7 @@ const SignIn = () => {
 				} else {
 					const userProfile: IProfile = profile as IProfile;
 					dispatch(setProfile(userProfile));
-					toast.success("Вход выполнен успешно!");
+					toast.success("Sigh in successfully!");
 				}
 				router.push("/projects");
 			}
@@ -61,17 +61,17 @@ const SignIn = () => {
 			toast.error(resetError.message);
 			return;
 		}
-		toast.warn("Ссылка для сброса пароля отправлен на вашу почту.");
+		toast.warn("Reset password link sent to your email.");
 	};
 
 	return (
 		<SignLayout>
 			{signType === "signin" ? (
 				<div className="flex flex-col gap-7 font-serif items-center">
-					<p className="text-white font-normal text-22 mt-3">Вход</p>
+					<p className="text-white font-normal text-22 mt-3">Sigh in</p>
 					<form onSubmit={handleSignIn} className="flex flex-col gap-7">
 						<div className="flex flex-col gap-3">
-							<p className="text-dark">Электроннаяя почта</p>
+							<p className="text-dark">Email address</p>
 							<input
 								className="block py-1.5 px-3 w-full bg-dark7 text-gray0 lg:w-96 rounded"
 								type="email"
@@ -81,7 +81,7 @@ const SignIn = () => {
 							/>
 						</div>
 						<div className="flex flex-col gap-3">
-							<p className="text-dark">Пароль</p>
+							<p className="text-dark">Password</p>
 							<input
 								className="block py-1.5 px-3 w-full bg-dark7 text-gray0 lg:w-96 rounded"
 								type="password"
@@ -92,13 +92,13 @@ const SignIn = () => {
 						</div>
 						<div className="flex gap-1 items-center">
 							<p className="text-dark2 font-normal text-base">
-								Ещё нет аккаунта?
+								Don't have an account yet?
 							</p>
 							<Link
 								className="text-dark font-normal text-base"
 								href="/auth/registration"
 							>
-								Зарегистрироваться
+								Sign Up
 							</Link>
 						</div>
 						<button
@@ -106,7 +106,7 @@ const SignIn = () => {
 							type="submit"
 							className=" self-center flex items-center rounded w-fit justify-center bg-dark6 text-white font-semibold text-sm px-4 py-2"
 						>
-							Войти
+							Sign in
 						</button>
 					</form>
 					{message && <p className="text-white absolute">{message}</p>}
@@ -114,16 +114,18 @@ const SignIn = () => {
 						onClick={() => setSignType("reset")}
 						className="text-dark items-center justify-center font-medium cursor-pointer underline hover:text-dark2"
 					>
-						Забыли пароль?
+						Forgot Password?
 					</p>
 				</div>
 			) : (
 				<div className="flex flex-col gap-4 font-serif items-center">
-					<p className="text-white font-normal text-22">Забыли свой пароль?</p>
+					<p className="text-white font-normal text-22">
+						Forgot your password?
+					</p>
 					<form onSubmit={handleResetPassword} className="flex flex-col gap-7">
 						<div className="flex flex-col gap-3">
 							<p className="text-dark text-center">
-								Вы можете восстановить свой пароль здесь
+								You can restore your password here
 							</p>
 							<div className="flex items-center gap-[1px]">
 								<svg
@@ -143,7 +145,7 @@ const SignIn = () => {
 								</svg>
 								<input
 									className="flex-grow pl-5 outline-none text-base py-[4px] px-3 bg-dark7 text-gray0 lg:w-96 rounded"
-									placeholder="Введите почту..."
+									placeholder="Enter email address..."
 									type="email"
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
@@ -156,7 +158,7 @@ const SignIn = () => {
 							type="submit"
 							className="self-center flex items-center rounded w-fit justify-center bg-dark6 hover:bg-dark7 disabled:bg-dark5 text-white font-semibold text-sm px-4 py-2"
 						>
-							Сбросить пароль
+							Reset password
 						</button>
 					</form>
 					{message && <p className="text-white absolute">{message}</p>}

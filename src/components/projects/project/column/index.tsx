@@ -106,7 +106,7 @@ const Column = React.memo(function Column({ column }: { column: IColumn }) {
 				onSave={createTaskFn}
 				classes="bg-dark8 text-lg"
 				text=""
-				defaultValue="Добавить задачу"
+				defaultValue="Add task"
 			/>
 		</div>
 	);

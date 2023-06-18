@@ -37,7 +37,7 @@ const AuthButtons: React.FC = () => {
 					onClick={handleSignOut}
 					className="border border-solid font-serif border-white px-4 py-2 rounded-lg text-white text-sm"
 				>
-					Выйти
+					Sign out
 				</button>
 			</>
 		);
@@ -49,14 +49,14 @@ const AuthButtons: React.FC = () => {
 				href="/auth/login"
 				className="signIn  text-base text-white font-serif"
 			>
-				Вход
+				Sigh in
 			</Link>
 			{size > 960 && (
 				<Link
 					href="/auth/registration"
 					className="signUp hidden md:block border border-solid font-serif border-white px-4 py-2 rounded-lg text-white text-sm"
 				>
-					Регистрация
+					Sign up
 				</Link>
 			)}
 		</div>

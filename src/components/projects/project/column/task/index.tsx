@@ -25,7 +25,7 @@ const Task = ({ task, index }: ITaskProps) => {
 							</span>
 						</div>
 						<div className="text-gray5">
-							{task.description ? task.description : "описания нет"}
+							{task.description ? task.description : "no description"}
 						</div>
 					</div>
 					<div className="flex flex-col justify-between">

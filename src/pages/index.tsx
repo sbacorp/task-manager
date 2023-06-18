@@ -6,8 +6,6 @@ import { motion } from "framer-motion";
 import type { NextPage } from "next";
 import Gradient from "@/components/gradient";
 
-
-
 const Index: NextPage = () => {
 	return (
 		<>
@@ -21,21 +19,21 @@ const Index: NextPage = () => {
 					<Gradient classes="right-1/2 md:right-3/4" />
 					<div className="container">
 						<p className="title1 text-white font-serif text-xl font-semibold">
-							Приложение для управления проектами
+							Project Management Application
 						</p>
 						<p className="title2 text-3xl sm:text-4xl text-white font-semibold font-serif md:text-6xl">
-							Сотрудничайте и работайте
-							<br /> быстрее вместе.
+							Collaborate and work
+							<br /> faster together.
 						</p>
 						<p className="desc text-dark2 text-lg font-normal sm:max-w-md max-w-xs text-center mx-auto mb-10">
-							Создавайте, делитесь и получайте отзывы с помощью совместных досок
-							для быстрой разработки.
+							Create, share, and get feedback with collaborative boards for
+							quick development.
 						</p>
 						<Link
 							href="/projects"
 							className="text-white px-4 py-1.5 text-lg font-semibold  bg-cyan7 rounded-lg"
 						>
-							Создать канбан-доску
+							Create a kanban board
 						</Link>
 					</div>
 				</section>

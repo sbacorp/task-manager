@@ -1,8 +1,8 @@
 import Gradient from "@/components/gradient";
-import Link from "next/link"
+import Link from "next/link";
 
 function NotFound() {
-  return (
+	return (
 		<div className=" min-h-full font-sans relative w-full">
 			<div className="mx-auto max-w-md">
 				<div className="space-y-6 flex flex-col items-center text-center">
@@ -11,7 +11,7 @@ function NotFound() {
 					</p>
 
 					<p className="text-sm text-[#909296] font-normal ">
-						Перейдите на главную страницу или воспользуйтесь поиском, чтобы
+						Перейдите на главную страницу или воспользуйтесь Searchом, чтобы
 						найти то, что вы ищете.
 					</p>
 					<Link
@@ -26,4 +26,4 @@ function NotFound() {
 	);
 }
 
-export default NotFound
+export default NotFound;

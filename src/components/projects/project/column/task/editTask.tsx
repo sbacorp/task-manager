@@ -90,14 +90,14 @@ function EditTaskModal({ task }: { task: ITask }) {
 							className=" border-gray9 opacity-1 bg-white border-2 rounded-md fixed w-screen max-w-md top-1/3 p-6 focus:outline-none"
 						>
 							<Dialog.Title className="font-medium text-lg mb-6">
-								Редактировать проект
+								Edit project
 							</Dialog.Title>
 							<fieldset className="flex gap-5 items-center mb-4">
 								<label
 									className="font-nurmal text-base text-purple text-right w-24"
 									htmlFor="title"
 								>
-									Название
+									Title
 								</label>
 								<input
 									className="w-full flex-1 inline-flex items-center justify-center rounded-md px-3 text-base text-purple shadow-lg h-9 focus:shadow-p duration-300 transition-all"
@@ -105,7 +105,7 @@ function EditTaskModal({ task }: { task: ITask }) {
 									value={title}
 									onChange={(e) => setTitle(e.target.value)}
 									type="text"
-									placeholder="Введите название задачи"
+									placeholder="Enter the task title"
 								/>
 							</fieldset>
 							<fieldset className="flex gap-5 items-center mb-4">
@@ -113,7 +113,7 @@ function EditTaskModal({ task }: { task: ITask }) {
 									className="font-nurmal text-base text-purple text-right w-24"
 									htmlFor="desc"
 								>
-									Описание
+									Description
 								</label>
 								<input
 									className="w-full flex-1 inline-flex items-center justify-center rounded-md px-3 text-base text-purple shadow-lg h-9 focus:shadow-p duration-300 transition-all"
@@ -121,7 +121,7 @@ function EditTaskModal({ task }: { task: ITask }) {
 									value={desc}
 									onChange={(e) => setDesc(e.target.value)}
 									type="text"
-									placeholder="Введите описание задачи"
+									placeholder="Enter the task description"
 								/>
 							</fieldset>
 							<fieldset className="flex gap-5 items-center mb-4">
@@ -129,7 +129,7 @@ function EditTaskModal({ task }: { task: ITask }) {
 									className="font-nurmal text-base text-purple text-right w-24"
 									htmlFor="assignedTo"
 								>
-									Назначить пользователю
+									Assign to a user
 								</label>
 								<input
 									className="w-full flex-1 inline-flex items-center justify-center rounded-md px-3 text-base text-purple shadow-lg h-9 focus:shadow-p duration-300 transition-all"
@@ -137,7 +137,7 @@ function EditTaskModal({ task }: { task: ITask }) {
 									value={assignedTo}
 									onChange={(e) => setAssignedTo(e.target.value)}
 									type="text"
-									placeholder="Введите имя пользователя"
+									placeholder="Enter user name"
 								/>
 							</fieldset>
 							<div className="flex gap-5 items-center mb-4">
@@ -145,7 +145,7 @@ function EditTaskModal({ task }: { task: ITask }) {
 									className="font-nurmal text-base text-purple text-right w-24"
 									htmlFor="label"
 								>
-									Добавить лейбл
+									Add label
 								</label>
 								<RadioGroup.Root
 									className="flex gap-2.5"
@@ -175,7 +175,7 @@ function EditTaskModal({ task }: { task: ITask }) {
 										onClick={onClickDelete}
 										className="border-solid border-2 border-black p-3 rounded-md bg-white text-back hover:bg-transparent hover:text-purple duration-300 transition-all disabled:cursor-not-allowed disabled:bg-gray2 disabled:border-gray2  background hover:text-white hover:bg-black "
 									>
-										Удалить
+										Delete
 									</button>
 								</Dialog.Close>
 								<Dialog.Close asChild>
@@ -184,7 +184,7 @@ function EditTaskModal({ task }: { task: ITask }) {
 										onClick={onClickEdit}
 										className="border-solid border-2 border-black p-3 rounded-md bg-black text-white hover:bg-transparent hover:text-purple duration-300 transition-all disabled:cursor-not-allowed disabled:bg-gray2 disabled:border-gray2  background"
 									>
-										Применить
+										Apply
 									</button>
 								</Dialog.Close>
 							</div>

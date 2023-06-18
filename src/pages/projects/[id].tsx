@@ -87,11 +87,7 @@ function Project({ id }: { id: string }) {
 					columnId: destination.droppableId,
 					tasks: destTasks,
 				});
-				for (
-					let index = 0;
-					index < destTasks.length;
-					index++
-				) {
+				for (let index = 0; index < destTasks.length; index++) {
 					dispatch(
 						updateTask({
 							id: destTasks[index].id,
@@ -100,11 +96,7 @@ function Project({ id }: { id: string }) {
 						})
 					);
 				}
-				for (
-					let index = 0;
-					index < sourceTasks.length;
-					index++
-				) {
+				for (let index = 0; index < sourceTasks.length; index++) {
 					dispatch(
 						updateTask({
 							id: sourceTasks[index].id,
@@ -127,7 +119,7 @@ function Project({ id }: { id: string }) {
 			subscribeToColumnsChanges(project?.id);
 			getColumns();
 		} else {
-			toast.error("Проект не найден!");
+			toast.error("Project not found!");
 			router.push("/projects");
 		}
 	}, [project]);
