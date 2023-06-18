@@ -51,7 +51,7 @@ function EditProfile() {
 			return;
 		}
 
-		const { data, error: updateError } = await supabase.auth.updateUser({
+		const { error: updateError } = await supabase.auth.updateUser({
 			email: profile.email,
 			password: newPassword,
 		});

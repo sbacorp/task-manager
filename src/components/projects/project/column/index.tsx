@@ -31,7 +31,7 @@ const Column = React.memo(function Column({ column }: { column: IColumn }) {
 					schema: "public",
 					table: "tasks",
 				},
-				(payload) => {
+				() => {
 					dispatch(fetchTasks(column.id));
 				}
 			)

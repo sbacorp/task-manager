@@ -18,7 +18,8 @@ function EditProjectItem({ project }: { project: IProject }) {
 				.from("profiles")
 				.select("id")
 				.eq("email", inviteUser);
-			const profileId = data![0]?.id;
+			
+			const profileId = data?.[0].id;
 			dispatch(
 				editProject({
 					id: project.id,

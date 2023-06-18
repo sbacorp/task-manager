@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useState } from "react";
 import { Open_Sans } from "next/font/google";
 import Meta from "./meta";
 import Header from "../navigation/header";

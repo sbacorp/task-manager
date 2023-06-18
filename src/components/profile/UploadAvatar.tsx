@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
-import supabase, { storage } from "@/lib/supabaseClient";
+import supabase from "@/lib/supabaseClient";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { setProfile } from "@/store/slices/profileSlice";
 
@@ -69,7 +69,6 @@ function UploadAvatar() {
 		const avatarPath = await uploadAvatar(userId, file);
 
 		if (avatarPath) {
-			console.log("Profile photo uploaded successfully:", avatarPath);
 			await saveAvatarPath(userId, avatarPath);
 			setMessage("");
 		}

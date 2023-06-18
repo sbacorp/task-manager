@@ -5,7 +5,6 @@ import { useState } from "react";
 import { addProject, fetchProjects } from "@/store/slices/projectsSlice";
 import * as RadioGroup from "@radix-ui/react-radio-group";
 import { IProject } from "@/store/slices/types";
-import { progress } from "framer-motion";
 
 const colors = [
 	{ colorName: "MIDNIGHT", color: "midnight" },

@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import {
 	createServerSupabaseClient
 } from "@supabase/auth-helpers-nextjs";
-import { store } from "@/store";
+import { GetServerSidePropsContext } from "next";
 interface PrivateRouteProps {
 	children: ReactNode;
 }
@@ -13,7 +13,7 @@ const PrivateRoute = ({ children }: PrivateRouteProps) => {
 
 export default PrivateRoute;
 
-export const getServerSideProps = async (ctx: any) => {
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 	const supabase = createServerSupabaseClient(ctx);
 	const {
 		data: { session },

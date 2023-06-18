@@ -1,4 +1,3 @@
-import Gradient from "@/components/gradient";
 import Link from "next/link";
 
 function NotFound() {

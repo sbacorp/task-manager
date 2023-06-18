@@ -19,9 +19,12 @@ function Projects() {
 		debounce(async () => {
 			try {
 				const { data } = await supabase.auth.getUser();
-				await dispatch(
-					fetchProjects({ profileId: data!.user!.id, searchValue })
-				);
+				if (data && data.user) {
+					await dispatch(
+						fetchProjects({ profileId: data.user.id, searchValue })
+					);
+				}
+
 				setLoading(false);
 			} catch (error) {
 				console.log(error);

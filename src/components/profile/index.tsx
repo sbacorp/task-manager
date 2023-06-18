@@ -1,27 +1,15 @@
 import dynamic from "next/dynamic";
 import { Cross2Icon } from "@radix-ui/react-icons";
-import { useState } from "react";
 import Image from "next/image";
 import { useAppSelector } from "@/store";
 import { ProfileProps } from "../../../typings";
-import Search from "../Search";
 import UploadAvatar from "./UploadAvatar";
-import AccordionDemo from "./Accordion";
 import { motion } from "framer-motion";
 import { FADE_IN_ANIMATION_SETTINGS } from "@/lib/constants";
 const EditProfile = dynamic(() => import("./EditProfile"));
 
 function Profile({ setIsOpen }: ProfileProps) {
 	const profile = useAppSelector((state) => state.profileSlice.profile);
-	const [searchInput, setSearchInput] = useState<string>("");
-	const haveTasks = true;
-	console.log(profile, "profile");
-	const tasks = [
-		"Brochure products",
-		"Treatment",
-		"Windexing mirrors",
-		"Quarterly report tasklist",
-	];
 	if (!profile) {
 		return <>login</>;
 	}
@@ -68,7 +56,7 @@ function Profile({ setIsOpen }: ProfileProps) {
 					<EditProfile />
 					<UploadAvatar />
 				</div>
-				<div className="flex flex-col gap-[16px] mt-10 justify-center items-center">
+				{/* <div className="flex flex-col gap-[16px] mt-10 justify-center items-center">
 					<h2 className="font-bold text-lg text-dark2">Your tasks</h2>
 					{haveTasks ? (
 						<div className="flex items-center justify-center flex-col">
@@ -84,7 +72,7 @@ function Profile({ setIsOpen }: ProfileProps) {
 							У вас нет назначенных задач
 						</p>
 					)}
-				</div>
+				</div> */}
 			</div>
 		</motion.div>
 	);

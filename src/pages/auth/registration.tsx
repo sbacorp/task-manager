@@ -28,8 +28,6 @@ export default function Registration() {
 	const router = useRouter();
 	console.log(errors, "errors");
 	const handleSignUp = async (data: IFormInput) => {
-		console.log(data);
-
 		const { data: user, error } = await supabase.auth.signUp({
 			email: data.email,
 			password: data.password,

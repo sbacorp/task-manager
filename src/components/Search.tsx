@@ -1,4 +1,4 @@
-import React, { useState, useRef, ChangeEvent } from "react";
+import React, {useRef, ChangeEvent } from "react";
 
 function Search({
 	value,

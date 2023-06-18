@@ -12,7 +12,7 @@ function UpdatePassword() {
 	const handleResetPassword = async (e: React.FormEvent) => {
 		e.preventDefault();
 		if (newPassword === repeatPassword) {
-			const { data, error: updateError } = await supabase.auth.updateUser({
+			const { error: updateError } = await supabase.auth.updateUser({
 				password: newPassword,
 			});
 			if (updateError) {

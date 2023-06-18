@@ -1,7 +1,6 @@
 import supabase from "@/lib/supabaseClient";
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IColumn, IColumnsSliceState, Status } from "./types";
-import { AppDispatch } from "..";
 
 
 const initialState: IColumnsSliceState = {
@@ -115,7 +114,7 @@ const columnsSlice = createSlice({
 		builder.addCase(deleteColumn.pending, (state) => {
 			state.status = Status.LOADING;
 		});
-		builder.addCase(deleteColumn.fulfilled, (state, action) => {
+		builder.addCase(deleteColumn.fulfilled, (state) => {
 			state.status = Status.SUCCESS;
 		});
 		builder.addCase(deleteColumn.rejected, (state) => {

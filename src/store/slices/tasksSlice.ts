@@ -43,7 +43,7 @@ export const fetchTasks =
 export const addTask =
 	(task: Omit<ITask, "id">): AppThunk =>
 	async (dispatch) => {
-		const { data, error } = await supabase.from("tasks").insert(task).single();
+		const { error } = await supabase.from("tasks").insert(task).single();
 		if (error) {
 			throw error;
 		}
@@ -54,7 +54,7 @@ type IUpdateTask = Pick<ITask, "id" | "column_id" | "position">;
 export const updateTask =
 	(task: IUpdateTask): AppThunk =>
 	async () => {
-		const { data, error } = await supabase
+		const { error } = await supabase
 			.from("tasks")
 			.update({
 				column_id: task.column_id,
@@ -71,7 +71,7 @@ export const updateTask =
 export const updateTaskInfo =
 	(task: ITask): AppThunk =>
 	async () => {
-		const { data, error } = await supabase
+		const { error } = await supabase
 			.from("tasks")
 			.update(task)
 			.eq("id", task.id)

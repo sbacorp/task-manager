@@ -6,7 +6,7 @@ import supabase from "@/lib/supabaseClient";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { addColumn, fetchcolumns } from "@/store/slices/columnsSlice";
 import { setTasks, updateTask } from "@/store/slices/tasksSlice";
-import { IColumn, IProject, ITask, TasksState } from "@/store/slices/types";
+import { IColumn, ITask, TasksState } from "@/store/slices/types";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
@@ -21,7 +21,7 @@ function Project({ id }: { id: string }) {
 		project = projects.find((b) => b.id == id),
 		[loading, setLoading] = useState(true);
 
-	let columns = useAppSelector((state) => state.columnsReducer.columns);
+	const columns = useAppSelector((state) => state.columnsReducer.columns);
 	const currentTasksState: TasksState = useAppSelector(
 		(state) => state.tasksReducer
 	);
@@ -39,6 +39,7 @@ function Project({ id }: { id: string }) {
 			})
 		);
 	};
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const handleDragEnd = (currentTasksState: TasksState, result: any) => {
 		const { source, destination, type } = result;
 		if (!destination) {
@@ -123,9 +124,12 @@ function Project({ id }: { id: string }) {
 			router.push("/projects");
 		}
 	}, [project]);
+
 	const createColumnFn = async ({ title }: { title: string }) => {
-		await dispatch(addColumn({ project_id: project!.id, title: title }));
-		await dispatch(fetchcolumns(project!.id));
+		if (project) {
+			await dispatch(addColumn({ project_id: project.id, title: title }));
+			await dispatch(fetchcolumns(project.id));
+		}
 	};
 	interface IAvatars {
 		avatarPath: string;
@@ -151,12 +155,12 @@ function Project({ id }: { id: string }) {
 		<div className="w-[95vw] h-[92vh] overflow-hidden flex flex-col items-start justify-start">
 			<div className="top flex justify-between w-full">
 				<div className=" text-lg md:text-4xl text-white font-semibold mb-10">
-					{project!.title}
+					{project.title}
 				</div>
 
 				<div className="avatars flex ">
 					{avatars &&
-						avatars.map((el: any, i) => {
+						avatars.map((el: IAvatars, i) => {
 							return (
 								<div
 									key={i}

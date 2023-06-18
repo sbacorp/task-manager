@@ -5,6 +5,7 @@ import { cards, ItemAnimation, sections } from "@/lib/constants";
 import { motion } from "framer-motion";
 import type { NextPage } from "next";
 import Gradient from "@/components/gradient";
+import { ICard } from "@/../typings";
 
 const Index: NextPage = () => {
 	return (
@@ -38,7 +39,7 @@ const Index: NextPage = () => {
 					</div>
 				</section>
 				<section className="flex flex-col md:flex-row justify-center gap-12 items-center py-14 container px-2">
-					{cards.map((el: any, i: number) => {
+					{cards.map((el: ICard, i: number) => {
 						return (
 							<motion.div
 								key={i}

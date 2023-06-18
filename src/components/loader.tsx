@@ -1,8 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function Loader() {
-	
-  return (
+	return (
 		<div>
 			<svg
 				width="14"
@@ -16,7 +15,7 @@ function Loader() {
 					cy="6.63999"
 					r="5.9"
 					fill="#50ADBB"
-					fill-opacity="0.9"
+					fillOpacity="0.9"
 					stroke="black"
 				/>
 			</svg>
@@ -32,7 +31,7 @@ function Loader() {
 					cy="6.63999"
 					r="5.9"
 					fill="#50ADBB"
-					fill-opacity="0.9"
+					fillOpacity="0.9"
 					stroke="black"
 				/>
 			</svg>
@@ -48,7 +47,7 @@ function Loader() {
 					cy="6.63999"
 					r="5.9"
 					fill="#50ADBB"
-					fill-opacity="0.9"
+					fillOpacity="0.9"
 					stroke="black"
 				/>
 			</svg>
@@ -64,7 +63,7 @@ function Loader() {
 					cy="6.63999"
 					r="5.9"
 					fill="#50ADBB"
-					fill-opacity="0.9"
+					fillOpacity="0.9"
 					stroke="black"
 				/>
 			</svg>
@@ -80,7 +79,7 @@ function Loader() {
 					cy="6.63999"
 					r="5.9"
 					fill="#50ADBB"
-					fill-opacity="0.9"
+					fillOpacity="0.9"
 					stroke="black"
 				/>
 			</svg>
@@ -88,4 +87,4 @@ function Loader() {
 	);
 }
 
-export default Loader
+export default Loader;

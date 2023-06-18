@@ -8,7 +8,7 @@ const HamburgerMenu = ({
 	setIsOpen,
 	user,
 }: {
-	setIsOpen: any;
+	setIsOpen: (isOpen: boolean) => boolean;
 	user: User | null;
 }) => {
 	return (
@@ -16,7 +16,6 @@ const HamburgerMenu = ({
 			<DropdownMenu.Trigger asChild>
 				<HamburgerMenuIcon className="w-10 h-10" />
 			</DropdownMenu.Trigger>
-
 			<DropdownMenu.Portal>
 				<DropdownMenu.Content
 					className=" w-44 flex flex-col gap-3 items-center bg-dark9 rounded-md p-2"
@@ -35,14 +34,14 @@ const HamburgerMenu = ({
 										{el.title}
 									</DropdownMenu.Item>
 								</Link>
-						  ))
+					))
 						: notAuthLinks.map((el, i) => (
 								<Link key={i} href={`/${el.href}`}>
 									<DropdownMenu.Item className="  group text-2xl text-white rounded py-2 flex items-center px-2 relative select-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-dark7 data-[highlighted]:text-white active:bg-dark7">
 										{el.title}
 									</DropdownMenu.Item>
 								</Link>
-						  ))}
+					))}
 					<DropdownMenu.Arrow className="fill-dark9" />
 				</DropdownMenu.Content>
 			</DropdownMenu.Portal>

@@ -16,7 +16,6 @@ const AuthButtons: React.FC = () => {
 	useEffect(() => {
 		if (window) {
 			setSize(window.innerWidth);
-			console.log(window.innerWidth);
 		}
 	}, []);
 	const handleSignOut = async () => {

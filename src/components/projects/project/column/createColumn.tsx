@@ -1,9 +1,6 @@
 import React from "react";
 import Editable from "@/components/Editable";
-interface ICreateColumn {
-	createColumnF: any;
-}
-
+import { ICreateColumn } from "@/../typings";
 function CreateColumn({ createColumnF }: ICreateColumn) {
 	const handleAddColumn = (title: string) => {
 		createColumnF(title);

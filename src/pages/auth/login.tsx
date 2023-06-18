@@ -13,7 +13,6 @@ import "react-toastify/dist/ReactToastify.css";
 const SignIn = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [message, setMessage] = useState("");
 	const [signType, setSignType] = useState<LoginType>("signin");
 	const router = useRouter();
 	const dispatch = useDispatch();
@@ -51,7 +50,7 @@ const SignIn = () => {
 	const handleResetPassword = async (e: FormEvent) => {
 		e.preventDefault();
 
-		let { data, error: resetError } = await supabase.auth.resetPasswordForEmail(
+		const { error: resetError } = await supabase.auth.resetPasswordForEmail(
 			email,
 			{
 				redirectTo: `${process.env.PROJECT_URL_DEPLOY}/auth/update-password`,
@@ -92,7 +91,7 @@ const SignIn = () => {
 						</div>
 						<div className="flex gap-1 items-center">
 							<p className="text-dark2 font-normal text-base">
-								Don't have an account yet?
+								{"Don't have an account yet?"}
 							</p>
 							<Link
 								className="text-dark font-normal text-base"
@@ -109,7 +108,7 @@ const SignIn = () => {
 							Sign in
 						</button>
 					</form>
-					{message && <p className="text-white absolute">{message}</p>}
+					
 					<p
 						onClick={() => setSignType("reset")}
 						className="text-dark items-center justify-center font-medium cursor-pointer underline hover:text-dark2"
@@ -161,7 +160,6 @@ const SignIn = () => {
 							Reset password
 						</button>
 					</form>
-					{message && <p className="text-white absolute">{message}</p>}
 				</div>
 			)}
 		</SignLayout>

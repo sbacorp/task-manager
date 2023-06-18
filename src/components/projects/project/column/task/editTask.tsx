@@ -31,21 +31,13 @@ export const cardLabels = [
 ];
 function EditTaskModal({ task }: { task: ITask }) {
 	const dispatch = useAppDispatch();
-	const [title, setTitle] = useState(task!.title);
+	const [title, setTitle] = useState(task.title);
 	const [desc, setDesc] = useState(task.description || "");
 	const profile = useAppSelector((state) => state.profileSlice.profile?.id);
 	const [assignedTo, setAssignedTo] = useState<string>(task.assignedTo || "");
 	const [label, setLabel] = useState<string>("");
 	const onClickEdit = async () => {
 		if (profile) {
-			let profileId = "";
-			const { data } = await supabase
-				.from("profiles")
-				.select("id")
-				.eq("userName", assignedTo);
-			if (data && data[0]) {
-				profileId = data![0]?.id;
-			}
 			dispatch(
 				updateTaskInfo({
 					id: task.id,
