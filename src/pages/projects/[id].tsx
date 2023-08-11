@@ -125,7 +125,7 @@ function Project({ id }: { id: string }) {
 		}
 	}, [project]);
 
-	const createColumnFn = async ({ title }: { title: string }) => {
+	const createColumnFn = async ( title :string) => {
 		if (project) {
 			await dispatch(addColumn({ project_id: project.id, title: title }));
 			await dispatch(fetchcolumns(project.id));
