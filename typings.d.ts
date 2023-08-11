@@ -27,7 +27,7 @@ export interface ProfileProps {
 
 export interface HeaderNavProps {
 	isOpen: boolean;
-	setIsOpen: (boolean) => boolean;
+	setIsOpen: (boolean) => void;
 }
 
 export type LoginType = "signin" | "reset";
