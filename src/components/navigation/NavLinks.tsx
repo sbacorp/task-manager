@@ -11,7 +11,7 @@ function NavLinks({
 	setIsOpen,
 }: {
 	children: ReactNode;
-	setIsOpen: (_: boolean) => boolean;
+	setIsOpen: (_: boolean) => void;
 }) {
 	const user = useAppSelector((state) => state.userSlice.user);
 	const [size, setSize] = useState<number>(1024);
