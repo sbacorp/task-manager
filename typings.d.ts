@@ -22,7 +22,7 @@ interface IWorking {
 }
 
 export interface ProfileProps {
-	setIsOpen: (boolean) => boolean;
+	setIsOpen: (boolean) => void;
 }
 
 export interface HeaderNavProps {
