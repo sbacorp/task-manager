@@ -6,7 +6,7 @@ function EyeAction({
 	setIsOpen,
 }: {
 	isOpen: EyeActive;
-	setIsOpen: (isOpen: EyeActive) => EyeActive;
+	setIsOpen: (isOpen: EyeActive) => void;
 }) {
 	return (
 		<>
