@@ -40,7 +40,7 @@ export interface ILink {
 }
 
 export interface ICreateColumn {
-	createColumnF: (title: string) => void;
+	createColumnF: (title: string) => string;
 }
 
 interface ICard {
