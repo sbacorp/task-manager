@@ -8,7 +8,7 @@ const HamburgerMenu = ({
 	setIsOpen,
 	user,
 }: {
-	setIsOpen: (isOpen: boolean) => boolean;
+	setIsOpen: (isOpen: boolean) => void;
 	user: User | null;
 }) => {
 	return (
