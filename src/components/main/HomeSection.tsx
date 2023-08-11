@@ -9,7 +9,7 @@ function HomeSection({ tag, title, desc, imgPath, order }: HomeProps) {
 			initial="hidden"
 			whileInView="visible"
 			viewport={{ once: true }}
-			className="flex flex-col md:flex-row justify-evently gap-8 md:gap-20 items-center py-12 container px-2"
+			className="flex flex-col md:flex-row justify-around gap-8 md:gap-20 items-center py-12 container px-2 w-full"
 		>
 			<motion.div className="" custom={1} variants={ItemAnimation3}>
 				<div className="tag flex gap-2">
